@@ -55,9 +55,9 @@ public class OI {
     Joystick xbox = new Joystick(2);
     
  	private JoystickButton btnL1 = new JoystickButton(joystickLeft,1),
- 					btnLowThrottle = new JoystickButton(joystickLeft,2),
-					btnToggleThrottle = new JoystickButton(joystickLeft,3),
-					btnDriveToPosition = new JoystickButton(joystickLeft,4),
+ 					btnL2 = new JoystickButton(joystickLeft,2),
+					btnL3 = new JoystickButton(joystickLeft,3),
+					btnL4 = new JoystickButton(joystickLeft,4),
 					btnL5 = new JoystickButton(joystickLeft,5),
 					btnL6 = new JoystickButton(joystickLeft,6),
  					btnL7 = new JoystickButton(joystickLeft,7),
