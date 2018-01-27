@@ -8,7 +8,7 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
 import org.usfirst.frc.team5288.robot.RobotMap;
-import org.usfirst.frc.team5288.robot.subsystems.Drivetrain.drivestates;
+//import org.usfirst.frc.team5288.robot.subsystems.Drivetrain.drivestates;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -125,7 +125,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		return rEncoder.getDistance()*5.57;
 	}
 	//Gearing Procedures
-	public void toggleHighGear(){
+	/*public void toggleHighGear(){
 		isHighGear =  !isHighGear;
 	}
 	public boolean getGearing(){
@@ -135,6 +135,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double getUltraSonicVoltageData(){
 		return ultrasonic.getAverageVoltage();
 	}
+	*/
 	public double getUltraSonicDistanceInches(){
 		return ultraSonicDistance;
 	}
