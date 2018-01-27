@@ -10,6 +10,7 @@ package org.usfirst.frc.team5288.robot.subsystems;
 import org.usfirst.frc.team5288.robot.RobotMap;
 //import org.usfirst.frc.team5288.robot.subsystems.Drivetrain.drivestates;
 
+import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -84,6 +85,10 @@ public class DrivetrainSubsystem extends Subsystem {
 		rEncoder.setDistancePerPulse(wheelcirc/360);
 		lEncoder.setDistancePerPulse(wheelcirc/2048);
 		gyro.calibrate();
+		
+	// PID OBJECTS/VARIABLES
+		SpartanPID drivetrainPID = new SpartanPID(0.0,0.0,0.0,0.0);
+		
 	}
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.

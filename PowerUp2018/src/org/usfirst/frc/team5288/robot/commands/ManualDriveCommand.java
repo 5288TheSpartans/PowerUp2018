@@ -24,7 +24,7 @@ public class ManualDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(Robot.m_oi.getLeftStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickX() <= RobotMap.JOYDEADZONE ) {
+    	if(Robot.m_oi.getLeftStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickX() <= -RobotMap.JOYDEADZONE ) {
     		
     		Robot.drivetrain.setLPower(speedMultiplier  * Robot.m_oi.getLeftStickX());
     		
@@ -34,7 +34,7 @@ public class ManualDriveCommand extends Command {
     		Robot.drivetrain.setLPower(0.0);
     		
     		
-    	if(Robot.m_oi.getRightStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickX() <= RobotMap.JOYDEADZONE ) {
+    	if(Robot.m_oi.getRightStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickX() <= -RobotMap.JOYDEADZONE ) {
     		
     		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickX());
   
