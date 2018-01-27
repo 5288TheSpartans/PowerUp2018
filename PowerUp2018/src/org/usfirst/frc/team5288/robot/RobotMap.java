@@ -34,6 +34,10 @@ public class RobotMap {
 	public static int RDriveEncoder1 = 2;
 	public static int RDriveEncoder2 = 3;
 	
+	
+	// Joystick deadzones
+	public static double JOYDEADZONE = 0.15;
+	
 		
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
