@@ -32,13 +32,13 @@ public class Lift extends Subsystem {
 	private double wheelCirc = 0*Math.PI;
 	
 	public Lift() {
-		//this has been changed assholes
+		
 		encoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB, true, EncodingType.k4X);	
 		encoder.setMaxPeriod(5);
 		encoder.setMinRate(0);
 		encoder.setSamplesToAverage(1);		
 		encoder.setDistancePerPulse(wheelCirc/2048);
-		//This means nothing whatsoever
+		
 	}
 
     public void initDefaultCommand() {
