@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -9,12 +10,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualDriveCommand extends Command {
 
+	double speedMultiplier = 1.0;
     public ManualDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
-    	requires(drivetrain);
-    }
+    	requires(Robot.drivetrain);
+    	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
@@ -23,22 +24,23 @@ public class ManualDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(Robot.m_oi.getLeftStickX() >= Robot.m_oi.joyDeadzone || Robot.m_oi.getLeftStickX() <= Robot.m_oi.joyDeadzone ) {
+    	if(Robot.m_oi.getLeftStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickX() <= RobotMap.JOYDEADZONE ) {
     		
-    		drivetrain.outputToLeftDrive(speedMultiplier * Robot.m_oi.getLeftStickX());
+    		Robot.drivetrain.setLPower(speedMultiplier  * Robot.m_oi.getLeftStickX());
+    		
   
     	}
     	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
-    		Robot.drivetrain.outputToLeftDrive(0.0);
+    		Robot.drivetrain.setLPower(0.0);
     		
     		
-    	if(Robot.m_oi.getLeftStickX() >= Robot.m_oi.joyDeadzone || Robot.m_oi.getRightStickX() <= Robot.m_oi.joyDeadzone ) {
+    	if(Robot.m_oi.getRightStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickX() <= RobotMap.JOYDEADZONE ) {
     		
-    		drivetrain.outputToRightDrive(speedMultiplier * Robot.m_oi.getRightStickX());
+    		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickX());
   
     	}
     	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
-    		Robot.drivetrain.outputToRightDrive(0.0);
+    		Robot.drivetrain.setRPower(0.0);
     
     }
     
