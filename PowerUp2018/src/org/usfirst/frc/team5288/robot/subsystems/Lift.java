@@ -38,7 +38,7 @@ public class Lift extends Subsystem {
 		encoder.setMinRate(0);
 		encoder.setSamplesToAverage(1);		
 		encoder.setDistancePerPulse(wheelCirc/2048);
-		
+		//This means nothing whatsoever
 	}
 
     public void initDefaultCommand() {
