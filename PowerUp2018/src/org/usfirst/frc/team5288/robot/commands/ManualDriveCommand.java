@@ -31,18 +31,21 @@ public class ManualDriveCommand extends Command {
     		System.out.println("SpeedMultipler: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY());
   
     	}
-    	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
+    	 else {// if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);
     		System.out.println("L Power: 0.0");
+    	 }
     		
     	if(Robot.m_oi.getRightStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickY() <= -RobotMap.JOYDEADZONE ) {
     		
     		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickY());
+    		System.out.println("SpeedMultipler: " + speedMultiplier + " Right stick: " + Robot.m_oi.getRightStickY());
   
-    	}
-    	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
+    	} 
+    	else { // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setRPower(0.0);
-    
+    		System.out.println("R Power: 0.0");
+    	}
     }
     
 
