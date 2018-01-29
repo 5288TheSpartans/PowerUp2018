@@ -9,6 +9,7 @@ package org.usfirst.frc.team5288.robot.subsystems;
 
 import org.usfirst.frc.team5288.robot.RobotMap;
 //import org.usfirst.frc.team5288.robot.subsystems.Drivetrain.drivestates;
+import org.usfirst.frc.team5288.robot.commands.ManualDriveCommand;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -93,6 +94,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new ManualDrive());
+		setDefaultCommand(new ManualDriveCommand());
 	}
 	public double getGyroAngle(){
 		return gyroTotal;
