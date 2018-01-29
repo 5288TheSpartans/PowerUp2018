@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualDriveCommand extends Command {
 
-	double speedMultiplier = 1.0;
+	double speedMultiplier = 1.0; double leftSpeedOutput = 0; double rightSpeedOutput = 0;
+	
     public ManualDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -19,32 +20,32 @@ public class ManualDriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println();
+    	System.out.println("INITIALIZING MANUALDRIVECOMMAND.");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
     	if(Robot.m_oi.getLeftStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickY() <= -RobotMap.JOYDEADZONE ) {
-    		
-    		Robot.drivetrain.setLPower(speedMultiplier  * Robot.m_oi.getLeftStickY());
-    		System.out.println("SpeedMultipler: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY());
+    		leftSpeedOutput = speedMultiplier * Robot.m_oi.getLeftStickY();
+    		Robot.drivetrain.setLPower(leftSpeedOutput);
+    		System.out.println("Speed multipler: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY() + "\n Total left motor output: " + leftSpeedOutput);
   
     	}
     	 else {// if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);
-    		System.out.println("L Power: 0.0");
+    		System.out.println("Left Joystick inside deadzone. Left output: 0.0");
     	 }
     		
     	if(Robot.m_oi.getRightStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickY() <= -RobotMap.JOYDEADZONE ) {
-    		
-    		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickY());
-    		System.out.println("SpeedMultipler: " + speedMultiplier + " Right stick: " + Robot.m_oi.getRightStickY());
+    		rightSpeedOutput = speedMultiplier * Robot.m_oi.getRightStickY();
+    		Robot.drivetrain.setRPower(rightSpeedOutput);
+    		System.out.println("Speed multipler: " + speedMultiplier + " Right stick: " + Robot.m_oi.getRightStickY() + "\n Total right motor output: " + rightSpeedOutput);
   
     	} 
     	else { // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setRPower(0.0);
-    		System.out.println("R Power: 0.0");
+    		System.out.println("Right Joystick inside deadzone. Right output: 0.0");
     	}
     }
     
