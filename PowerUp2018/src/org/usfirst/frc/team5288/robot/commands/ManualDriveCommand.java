@@ -24,19 +24,19 @@ public class ManualDriveCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	if(Robot.m_oi.getLeftStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickX() <= -RobotMap.JOYDEADZONE ) {
+    	if(Robot.m_oi.getLeftStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickY() <= -RobotMap.JOYDEADZONE ) {
     		
-    		Robot.drivetrain.setLPower(speedMultiplier  * Robot.m_oi.getLeftStickX());
-    		
+    		Robot.drivetrain.setLPower(speedMultiplier  * Robot.m_oi.getLeftStickY());
+    		System.out.println("SpeedMultipler: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY());
   
     	}
     	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);
+    		System.out.println("L Power: 0.0");
     		
+    	if(Robot.m_oi.getRightStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickY() <= -RobotMap.JOYDEADZONE ) {
     		
-    	if(Robot.m_oi.getRightStickX() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickX() <= -RobotMap.JOYDEADZONE ) {
-    		
-    		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickX());
+    		Robot.drivetrain.setRPower(speedMultiplier * Robot.m_oi.getRightStickY());
   
     	}
     	else // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
