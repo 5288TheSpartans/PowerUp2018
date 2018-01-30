@@ -108,8 +108,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 	public void setLPower(double power){
 		lPower = power;
-		lmotor1.set(power);
-		lmotor2.set(power);
+		lmotor1.set(-power);
+		lmotor2.set(-power);
 	}
 	public void setRPower(double power){
 		rPower = power;
