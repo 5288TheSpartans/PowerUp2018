@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DrivetrainSubsystem extends Subsystem {
 	//**DRIVETRAIN CONSTANTS**
 	public final double wheelRadiusm = 0.0508; //meters
-	public final double wheelcirc = 4*Math.PI; 
+	public final double wheelcirc = 6*Math.PI; 
 	public final double topSpeed =  3.048; // meters per second
 	//*******************MOTOR CONTROLLER OBJECTS**************
 	//These Motor controller objects will always be synced in pairs of output.
@@ -83,8 +83,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		lEncoder.setMinRate(0);
 		rEncoder.setSamplesToAverage(1);
 		lEncoder.setSamplesToAverage(1);		
-		rEncoder.setDistancePerPulse(wheelcirc/360);
-		lEncoder.setDistancePerPulse(wheelcirc/2048);
+		rEncoder.setDistancePerPulse(wheelcirc);
+		lEncoder.setDistancePerPulse(wheelcirc);
 		gyro.calibrate();
 		
 	// PID OBJECTS/VARIABLES
@@ -129,12 +129,17 @@ public class DrivetrainSubsystem extends Subsystem {
 	public double getThrottle(){
 		return throttle;
 	}
-	
 	public double getLeftDistanceInches(){
-		return lEncoder.getDistance();
+		return -lEncoder.getDistance();
 	}
 	public double getRightDistanceInches(){
-		return rEncoder.getDistance()*5.57;
+		return -rEncoder.getDistance();
+	}
+	public int getLeftCount() {
+		return lEncoder.getRaw();
+	}
+	public int getRightCount() {
+		return rEncoder.getRaw();
 	}
 	//Gearing Procedures
 	/*public void toggleHighGear(){
