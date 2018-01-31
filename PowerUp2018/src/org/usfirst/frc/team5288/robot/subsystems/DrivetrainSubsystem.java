@@ -133,7 +133,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		return lEncoder.getDistance();
 	}
 	public double getRightDistanceInches(){
-		return rEncoder.getDistance()*5.57;
+		return rEncoder.getDistance();
 	}
 	//Gearing Procedures
 	/*public void toggleHighGear(){
