@@ -40,7 +40,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double rPower = 0;//Raw Power percentage being output to the right gearbox.
 	//GYRO VARIABLES
 	private ADXRS450_Gyro gyro = new ADXRS450_Gyro(); 
-	private final double gyroCorrectionValue = -1.9923625000000003 +1.9959375000000001;
+	private final double gyroCorrectionValue = -1.9923625000000003 + 1.9959375000000001;
 	private double gyroCurrent = 0;
 	private double gyroDifference= 0;
 	private double gyroTotal = 0;
@@ -83,8 +83,8 @@ public class DrivetrainSubsystem extends Subsystem {
 		lEncoder.setMinRate(0);
 		rEncoder.setSamplesToAverage(1);
 		lEncoder.setSamplesToAverage(1);		
-		rEncoder.setDistancePerPulse(wheelcirc);
-		lEncoder.setDistancePerPulse(wheelcirc);
+		rEncoder.setDistancePerPulse(wheelcirc/2048);
+		lEncoder.setDistancePerPulse(wheelcirc/2048);
 		gyro.calibrate();
 		
 	// PID OBJECTS/VARIABLES
@@ -114,8 +114,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	public void setRPower(double power){
 		rPower = power;
 		rmotor1.set(power);
-		rmotor2.set(power);
-		
+		rmotor2.set(power);	
 	}
 	private void outputToMotors(double pwrLeft, double pwrRight){
 		lmotor1.set(-pwrLeft);
@@ -129,17 +128,12 @@ public class DrivetrainSubsystem extends Subsystem {
 	public double getThrottle(){
 		return throttle;
 	}
+	
 	public double getLeftDistanceInches(){
-		return -lEncoder.getDistance();
+		return lEncoder.getDistance();
 	}
 	public double getRightDistanceInches(){
-		return -rEncoder.getDistance();
-	}
-	public int getLeftCount() {
-		return lEncoder.getRaw();
-	}
-	public int getRightCount() {
-		return rEncoder.getRaw();
+		return rEncoder.getDistance()*5.57;
 	}
 	//Gearing Procedures
 	/*public void toggleHighGear(){

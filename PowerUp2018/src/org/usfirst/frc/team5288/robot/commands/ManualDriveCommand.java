@@ -30,7 +30,7 @@ public class ManualDriveCommand extends Command {
     		leftSpeedOutput = speedMultiplier * Robot.m_oi.getLeftStickY();
     		Robot.drivetrain.setLPower(leftSpeedOutput);
     	//	System.out.println("Speed multiplier: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY() + "\n Total left motor output: " + leftSpeedOutput);
-    		System.out.println("LEFT" + Robot.drivetrain.getLeftCount());
+    		System.out.println("LEFT" + Robot.drivetrain.getLeftDistanceInches());
     	}
     	 else {// if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);
@@ -41,7 +41,7 @@ public class ManualDriveCommand extends Command {
     		rightSpeedOutput = speedMultiplier * Robot.m_oi.getRightStickY();
     		Robot.drivetrain.setRPower(rightSpeedOutput);
     	//	System.out.println("Speed multiplier: " + speedMultiplier + " Right stick: " + Robot.m_oi.getRightStickY() + "\n Total right motor output: " + rightSpeedOutput);
-    		System.out.println("RIGHT " + Robot.drivetrain.getRightCount());
+    		System.out.println("RIGHT " + Robot.drivetrain.getRightDistanceInches());
     		
     	/*	if(Robot.drivetrain.getRightDistanceInches() > 12.0 || Robot.drivetrain.getRightDistanceInches() < 0.0 || Robot.drivetrain.getLeftDistanceInches() > 12.0 || Robot.drivetrain.getRightDistanceInches() < 0.0) {
     			Robot.drivetrain.resetEncoders();
