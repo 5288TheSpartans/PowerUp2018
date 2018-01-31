@@ -9,9 +9,14 @@ public class DriveStraight extends Command {
 
 	/*
 	 * Use PID to ensure this equation holds true from encoder values:
+	 * basePower = command instantiation input 
 	 * L - R = 0  or (L + R)/2 = L = R
+	 * PID INPUT = (L + R /2) = 0
+	 * PID output = Gain
+	 * Motor output Left = basePower + Gain
+	 * Motor output Right = basePower - Gain
 	 */
-    public DriveStraight() {
+    public DriveStraight(double basePower) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
