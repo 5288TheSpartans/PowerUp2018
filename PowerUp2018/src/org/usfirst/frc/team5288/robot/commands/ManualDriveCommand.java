@@ -47,8 +47,8 @@ public class ManualDriveCommand extends Command {
     			Robot.drivetrain.resetEncoders();
     			System.out.println("ENCODERS RESET.");
     		}
-    		
-    	*/} 
+    	*/
+    		} 
     	else { // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setRPower(0.0);
     	//	System.out.println("Right Joystick inside deadzone. Right output: 0.0");
