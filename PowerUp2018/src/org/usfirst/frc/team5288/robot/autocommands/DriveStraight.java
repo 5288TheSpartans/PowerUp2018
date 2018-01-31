@@ -48,11 +48,13 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	error = Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches() ;
+    	error = Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches();
+    	System.out.println("Error: " + error);
+    	System.out.println("Encoder values(Left,Right): "+ Robot.drivetrain.getLeftDistanceInches() + ", " + Robot.drivetrain.getRightDistanceInches());
     	straightPID.update(error);
     	gain = straightPID.getOutput();
-    	Robot.drivetrain.setLPower(m_basePower + gain);
-    	Robot.drivetrain.setRPower(m_basePower - gain);
+    	Robot.drivetrain.setLPower(m_basePower - gain);
+    	Robot.drivetrain.setRPower(m_basePower + gain);
 
     }
 

@@ -49,6 +49,9 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
+	public String getDashboardValue(String key) {
+		return SmartDashboard.getString(key, "null");
+	}
 	
 	public void robotPeriodic() {
 		
