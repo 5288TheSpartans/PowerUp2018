@@ -55,8 +55,8 @@ public class DriveStraight extends Command {
     	System.out.println("Encoder values(Left,Right): "+ Robot.drivetrain.getLeftDistanceInches() + ", " + Robot.drivetrain.getRightDistanceInches());
     	straightPID.update(error);
     	gain = straightPID.getOutput();
-    	Robot.drivetrain.setLPower(m_basePower - gain);
-    	Robot.drivetrain.setRPower(m_basePower + gain);
+    	Robot.drivetrain.setLPower(m_basePower + gain);
+    	Robot.drivetrain.setRPower(m_basePower - gain);
 
     }
 

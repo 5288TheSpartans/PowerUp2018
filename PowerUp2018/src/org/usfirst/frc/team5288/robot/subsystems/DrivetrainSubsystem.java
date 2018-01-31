@@ -75,8 +75,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double encCurrentR = 0;
 	private double encDiffR = 0;
 	public DrivetrainSubsystem() {
-		rEncoder = new Encoder(RobotMap.RDriveEncoder1,RobotMap.RDriveEncoder2,true,EncodingType.k4X);	
-		lEncoder = new Encoder(RobotMap.LDriveEncoder1,RobotMap.LDriveEncoder2,false,EncodingType.k4X);	
+		rEncoder = new Encoder(RobotMap.RDriveEncoder1,RobotMap.RDriveEncoder2,false,EncodingType.k4X);	
+		lEncoder = new Encoder(RobotMap.LDriveEncoder1,RobotMap.LDriveEncoder2,true,EncodingType.k4X);	
 		rEncoder.setMaxPeriod(5);
 		lEncoder.setMaxPeriod(5);
 		rEncoder.setMinRate(0);
