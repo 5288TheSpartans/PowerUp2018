@@ -27,14 +27,14 @@ public class DriveStraight extends Command {
 	 * }
 	 * 
 	 */
-	double basePower =  0.5;
+	double m_basePower =  0.5;
 	double error;
 	double gain;
 	SpartanPID straightPID;
     public DriveStraight(double basePower) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
-		this.basePower = basePower;
+		m_basePower = basePower;
 		double P = 0;
 		double I = 0;
 		double D = 0;
@@ -51,8 +51,8 @@ public class DriveStraight extends Command {
     	error = Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches() ;
     	straightPID.update(error);
     	gain = straightPID.getOutput();
-    	Robot.drivetrain.setLPower(basePower + gain);
-    	Robot.drivetrain.setRPower(basePower - gain);
+    	Robot.drivetrain.setLPower(m_basePower + gain);
+    	Robot.drivetrain.setRPower(m_basePower - gain);
 
     }
 
