@@ -7,6 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraight extends Command {
 
+	/*
+	 * Use PID to ensure this equation holds true from encoder values:
+	 * L - R = 0  or (L + R)/2 = L = R
+	 */
     public DriveStraight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
