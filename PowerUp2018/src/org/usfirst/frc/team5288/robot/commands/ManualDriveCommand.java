@@ -29,29 +29,17 @@ public class ManualDriveCommand extends Command {
     	if(Robot.m_oi.getLeftStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickY() <= -RobotMap.JOYDEADZONE ) {
     		leftSpeedOutput = speedMultiplier * Robot.m_oi.getLeftStickY();
     		Robot.drivetrain.setLPower(leftSpeedOutput);
-    	//	System.out.println("Speed multiplier: " + speedMultiplier + " Left stick: " + Robot.m_oi.getLeftStickY() + "\n Total left motor output: " + leftSpeedOutput);
-    		System.out.println("LEFT" + Robot.drivetrain.getLeftDistanceInches());
     	}
     	 else {// if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);
-    		//System.out.println("Left Joystick inside deadzone. Left output: 0.0");
     	 }
-    		
+    	
     	if(Robot.m_oi.getRightStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getRightStickY() <= -RobotMap.JOYDEADZONE ) {
     		rightSpeedOutput = speedMultiplier * Robot.m_oi.getRightStickY();
     		Robot.drivetrain.setRPower(rightSpeedOutput);
-    	//	System.out.println("Speed multiplier: " + speedMultiplier + " Right stick: " + Robot.m_oi.getRightStickY() + "\n Total right motor output: " + rightSpeedOutput);
-    		System.out.println("RIGHT " + Robot.drivetrain.getRightDistanceInches());
-    		
-    	/*	if(Robot.drivetrain.getRightDistanceInches() > 12.0 || Robot.drivetrain.getRightDistanceInches() < 0.0 || Robot.drivetrain.getLeftDistanceInches() > 12.0 || Robot.drivetrain.getRightDistanceInches() < 0.0) {
-    			Robot.drivetrain.resetEncoders();
-    			System.out.println("ENCODERS RESET.");
-    		}
-    	*/
-    		} 
+    	} 
     	else { // if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setRPower(0.0);
-    	//	System.out.println("Right Joystick inside deadzone. Right output: 0.0");
     	}
     }
     

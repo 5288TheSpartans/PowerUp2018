@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
+import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 import org.usfirst.frc.team5288.robot.commands.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLift;
 import edu.wpi.first.wpilibj.Joystick;
@@ -92,7 +93,7 @@ public class OI {
     
     btnL9.whileHeld(new RaiseLift());
     btnL8.whileHeld(new LowerLift());
-    //X-Box controller
+    btnL3.whileHeld(new DriveStraight(0.2));//X-Box controller
 /*    btnL9.whenPressed(new DriveStraightTime(4000));
     xboxLStickButton.toggleWhenPressed(new OuttakeBalls());
     xboxRStickButton.toggleWhenPressed(new IntakeBalls());
