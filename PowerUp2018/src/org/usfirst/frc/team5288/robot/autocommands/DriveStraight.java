@@ -38,7 +38,7 @@ public class DriveStraight extends Command {
 		double P = 0;
 		double I = 0;
 		double D = 0;
-    	straightPID = new SpartanPID(0.001, 0, 0, 0); //
+    	straightPID = new SpartanPID(0.008, 0, 0., 0); //
     }
 
     // Called just before this Command runs the first time
@@ -55,8 +55,8 @@ public class DriveStraight extends Command {
     	System.out.println("Encoder values(Left,Right): "+ Robot.drivetrain.getLeftDistanceInches() + ", " + Robot.drivetrain.getRightDistanceInches());
     	straightPID.update(error);
     	gain = straightPID.getOutput();
-    	Robot.drivetrain.setLPower(m_basePower + gain);
-    	Robot.drivetrain.setRPower(m_basePower - gain);
+    	Robot.drivetrain.setLPower(-m_basePower + gain);
+    	Robot.drivetrain.setRPower(-m_basePower - gain);
 
     }
 
