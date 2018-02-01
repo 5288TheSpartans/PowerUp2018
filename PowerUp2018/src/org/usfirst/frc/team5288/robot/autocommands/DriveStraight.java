@@ -38,7 +38,7 @@ public class DriveStraight extends Command {
 		double P = 0;
 		double I = 0;
 		double D = 0;
-    	straightPID = new SpartanPID(0.008, 0, 0., 0); //
+    	straightPID = new SpartanPID(0.01, 0, 0.005, 0); //
     }
 
     // Called just before this Command runs the first time
