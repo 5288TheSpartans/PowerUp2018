@@ -18,7 +18,7 @@ public class RobotMap {
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
 	// public static int rightMotor = 2;
-	public static final int liftMotor = 4;
+	
 	public static int liftEncoderA = 4;
 	public static int liftEncoderB = 5;
 	// Drivetrain
@@ -34,6 +34,8 @@ public class RobotMap {
 	public static int RDriveEncoder1 = 2;
 	public static int RDriveEncoder2 = 3;
 	
+	// LIFT motor (CAN)
+	public static int LiftMotor = 0;
 	
 	// Joystick deadzones
 	public static double JOYDEADZONE = 0.15;

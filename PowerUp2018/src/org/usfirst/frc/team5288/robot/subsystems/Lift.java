@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -15,7 +16,7 @@ public class Lift extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private VictorSP motor = new VictorSP(RobotMap.liftMotor);
+	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
 	private Encoder encoder;
 	private double power = 0;//Raw Power percentage being output to the lift
 	private double lastSpeed = 0;
@@ -33,12 +34,12 @@ public class Lift extends Subsystem {
 	
 	public Lift() {
 		
-		encoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB, true, EncodingType.k4X);	
+/*		encoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB, true, EncodingType.k4X);	
 		encoder.setMaxPeriod(5);
 		encoder.setMinRate(0);
 		encoder.setSamplesToAverage(1);		
 		encoder.setDistancePerPulse(wheelCirc/2048);
-		
+*/	
 	}
 
     public void initDefaultCommand() {
@@ -50,12 +51,12 @@ public class Lift extends Subsystem {
 		encoder.reset();
 	}
     
-    public void setRPower(double liftPower){
+    public void setPower(double liftPower){
 		power = liftPower;
 	}
     
     public void outputToLift(double pwr) {
-    	motor.set(pwr);
+    	LiftMotor.set(0.5);
     }
     
     public double getDistanceInches(){
