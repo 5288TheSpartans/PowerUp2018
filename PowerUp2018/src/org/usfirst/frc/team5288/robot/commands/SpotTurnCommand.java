@@ -21,8 +21,10 @@ public class SpotTurnCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     System.out.println("INITIALZING SPOT TURN COMMAND. TURNING " + targetAngle + "DEGREES.");
     startTime = System.currentTimeMillis();
+    Robot.drivetrain.resetGyro();
     initialAngle = Robot.drivetrain.getGyroAngle();
     System.out.println("INITIAL ANGLE: " + initialAngle + "DEGREES.");
     turnPID.setTarget(targetAngle);
@@ -40,8 +42,7 @@ public class SpotTurnCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        if(Math.abs(targetAngle) <= Math.abs(currentAngle + 1) ||
-        		Math.abs(targetAngle) >= Math.abs(currentAngle - 1))	return false;
+        if(currentAngle <= (targetAngle -1) || currentAngle >= (targetAngle + 1))	return false;
         		else return true;
     }
 
