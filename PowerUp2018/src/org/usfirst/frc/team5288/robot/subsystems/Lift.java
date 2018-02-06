@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
 
@@ -31,7 +32,8 @@ public class Lift extends Subsystem {
 	private double encDiff = 0;
 	//TODO get diameter
 	private double wheelCirc = 0*Math.PI;
-	
+	public static final ControlMode PercentOutput;
+
 	public Lift() {
 		
 /*		encoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB, true, EncodingType.k4X);	
@@ -56,7 +58,7 @@ public class Lift extends Subsystem {
 	}
     
     public void outputToLift(double pwr) {
-    	LiftMotor.set(0.5);
+    	LiftMotor.set(PercentOutput,0.5);
     }
     
     public double getDistanceInches(){
