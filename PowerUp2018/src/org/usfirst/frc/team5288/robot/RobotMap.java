@@ -40,6 +40,11 @@ public class RobotMap {
 	// Joystick deadzones
 	public static double JOYDEADZONE = 0.15;
 	
+	// DriveStraight PID values
+	public static double P = 0;
+	public static double I = 0;
+	public static double D = 0;
+	public static double FF = 0;
 		
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:

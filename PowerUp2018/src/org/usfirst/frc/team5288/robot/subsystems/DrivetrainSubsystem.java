@@ -45,6 +45,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double gyroDifference= 0;
 	private double gyroTotal = 0;
 	private double lastGyro = 0;
+	public String PIDInput = "";
+	public String PIDOutput = "";
 	//**ULTRASONIC VARIABLES*
 	//private AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicInput);
 	private double ultraSonicDistance = 0;

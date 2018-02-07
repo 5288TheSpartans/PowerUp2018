@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.autocommands;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.RobotMap;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.command.Command;
@@ -38,7 +39,7 @@ public class DriveStraight extends Command {
 		double P = 0;
 		double I = 0;
 		double D = 0;
-    	straightPID = new SpartanPID(0.01, 0, 0.005, 0); //
+    	straightPID = new SpartanPID(RobotMap.P, RobotMap.I, RobotMap.D, RobotMap.FF); //
     }
 
     // Called just before this Command runs the first time
