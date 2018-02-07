@@ -32,7 +32,7 @@ public class Lift extends Subsystem {
 	private double encDiff = 0;
 	//TODO get diameter
 	private double wheelCirc = 0*Math.PI;
-	public static final ControlMode PercentOutput;
+	//public static final ControlMode PercentOutput;
 
 	public Lift() {
 		
@@ -53,12 +53,9 @@ public class Lift extends Subsystem {
 		encoder.reset();
 	}
     
-    public void setPower(double liftPower){
-		power = liftPower;
-	}
-    
+  
     public void outputToLift(double pwr) {
-    	LiftMotor.set(PercentOutput,0.5);
+    	LiftMotor.set(ControlMode.PercentOutput,pwr);
     }
     
     public double getDistanceInches(){

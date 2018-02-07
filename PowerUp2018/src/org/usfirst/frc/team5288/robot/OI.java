@@ -94,7 +94,6 @@ public class OI {
     {
     
     btnL9.whileHeld(new RaiseLift());
-    btnL8.whileHeld(new LowerLift());
     btnL3.whileHeld(new DriveStraight(0.2));
     btnL4.whenPressed(new SpotTurnCommand(40));//X-Box controller
 /*    btnL9.whenPressed(new DriveStraightTime(4000));
