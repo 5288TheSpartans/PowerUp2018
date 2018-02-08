@@ -26,7 +26,7 @@ public class RaiseLift extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.lift.outputToLift(0.5);
+    	Robot.lift.outputToLift(-0.35);
     	
     }
 

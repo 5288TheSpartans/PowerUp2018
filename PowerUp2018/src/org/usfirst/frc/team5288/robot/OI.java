@@ -8,9 +8,9 @@
 package org.usfirst.frc.team5288.robot;
 
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
+import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLift;
-import org.usfirst.frc.team5288.robot.commands.SpotTurnCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -57,7 +57,8 @@ public class OI {
     Joystick joystickRight = new Joystick(1);    //right joystick is in port 0
     Joystick xbox = new Joystick(2);
     
- 	private JoystickButton btnL1 = new JoystickButton(joystickLeft,1),
+ 	private JoystickButton
+ 					btnL1 = new JoystickButton(joystickLeft,1),
  					btnL2 = new JoystickButton(joystickLeft,2),
 					btnL3 = new JoystickButton(joystickLeft,3),
 					btnL4 = new JoystickButton(joystickLeft,4),
@@ -93,9 +94,10 @@ public class OI {
     public OI()
     {
     
-    btnL9.whileHeld(new RaiseLift());
+    btnL4.whileHeld(new RaiseLift());
+    btnL5.whileHeld(new LowerLift());
     btnL3.whileHeld(new DriveStraight(0.2));
-    btnL4.whenPressed(new SpotTurnCommand(40));//X-Box controller
+    btnL2.whenPressed(new SpotTurnDegrees(10));//X-Box controller
 /*    btnL9.whenPressed(new DriveStraightTime(4000));
     xboxLStickButton.toggleWhenPressed(new OuttakeBalls());
     xboxRStickButton.toggleWhenPressed(new IntakeBalls());
