@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
 
@@ -18,9 +19,8 @@ public class Lift extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private Encoder liftEncoder = new Encoder();
+
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
-	private Encoder encoder;
 	private double power = 0;//Raw Power percentage being output to the lift
 	private double lastSpeed = 0;
 	private double lastAccel = 0;
@@ -33,8 +33,9 @@ public class Lift extends Subsystem {
 	private double encCurrent = 0;
 	private double encDiff = 0;
 	//TODO get diameter
-	private double wheelCirc = 0*Math.PI;
-	//public static final ControlMode PercentOutput;
+	// distance the shaft has spun is equal to the circumference divided by the total count (4096) times the current count.
+	// distancePerEncoderTick = perimeter of the hex shaft/4096 
+	// distancePassed = distancePerEncoderTick * encoderCount
 	
 	public Lift() {
 		
@@ -53,17 +54,17 @@ public class Lift extends Subsystem {
     }
     
     public void resetEncoders(){
-		encoder.reset();
+		// encoder.reset(); does not work for TalonSRX encoders; they have their own methods
 	}
     
   
     public void outputToLift(double pwr) {
     	LiftMotor.set(ControlMode.PercentOutput,pwr);
     	SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
+    	LiftMotor.setNeutralMode(NeutralMode.Brake);
     }
     
-    public double getDistanceInches(){
-		return encoder.getDistance();
-	}
+  //  public double getDistanceInches(){
+		// return encoder.getDistance()}
 }
 
