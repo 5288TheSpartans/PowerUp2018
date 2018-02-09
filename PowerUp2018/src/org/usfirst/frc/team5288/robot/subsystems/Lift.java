@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
+import org.usfirst.frc.team5288.robot.commands.ResistLiftWeight;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -46,11 +47,14 @@ public class Lift extends Subsystem {
 		encoder.setDistancePerPulse(wheelCirc/2048);
 */		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0,0);
 		LiftMotor.setSensorPhase(false);
+		SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new ResistLiftWeight());
+    	
     }
     
     public void resetEncoders(){
@@ -60,10 +64,16 @@ public class Lift extends Subsystem {
   
     public void outputToLift(double pwr) {
     	LiftMotor.set(ControlMode.PercentOutput,pwr);
-    	SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
-    	LiftMotor.setNeutralMode(NeutralMode.Brake);
+    	
     }
-    
+    public void setMode(boolean mode) {
+    	if(mode) {
+    		LiftMotor.setNeutralMode(NeutralMode.Brake);
+    	}
+    	else {
+    		LiftMotor.setNeutralMode(NeutralMode.Coast);
+    	}
+    }
   //  public double getDistanceInches(){
 		// return encoder.getDistance()}
 }

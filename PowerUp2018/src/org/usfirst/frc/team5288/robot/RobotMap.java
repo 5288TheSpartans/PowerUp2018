@@ -19,9 +19,7 @@ public class RobotMap {
 	// public static int leftMotor = 1;
 	// public static int rightMotor = 2;
 	
-	public static int liftEncoderA = 4;
-	public static int liftEncoderB = 5;
-	// Drivetrain
+// Drivetrain
 	//Drivetrain motors (PWM)
 	public static int LDriveMotor1 = 0;
 	public static int LDriveMotor2 = 1;
@@ -32,12 +30,20 @@ public class RobotMap {
 	public static int LDriveEncoder1 = 0;
 	public static int LDriveEncoder2 = 1;
 	public static int RDriveEncoder1 = 2;
+
 	public static int RDriveEncoder2 = 3;
 	
+// LIFT
 	// LIFT motor (CAN)
 	public static int LiftMotor = 0;
 	
-	// Joystick deadzones
+// RAMP
+	//RAMP motors (PWM)
+	// there are two ramp motors on each side, but a *splitter* is being used to output the same power to both at the same time using ONE PWM slot.
+	public static int LRampMotors = 4;
+	public static int RRampMotors = 5;
+// JOYSTICK
+	// Joystick dead/safe zone
 	public static double JOYDEADZONE = 0.15;
 	
 	// DriveStraight PID values

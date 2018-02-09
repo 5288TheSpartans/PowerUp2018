@@ -16,9 +16,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5288.robot.commands.ManualDriveCommand;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
 // import org.usfirst.frc.team5288.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team5288.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.Lift;
+import org.usfirst.frc.team5288.robot.subsystems.RightRampSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -34,6 +36,9 @@ public class Robot extends TimedRobot {
 	
 	public static final Lift lift = new Lift();
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
+	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
+	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
+	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
