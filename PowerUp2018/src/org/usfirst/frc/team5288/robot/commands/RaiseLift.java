@@ -45,6 +45,6 @@ public class RaiseLift extends Command {
     protected void interrupted() {
     	System.out.println("Lift interrupted.");
     	Robot.lift.outputToLift(0.0);
-    	Robot.lift.setMode(brakeMode);
+    	
     }
 }

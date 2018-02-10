@@ -47,14 +47,13 @@ public class Lift extends Subsystem {
 		encoder.setDistancePerPulse(wheelCirc/2048);
 */		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0,0);
 		LiftMotor.setSensorPhase(false);
-		SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
-	}
+			}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	setDefaultCommand(new ResistLiftWeight());
-    	
+    	// setDefaultCommand(new ResistLiftWeight());
+    
     }
     
     public void resetEncoders(){
@@ -73,6 +72,13 @@ public class Lift extends Subsystem {
     	else {
     		LiftMotor.setNeutralMode(NeutralMode.Coast);
     	}
+    }
+    
+    public double getEncoderPosition(){
+    	
+    	SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
+		SmartDashboard.putNumber("Lift encoder Position:", LiftMotor.getSelectedSensorPosition(0));
+		return LiftMotor.getSelectedSensorPosition(0);
     }
   //  public double getDistanceInches(){
 		// return encoder.getDistance()}

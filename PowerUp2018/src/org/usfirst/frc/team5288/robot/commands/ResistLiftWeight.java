@@ -4,6 +4,7 @@ import org.usfirst.frc.team5288.robot.Robot;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,7 +17,7 @@ public class ResistLiftWeight extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
-    	liftResistPID = new SpartanPID(0,0,0,0);
+    	//liftResistPID = new SpartanPID(0,0,0,0);
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +27,8 @@ public class ResistLiftWeight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.outputToLift(liftResistPID.getOutput());
+    	//Robot.lift.outputToLift(liftResistPID.getOutput());
+    	Robot.lift.getEncoderPosition();
     	
     }
 
@@ -43,5 +45,6 @@ public class ResistLiftWeight extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	System.out.println("Lift weight resist interrupted.");
+    	Robot.lift.outputToLift(0.0);
     }
 }
