@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands;
 
+
+
 import org.usfirst.frc.team5288.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,7 +25,9 @@ public class RaiseRightRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rightRamp.outputToRightRamp(0.25);
+    	if(Robot.rightRamp.checkRLimitSwitch())
+    		System.out.println("Right limit switch is triggered. Will not raise right ramp further.");
+    	else Robot.rightRamp.outputToRightRamp(-0.65);
     }
 
     // Make this return true when this Command no longer needs to run execute()

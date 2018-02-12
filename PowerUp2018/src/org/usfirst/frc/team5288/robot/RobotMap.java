@@ -42,6 +42,7 @@ public class RobotMap {
 	// there are two ramp motors on each side, but a *splitter* is being used to output the same power to both at the same time using ONE PWM slot.
 	public static int LRampMotors = 4;
 	public static int RRampMotors = 5;
+
 // JOYSTICK
 	// Joystick dead/safe zone
 	public static double JOYDEADZONE = 0.15;
@@ -51,7 +52,14 @@ public class RobotMap {
 	public static double I = 0;
 	public static double D = 0;
 	public static double FF = 0;
-		
+	
+// LIMIT SWITCHES (D I/O)
+	public static int LRampLimitSwitch = 4;
+	public static int RRampLimitSwitch = 5;
+	
+	
+	
+	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
