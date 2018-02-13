@@ -11,6 +11,7 @@ import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.LoosenLeftRampCommand;
+import org.usfirst.frc.team5288.robot.commands.LoosenRightRampCommand;
 import org.usfirst.frc.team5288.robot.commands.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLeftRampCommand;
@@ -101,9 +102,9 @@ public class OI {
     btnL5.whileHeld(new LowerLift());
     btnL3.whileHeld(new DriveStraight(0.2));
     btnL6.whileHeld(new RaiseLeftRampCommand());
-    btnL7.whileHeld(new LoosenLeftRampCommand());
-// btnLX.whileHeld(new RaiseRightRampCommand());
-// btnLX.whileHeld(new LoosenRightRampCommand());
+    btnL7.whileHeld(new RaiseRightRampCommand());
+    btnL8.whileHeld(new LoosenLeftRampCommand());
+    btnL9.whileHeld(new LoosenRightRampCommand());
     //btnL2.whenPressed(new SpotTurnDegrees(10));
 /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
