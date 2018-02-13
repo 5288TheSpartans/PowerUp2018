@@ -136,6 +136,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
+		updateSensors();
 		Scheduler.getInstance().run();
 	}
 
