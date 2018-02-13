@@ -16,7 +16,7 @@ public class RightRampSubsystem extends Subsystem {
 		
 		// Define limit switch
 		private DigitalInput rLimitSwitch = new DigitalInput(RobotMap.RRampLimitSwitch);
-		
+		private boolean limitSwitchStatus;
 	    // Put methods for controlling this subsystem
 	    // here. Call these from Commands.
 		
@@ -31,8 +31,11 @@ public class RightRampSubsystem extends Subsystem {
 	    public void outputToRightRamp(double power) {
 	    	rmotor1.set(power);
 	    }
+	    public void updateSensors() {
+			limitSwitchStatus = rLimitSwitch.get();
+		}
 	    public boolean isLimitChecked() {
-	    	return rLimitSwitch.get();
+	    	return limitSwitchStatus;
 	    }
 }
 

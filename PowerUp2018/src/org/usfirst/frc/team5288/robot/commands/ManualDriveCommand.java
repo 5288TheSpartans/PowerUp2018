@@ -30,7 +30,7 @@ public class ManualDriveCommand extends Command {
     	if(Robot.m_oi.getLeftStickY() >= RobotMap.JOYDEADZONE || Robot.m_oi.getLeftStickY() <= -RobotMap.JOYDEADZONE ) {
     		leftSpeedOutput = speedMultiplier * Robot.m_oi.getLeftStickY();
     		Robot.drivetrain.setLPower(leftSpeedOutput);
-    		System.out.println("MANUAL LEFT ENCODER: " + Robot.drivetrain.getLeftDistanceInches());
+    		//System.out.println("MANUAL LEFT ENCODER: " + Robot.drivetrain.getLeftDistanceInches());
     	}
     	 else {// if the joystick isn't being moved outside of the joystick dead zone, the robot does not move
     		Robot.drivetrain.setLPower(0.0);

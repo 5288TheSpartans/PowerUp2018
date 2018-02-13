@@ -16,11 +16,14 @@ public class LeftRampSubsystem extends Subsystem {
 		
 		// Define limit switch
 		private DigitalInput Llimitswitch = new DigitalInput(RobotMap.LRampLimitSwitch);
-	    
+	    boolean limitSwitchStatus;
 		// Put methods for controlling this subsystem
 	    // here. Call these from Commands.
 		
 		public LeftRampSubsystem() {
+		}
+		public void updateSensors() {
+			limitSwitchStatus = Llimitswitch.get();
 		}
 		
 	    public void initDefaultCommand() {
@@ -32,7 +35,7 @@ public class LeftRampSubsystem extends Subsystem {
 	    	lmotor1.set(power);
 	    }
 	    public boolean isLimitChecked() {
-	    	return Llimitswitch.get();
+	    	return limitSwitchStatus;
 	    }
 	    
     
