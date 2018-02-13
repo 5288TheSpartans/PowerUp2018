@@ -23,11 +23,13 @@ public class RaiseLeftRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.leftRamp.isLimitChecked())
-    		System.out.println("Left limit switch is triggered. Will not raise ramp further.");
-    	
-    	else Robot.leftRamp.outputToLeftRamp(-0.65);
-    	
+    	if(Robot.leftLimitCondition) {
+    		System.out.println(Robot.leftLimitCondition);
+    		Robot.leftRamp.outputToLeftRamp(-0.65);
+    	}
+    		else {	System.out.println("Left limit switch is triggered. Will not raise ramp further.");
+    				System.out.println(Robot.leftLimitCondition);
+    		}	
     }
 
     // Make this return true when this Command no longer needs to run execute()

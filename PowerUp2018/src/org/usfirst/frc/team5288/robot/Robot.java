@@ -33,7 +33,8 @@ public class Robot extends TimedRobot {
 	// public static final ExampleSubsystem kExampleSubsystem
 	//		= new ExampleSubsystem();
 	public static OI m_oi;
-	
+	public static boolean leftLimitCondition;
+	public static boolean rightLimitCondition;
 	public static final Lift lift = new Lift();
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
@@ -59,7 +60,8 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void robotPeriodic() {
-		
+		leftLimitCondition = Robot.leftRamp.isLimitChecked();
+		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 	}
 
 	/**

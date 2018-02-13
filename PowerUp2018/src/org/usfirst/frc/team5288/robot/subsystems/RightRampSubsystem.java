@@ -31,7 +31,7 @@ public class RightRampSubsystem extends Subsystem {
 	    public void outputToRightRamp(double power) {
 	    	rmotor1.set(power);
 	    }
-	    public boolean checkRLimitSwitch() {
+	    public boolean isLimitChecked() {
 	    	return rLimitSwitch.get();
 	    }
 }

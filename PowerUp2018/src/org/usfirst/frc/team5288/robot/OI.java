@@ -100,9 +100,10 @@ public class OI {
     btnL4.whileHeld(new RaiseLift());
     btnL5.whileHeld(new LowerLift());
     btnL3.whileHeld(new DriveStraight(0.2));
-   // btnL6.whileHeld(new RaiseRightRampCommand());
-    btnL7.whileHeld(new RaiseLeftRampCommand());
-    btnL8.whileHeld(new LoosenLeftRampCommand());
+    btnL6.whileHeld(new RaiseLeftRampCommand());
+    btnL7.whileHeld(new LoosenLeftRampCommand());
+// btnLX.whileHeld(new RaiseRightRampCommand());
+// btnLX.whileHeld(new LoosenRightRampCommand());
     //btnL2.whenPressed(new SpotTurnDegrees(10));
 /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
