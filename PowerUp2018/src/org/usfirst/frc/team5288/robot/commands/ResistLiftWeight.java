@@ -39,8 +39,8 @@ public class ResistLiftWeight extends Command {
     	currentHeight = Robot.lift.getEncoderPosition();
     	deltaHeight = currentHeight - initialHeight;
     	liftResistPID.update(deltaHeight);
-    	//Robot.lift.outputToLift(liftResistPID.getOutput());
-    	Robot.lift.outputToLift(0);
+    	Robot.lift.outputToLift(liftResistPID.getOutput());
+    	//	Robot.lift.outputToLift(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
