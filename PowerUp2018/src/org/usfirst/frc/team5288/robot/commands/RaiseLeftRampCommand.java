@@ -23,7 +23,7 @@ public class RaiseLeftRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rightRamp.updateSensors();
+    	Robot.leftRamp.updateSensors();
     	if(Robot.leftLimitCondition) {
     		System.out.println("Left limit switch condition: " + Robot.leftLimitCondition);
     		Robot.leftRamp.outputToLeftRamp(-0.65);
