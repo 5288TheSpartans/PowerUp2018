@@ -33,11 +33,21 @@ public class RaiseRightRampCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        	Robot.rightRamp.updateSensors();
+        	if(Robot.rightLimitCondition) {
+        		System.out.println("Keep going");
+        		return false;
+        	}
+        	else {
+        		System.out.println("Limit switch activated");
+        		return true;
+        	}
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.rightRamp.outputToRightRamp(0.0);
+    	System.out.println("Turning off motor b/c limit switch");
     }
 
     // Called when another command which requires one or more of the same

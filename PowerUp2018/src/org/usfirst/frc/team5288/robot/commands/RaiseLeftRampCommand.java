@@ -23,11 +23,13 @@ public class RaiseLeftRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.leftRamp.updateSensors();
     	if(Robot.leftLimitCondition) {
     		System.out.println("Left limit switch condition: " + Robot.leftLimitCondition);
     		Robot.leftRamp.outputToLeftRamp(-0.65);
     	}
     		else {	System.out.println("Left limit switch is triggered. Will not raise ramp further.");
+    				System.out.println(Robot.leftLimitCondition);
     		}	
     }
 
@@ -45,5 +47,6 @@ public class RaiseLeftRampCommand extends Command {
     protected void interrupted() {
     	Robot.leftRamp.outputToLeftRamp(0.0);
     	System.out.println("RaiseLeftRampCommand interrupted.");
-    }
+
+}
 }
