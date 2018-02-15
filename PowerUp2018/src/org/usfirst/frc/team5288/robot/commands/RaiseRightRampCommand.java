@@ -25,17 +25,13 @@ public class RaiseRightRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.rightLimitCondition) {
-    		System.out.println("Right limit switch condiiton: " + Robot.rightLimitCondition);
     		Robot.rightRamp.outputToRightRamp(0.65);
-    	}	else System.out.println("Right limit switch triggered. Will not raise ramp further.");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         	Robot.rightRamp.updateSensors();
         	if(Robot.rightLimitCondition) {
-        		System.out.println("Keep going");
         		return false;
         	}
         	else {
@@ -47,7 +43,7 @@ public class RaiseRightRampCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.rightRamp.outputToRightRamp(0.0);
-    	System.out.println("Turning off motor b/c limit switch");
+    	System.out.println("Turning off motor due to limit switch trigger.");
     }
 
     // Called when another command which requires one or more of the same
