@@ -27,7 +27,7 @@ public class RaiseRightRampCommand extends Command {
     protected void execute() {
     	if(Robot.rightLimitCondition) {
     		System.out.println("Right limit switch condiiton: " + Robot.rightLimitCondition);
-    		Robot.rightRamp.outputToRightRamp(-0.65);
+    		Robot.rightRamp.outputToRightRamp(0.65);
     	}	else System.out.println("Right limit switch triggered. Will not raise ramp further.");
     }
 
