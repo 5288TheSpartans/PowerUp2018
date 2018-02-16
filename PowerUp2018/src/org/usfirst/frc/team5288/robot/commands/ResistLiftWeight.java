@@ -25,7 +25,10 @@ public class ResistLiftWeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//
+    	double pValue = Double.parseDouble(Robot.getDashboardValue("LIFTP"));
+    	double iValue = Double.parseDouble(Robot.getDashboardValue("LIFTI"));
+    	double dValue = Double.parseDouble(Robot.getDashboardValue("LIFTD"));
+    	liftResistPID = new SpartanPID(pValue,iValue,dValue, 0);
     	initialHeight = Robot.lift.getEncoderPosition();
     	currentHeight = initialHeight;
     	deltaHeight = 0;
@@ -56,7 +59,7 @@ public class ResistLiftWeight extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	System.out.println("Lift weight resist interrupted.");
-    	//TODO: Try too not set numbers to 0
-    	Robot.lift.outputToLift(0.0);
+    	//TODO: Try too not set motors to 0 when ending a command unless necessary, adds unnecessary jitter.
+    	Robot.lift.outputToLift(0);
     }
 }
