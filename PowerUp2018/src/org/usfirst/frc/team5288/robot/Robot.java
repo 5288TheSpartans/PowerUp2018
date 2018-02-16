@@ -39,9 +39,10 @@ public class Robot extends TimedRobot {
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
-	
+	 
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Integer> m_positionChooser = new SendableChooser<>();
+	SendableChooser<Integer> m_goalChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -53,7 +54,15 @@ public class Robot extends TimedRobot {
 		
 		// m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("Auto position", m_positionChooser);
+		m_positionChooser.addDefault("Position 0", 0);
+		m_positionChooser.addObject("Position 1", 1);
+		m_positionChooser.addObject("Position 2", 2);
+		SmartDashboard.putData("Auto goal", m_goalChooser);
+		m_positionChooser.addDefault("Drive straight", 0);
+		m_positionChooser.addObject("Switch", 1);
+		m_positionChooser.addObject("Scale", 2);
+		
 	}
 	public String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
@@ -93,7 +102,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = new AutoMaker(m_positionChooser.getSelected(),m_goalChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
