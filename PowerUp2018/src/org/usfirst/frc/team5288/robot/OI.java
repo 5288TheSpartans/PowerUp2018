@@ -99,14 +99,19 @@ public class OI {
     {
     
     btnL4.whileHeld(new RaiseLift());
-    btnL5.whileHeld(new LowerLift());
-    btnL3.whileHeld(new DriveStraight(0.2));
+    btnL5.whileHeld(new DriveStraight(0.2));
     btnL6.whileHeld(new RaiseLeftRampCommand());
     btnL7.whileHeld(new RaiseRightRampCommand());
     btnL8.whileHeld(new LoosenLeftRampCommand());
     btnL9.whileHeld(new LoosenRightRampCommand());
     //btnL2.whenPressed(new SpotTurnDegrees(10));
-/*    btnL9.whenPressed(new DriveStraightTime(4000));
+
+    // X-Box controls
+    xBoxB.whileHeld(new RaiseLift());
+    
+    
+    
+    /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
  * 
  * 
