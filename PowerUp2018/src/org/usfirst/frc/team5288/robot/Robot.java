@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		updateSensors();
+		updateDashboard();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Scheduler.getInstance().run();
@@ -145,6 +146,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		updateSensors();
+		updateDashboard();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Scheduler.getInstance().run();
@@ -160,5 +162,11 @@ public class Robot extends TimedRobot {
 	public void updateSensors(){
 		Robot.leftRamp.updateSensors();
 		Robot.rightRamp.updateSensors();
+	}
+	
+	public void updateDashboard() {
+		SmartDashboard.putBoolean("Left Ramp condition: ", Robot.leftLimitCondition);
+		SmartDashboard.putBoolean("Right ramp condition: ", Robot.rightLimitCondition);
+
 	}
 }
