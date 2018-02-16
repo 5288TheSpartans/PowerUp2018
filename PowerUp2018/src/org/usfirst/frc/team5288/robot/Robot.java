@@ -64,7 +64,7 @@ public class Robot extends TimedRobot {
 		m_positionChooser.addObject("Scale", 2);
 		
 	}
-	public String getDashboardValue(String key) {
+	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
 	}
 	
