@@ -120,13 +120,14 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		updateSensors();
-		leftLimitCondition = Robot.leftRamp.isLimitChecked();
-		rightLimitCondition = Robot.rightRamp.isLimitChecked();
+		updateSubsystems();
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
+		updateSensors();
+		updateSubsystems();
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -142,8 +143,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		updateSensors();
-		leftLimitCondition = Robot.leftRamp.isLimitChecked();
-		rightLimitCondition = Robot.rightRamp.isLimitChecked();
+		updateSubsystems();
 		Scheduler.getInstance().run();
 	}
 
@@ -152,10 +152,24 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		updateSensors();
+		updateSubsystems();
+		Scheduler.getInstance().run();
 	}
 	
 	public void updateSensors(){
+
+		leftLimitCondition = Robot.leftRamp.isLimitChecked();
+		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Robot.leftRamp.updateSensors();
 		Robot.rightRamp.updateSensors();
+		//Robot.lift.updateSensors();
+	}
+	public void updateSubsystems() {
+		lift.updateOutputs();
+		//drivetrain.updateOutputs();
+		rightRamp.updateOutputs();
+		leftRamp.updateOutputs();
+		
 	}
 }

@@ -25,10 +25,10 @@ public class ResistLiftWeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double pValue = Robot.getDashboardNumber("LIFTP");
-    	double iValue = Robot.getDashboardNumber("LIFTI");
-    	double dValue = Robot.getDashboardNumber("LIFTD");
-    	liftResistPID = new SpartanPID(pValue,iValue,dValue, 0);
+    	//double pValue = Robot.getDashboardNumber("LIFTP");
+    	//double iValue = Robot.getDashboardNumber("LIFTI");
+    	//double dValue = Robot.getDashboardNumber("LIFTD");
+    	//liftResistPID = new SpartanPID(pValue,iValue,dValue, 0);
     	initialHeight = Robot.lift.getEncoderPosition();
     	currentHeight = initialHeight;
     	deltaHeight = 0;
