@@ -16,6 +16,8 @@ import org.usfirst.frc.team5288.robot.commands.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLeftRampCommand;
 import org.usfirst.frc.team5288.robot.commands.RaiseRightRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ResistLiftWeight;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -83,7 +85,7 @@ public class OI {
  				btnR10 = new JoystickButton(joystickRight,10),
  		 		btnR11 = new JoystickButton(joystickRight,1); 
  	private JoystickButton 
- 			xBoxB = new JoystickButton(xbox, 0),//Coloured buttons
+ 			//xBoxB = new JoystickButton(xbox, 0),//Coloured buttons
 			xboxA= new JoystickButton(xbox,1),//Coloured buttons
 			xboxY = new JoystickButton(xbox,2),//Coloured buttons
 			xboxX = new JoystickButton(xbox,3),//Coloured buttons
@@ -104,10 +106,11 @@ public class OI {
     btnL7.whileHeld(new RaiseRightRampCommand());
     btnL8.whileHeld(new LoosenLeftRampCommand());
     btnL9.whileHeld(new LoosenRightRampCommand());
-    //btnL2.whenPressed(new SpotTurnDegrees(10));
+    btnL2.whenPressed(new SpotTurnDegrees(10));
+    btnL3.whileHeld(new ResistLiftWeight());
 
     // X-Box controls
-    xBoxB.whileHeld(new RaiseLift());
+    //xBoxB.whileHeld(new RaiseLift());
     
     
     

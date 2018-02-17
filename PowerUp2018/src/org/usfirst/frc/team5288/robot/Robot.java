@@ -64,8 +64,11 @@ public class Robot extends TimedRobot {
 		m_positionChooser.addObject("Scale", 2);
 		
 	}
-	public static String getDashboardValue(String key) {
+	public static String getDashboardString(String key) {
 		return SmartDashboard.getString(key, "null");
+	}
+	public static double getDashboardNumber(String key) {
+		return SmartDashboard.getNumber(key,0);
 	}
 	
 	public void robotPeriodic() {
@@ -102,7 +105,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = new AutoMaker(m_positionChooser.getSelected(),m_goalChooser.getSelected());
+		//m_autonomousCommand = new AutoMaker(m_positionChooser.getSelected(),m_goalChooser.getSelected());
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -148,6 +151,7 @@ public class Robot extends TimedRobot {
 		updateSensors();
 		updateDashboard();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
+		lift.getEncoderPosition();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Scheduler.getInstance().run();
 	}

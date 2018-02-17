@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class ResistLiftWeight extends Command {
+public class LiftToHeight extends Command {
 	
 	
 	SpartanPID liftResistPID;
 	double initialHeight;
 	double currentHeight;
 	double deltaHeight;// current - initial
-    public ResistLiftWeight() {
+    public LiftToHeight() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
@@ -25,10 +25,7 @@ public class ResistLiftWeight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	double pValue = Robot.getDashboardNumber("LIFTP");
-    	double iValue = Robot.getDashboardNumber("LIFTI");
-    	double dValue = Robot.getDashboardNumber("LIFTD");
-    	liftResistPID = new SpartanPID(pValue,iValue,dValue, 0);
+    	//
     	initialHeight = Robot.lift.getEncoderPosition();
     	currentHeight = initialHeight;
     	deltaHeight = 0;

@@ -45,7 +45,7 @@ public class Lift extends Subsystem {
 		encoder.setMinRate(0);
 		encoder.setSamplesToAverage(1);		
 		encoder.setDistancePerPulse(wheelCirc/2048);
-*/		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.QuadEncoder, 0,0);
+*/		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
 		LiftMotor.setSensorPhase(false);
 			}
 
