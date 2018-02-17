@@ -16,7 +16,7 @@ public class LeftRampSubsystem extends Subsystem {
 		private enum state {initial, moving, planted, raising} ;
 		// Define motors
 		private VictorSP lmotor1 = new VictorSP(RobotMap.LRampMotors);	//	Left ramp motors; PWM is split.
-		private Servo lRelease = new Servo(RobotMap.LServo);
+		private Servo lRelease = new Servo(RobotMap.lRampServo);
 		// Define limit switch
 		private DigitalInput Llimitswitch = new DigitalInput(RobotMap.LRampLimitSwitch);
 	    boolean limitSwitchStatus;

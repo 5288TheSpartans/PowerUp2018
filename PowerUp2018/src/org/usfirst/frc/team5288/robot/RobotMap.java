@@ -36,12 +36,13 @@ public class RobotMap {
 // LIFT
 	// LIFT motor (CAN)
 	public static int LiftMotor = 0;
-	
 // RAMP
 	//RAMP motors (PWM)
 	// there are two ramp motors on each side, but a *splitter* is being used to output the same power to both at the same time using ONE PWM slot.
 	public static int LRampMotors = 4;
 	public static int RRampMotors = 5;
+	public static int lRampServo = 6;
+	public static int rRampServo = 7;
 
 // JOYSTICK
 	// Joystick dead/safe zone
