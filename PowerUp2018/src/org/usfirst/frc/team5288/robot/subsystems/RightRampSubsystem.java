@@ -44,7 +44,7 @@ public class RightRampSubsystem extends Subsystem {
 	    	}
 	    	else if(currentState == state.neutral) {
 	    		rmotor1.set(0);
-		    	rServo.set(servoPlantedAngle);
+		    	rServo.set(servoNeutralAngle);
 	    	}
 	    	else if (currentState == state.initial) {
 	    		rmotor1.set(0);
