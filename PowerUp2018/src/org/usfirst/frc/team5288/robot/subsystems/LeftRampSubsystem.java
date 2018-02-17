@@ -40,8 +40,14 @@ public class LeftRampSubsystem extends Subsystem {
 		}
 	    public void updateOutputs() {
 	    	if (currentState == state.planted){
+	    		if(limitSwitchStatus){
 		    	lmotor1.set(rampMotorOutput);
 		    	lServo.set(servoPlantedAngle);
+	    		}
+	    		else {
+			    	lmotor1.set(0);
+			    	lServo.set(servoPlantedAngle);
+	    		}
 	    	}
 	    	else if(currentState == state.neutral) {
 	    		lmotor1.set(0);
