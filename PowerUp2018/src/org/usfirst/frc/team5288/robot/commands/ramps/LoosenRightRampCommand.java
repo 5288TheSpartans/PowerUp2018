@@ -1,4 +1,4 @@
-package org.usfirst.frc.team5288.robot.commands;
+package org.usfirst.frc.team5288.robot.commands.ramps;
 
 import org.usfirst.frc.team5288.robot.Robot;
 

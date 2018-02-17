@@ -10,13 +10,13 @@ package org.usfirst.frc.team5288.robot;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
-import org.usfirst.frc.team5288.robot.commands.LoosenLeftRampCommand;
-import org.usfirst.frc.team5288.robot.commands.LoosenRightRampCommand;
 import org.usfirst.frc.team5288.robot.commands.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.RaiseLift;
-import org.usfirst.frc.team5288.robot.commands.RaiseLeftRampCommand;
-import org.usfirst.frc.team5288.robot.commands.RaiseRightRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ResistLiftWeight;
+import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
