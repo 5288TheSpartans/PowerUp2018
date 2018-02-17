@@ -41,10 +41,8 @@ public class Robot extends TimedRobot {
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
-	 
 	Command m_autonomousCommand;
-	SendableChooser<Integer> m_positionChooser = new SendableChooser<>();
-	SendableChooser<Integer> m_goalChooser = new SendableChooser<>();
+	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -56,21 +54,10 @@ public class Robot extends TimedRobot {
 		
 		// m_chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto position", m_positionChooser);
-		m_positionChooser.addDefault("Position 0", 0);
-		m_positionChooser.addObject("Position 1", 1);
-		m_positionChooser.addObject("Position 2", 2);
-		SmartDashboard.putData("Auto goal", m_goalChooser);
-		m_positionChooser.addDefault("Drive straight", 0);
-		m_positionChooser.addObject("Switch", 1);
-		m_positionChooser.addObject("Scale", 2);
-		
+		SmartDashboard.putData("Auto mode", m_chooser);
 	}
-	public static String getDashboardString(String key) {
+	public String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
-	}
-	public static double getDashboardNumber(String key) {
-		return SmartDashboard.getNumber(key,0);
 	}
 	
 	public void robotPeriodic() {
@@ -110,7 +97,7 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void autonomousInit() {
-		//m_autonomousCommand = new AutoMaker(m_positionChooser.getSelected(),m_goalChooser.getSelected());
+		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -133,7 +120,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		updateSensors();
-		updateDashboard();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Scheduler.getInstance().run();
@@ -156,9 +142,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		updateSensors();
-		updateDashboard();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
-		lift.getEncoderPosition();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		Scheduler.getInstance().run();
 	}
@@ -173,11 +157,5 @@ public class Robot extends TimedRobot {
 	public void updateSensors(){
 		Robot.leftRamp.updateSensors();
 		Robot.rightRamp.updateSensors();
-	}
-	
-	public void updateDashboard() {
-		SmartDashboard.putBoolean("Left Ramp condition: ", Robot.leftLimitCondition);
-		SmartDashboard.putBoolean("Right ramp condition: ", Robot.rightLimitCondition);
-
 	}
 }

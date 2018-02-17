@@ -36,7 +36,7 @@ public class AutoMaker extends CommandGroup {
 			}
 		
 		}
-		
+		/*
 		//auto selection
 		if ((goal==0) & ((spawn==0) | (spawn==2))) {
 			
@@ -91,7 +91,7 @@ public class AutoMaker extends CommandGroup {
 		} else {
 			//what tf you trying to accomplish??
 		}
-		
+		*/
 	}
 	/*int goal, spawn, switch_cf, scale_cf, vers; //the 5 parameters
 
