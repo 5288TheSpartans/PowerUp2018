@@ -25,15 +25,15 @@ public class Lift extends Subsystem {
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
 	
 	// lift states
-	private enum state {raising, lowering, stopped};
-	private state currentState;
+	public enum liftState {raising, lowering, stopped};
+	private liftState currentState;
 	
 	// lift modes
-	private enum motorMode {brake, coast};
-	private motorMode currentMode;
+	public enum liftMotorMode {brake, coast};
+	private liftMotorMode currentMode;
 	// lift outputs
 	private double liftMotorRaisingOutput = 1.0;
-	private double liftMotorLoweringOutput = -1.0;
+	private double liftMotorLoweringOutput = 0.0; // needs to be 0.0 as this will let gravity make the lift fall
 	private double liftMotorStoppedOutput = 0.0;
 	
 	
@@ -59,25 +59,27 @@ public class Lift extends Subsystem {
     	
     }
     public void updateOutputs() {
-    	if(currentState == state.raising) {
+    	if(currentState == liftState.raising) {
+    		setMode(liftMotorMode.coast);
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorRaisingOutput);
     	} 
-    	else if(currentState == state.lowering) {
+    	else if(currentState == liftState.lowering) {
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
+    		setMode(liftMotorMode.coast);
     	}
-    	else if(currentState == state.stopped) {
-    		setMode(motorMode.brake);
+    	else if(currentState == liftState.stopped) {
+    		setMode(liftMotorMode.brake);
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorStoppedOutput);
     	}
     }
-    public void setState(state newState) {
+    public void setState(liftState newState) {
     	currentState = newState;
     }
-    public void setMode(motorMode newMode) {
-    	if(newMode == motorMode.brake) {
+    public void setMode(liftMotorMode newMode) {
+    	if(newMode == liftMotorMode.brake) {
     		LiftMotor.setNeutralMode(NeutralMode.Brake);
     	}
-    	else if(newMode == motorMode.coast){
+    	else if(newMode == liftMotorMode.coast){
     		LiftMotor.setNeutralMode(NeutralMode.Coast);
     	}
     }

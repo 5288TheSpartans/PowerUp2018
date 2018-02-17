@@ -2,6 +2,8 @@ package org.usfirst.frc.team5288.robot.commands;
 
 import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.subsystems.Lift;
+import org.usfirst.frc.team5288.robot.subsystems.Lift.liftState;
+import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem.state;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
@@ -13,7 +15,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class RaiseLift extends Command {
-	boolean brakeMode = true;
     public RaiseLift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -22,13 +23,12 @@ public class RaiseLift extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	System.out.println("Lift initialized.");
-    	Robot.lift.outputToLift(0.0);
+    	Robot.lift.setState(liftState.raising);
+    	System.out.println("RaiseLift command initialized.");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.outputToLift(-0.35);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,8 +43,7 @@ public class RaiseLift extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	System.out.println("Lift interrupted.");
-    	Robot.lift.outputToLift(0.0);
-    	
+    	Robot.lift.setState(liftState.stopped);
+    	System.out.println("RaiseLift command interrupted.");
     }
 }

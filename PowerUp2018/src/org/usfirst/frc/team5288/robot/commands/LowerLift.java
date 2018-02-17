@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.subsystems.Lift.liftState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -8,7 +9,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LowerLift extends Command {
-
     public LowerLift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -17,14 +17,12 @@ public class LowerLift extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	System.out.println("Robot LowerLift initialized.");
+    	Robot.lift.setState(liftState.lowering);
+    	System.out.println("LowerLift command initialized.");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	Robot.lift.outputToLift(0.35);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,8 +37,7 @@ public class LowerLift extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
-    	Robot.lift.outputToLift(0.0);
+    	Robot.lift.setState(liftState.stopped);
     	System.out.println("LowerLift command interrupted.");
     		
     }
