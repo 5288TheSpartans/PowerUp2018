@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
-import org.usfirst.frc.team5288.robot.commands.ResistLiftWeight;
+import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;

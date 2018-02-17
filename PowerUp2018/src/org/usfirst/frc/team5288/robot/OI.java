@@ -10,9 +10,9 @@ package org.usfirst.frc.team5288.robot;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
-import org.usfirst.frc.team5288.robot.commands.LowerLift;
-import org.usfirst.frc.team5288.robot.commands.RaiseLift;
-import org.usfirst.frc.team5288.robot.commands.ResistLiftWeight;
+import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
+import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
+import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampCommand;

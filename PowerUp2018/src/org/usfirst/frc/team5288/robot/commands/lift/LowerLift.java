@@ -1,21 +1,15 @@
-package org.usfirst.frc.team5288.robot.commands;
+package org.usfirst.frc.team5288.robot.commands.lift;
 
 import org.usfirst.frc.team5288.robot.Robot;
-import org.usfirst.frc.team5288.robot.subsystems.Lift;
 import org.usfirst.frc.team5288.robot.subsystems.Lift.liftState;
-import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem.state;
-
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
-//import org.usfirst.frc.team5288.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RaiseLift extends Command {
-    public RaiseLift() {
+public class LowerLift extends Command {
+    public LowerLift() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.lift);
@@ -23,8 +17,8 @@ public class RaiseLift extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lift.setState(liftState.raising);
-    	System.out.println("RaiseLift command initialized.");
+    	Robot.lift.setState(liftState.lowering);
+    	System.out.println("LowerLift command initialized.");
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -44,6 +38,7 @@ public class RaiseLift extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.lift.setState(liftState.stopped);
-    	System.out.println("RaiseLift command interrupted.");
+    	System.out.println("LowerLift command interrupted.");
+    		
     }
 }
