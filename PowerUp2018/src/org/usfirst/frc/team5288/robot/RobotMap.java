@@ -33,7 +33,8 @@ public class RobotMap {
 
 	public static int RDriveEncoder2 = 3;
 // INTAKE
-	public static int leftIntakeMotor = 
+	public static int lIntakeMotor = 8;
+	public static int rIntakeMotor = 9;
 // LIFT
 	// LIFT motor (CAN)
 	public static int LiftMotor = 0;
