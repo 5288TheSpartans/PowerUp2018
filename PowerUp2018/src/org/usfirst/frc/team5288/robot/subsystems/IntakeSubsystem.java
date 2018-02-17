@@ -1,6 +1,9 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+
+import org.usfirst.frc.team5288.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -11,8 +14,8 @@ public class IntakeSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private VictorSP lIntake = new VictorSP(RobotMap.TBD);
-	private VictorSP rIntake = new VictorSP(RobotMap.TBD);
+	private VictorSP lIntake = new VictorSP(RobotMap.intakeRight);
+	private VictorSP rIntake = new VictorSP(RobotMap.intakeLeft);
 	public enum state{};
 	private state currentState;
 	
