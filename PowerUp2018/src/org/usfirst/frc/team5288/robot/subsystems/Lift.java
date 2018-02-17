@@ -20,40 +20,33 @@ public class Lift extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
+	
+	// declare talonSRX
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
-	private double power = 0;//Raw Power percentage being output to the lift
-	private double lastSpeed = 0;
-	private double lastAccel = 0;
-	private double currentAccel = 0;
-	private double jerk = 0;
-	private double currentSpeed = 0;
-	private double targetAccel = 0;
-	private double targetSpeed = 0;
-	private double encLast = 0;
-	private double encCurrent = 0;
-	private double encDiff = 0;
-	//TODO get diameter
-	// distance the shaft has spun is equal to the circumference divided by the total count (4096) times the current count.
-	// distancePerEncoderTick = perimeter of the hex shaft/4096 
-	// distancePassed = distancePerEncoderTick * encoderCount
+	
+	// lift states
+	private enum state {raising, lowering, stopped};
+	private state currentState;
+	
+	// lift modes
+	private enum motorMode {brake, coast};
+	private motorMode currentMode;
+	// lift outputs
+	private double liftMotorRaisingOutput = 1.0;
+	private double liftMotorLoweringOutput = -1.0;
+	private double liftMotorStoppedOutput = 0.0;
+	
+	
+	
 	
 	public Lift() {
-		
-/*		encoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB, true, EncodingType.k4X);	
-		encoder.setMaxPeriod(5);
-		encoder.setMinRate(0);
-		encoder.setSamplesToAverage(1);		
-		encoder.setDistancePerPulse(wheelCirc/2048);
-*/		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
+		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
 		LiftMotor.setSensorPhase(false);
-			}
-
+	}
+	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
-    	// setDefaultCommand(new ResistLiftWeight());
-    
     }
     
     public void resetEncoders(){
@@ -65,11 +58,26 @@ public class Lift extends Subsystem {
     	LiftMotor.set(ControlMode.PercentOutput,pwr);
     	
     }
-    public void setMode(boolean mode) {
-    	if(mode) {
+    public void updateOutputs() {
+    	if(currentState == state.raising) {
+    		LiftMotor.set(ControlMode.PercentOutput, liftMotorRaisingOutput);
+    	} 
+    	else if(currentState == state.lowering) {
+    		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
+    	}
+    	else if(currentState == state.stopped) {
+    		setMode(motorMode.brake);
+    		LiftMotor.set(ControlMode.PercentOutput, liftMotorStoppedOutput);
+    	}
+    }
+    public void setState(state newState) {
+    	currentState = newState;
+    }
+    public void setMode(motorMode newMode) {
+    	if(newMode == motorMode.brake) {
     		LiftMotor.setNeutralMode(NeutralMode.Brake);
     	}
-    	else {
+    	else if(newMode == motorMode.coast){
     		LiftMotor.setNeutralMode(NeutralMode.Coast);
     	}
     }
