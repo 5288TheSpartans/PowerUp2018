@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
+	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	 
 	Command m_autonomousCommand;
 	SendableChooser<Integer> m_positionChooser = new SendableChooser<>();
@@ -103,6 +105,9 @@ public class Robot extends TimedRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
+	public void updateGameData() {
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+	}
 	@Override
 	public void autonomousInit() {
 		//m_autonomousCommand = new AutoMaker(m_positionChooser.getSelected(),m_goalChooser.getSelected());
@@ -115,6 +120,8 @@ public class Robot extends TimedRobot {
 		 */
 
 		// schedule the autonomous command (example)
+		
+		updateGameData();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
