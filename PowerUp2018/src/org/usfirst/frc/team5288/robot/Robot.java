@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
-	public String getDashboardValue(String key) {
+	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
 	}
 	
@@ -128,6 +128,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		updateSensors();
 		updateSubsystems();
+		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -144,6 +145,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		updateSensors();
 		updateSubsystems();
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -169,7 +171,17 @@ public class Robot extends TimedRobot {
 		lift.updateOutputs();
 		//drivetrain.updateOutputs();
 		rightRamp.updateOutputs();
-		leftRamp.updateOutputs();
-		
+		leftRamp.updateOutputs();	
 	}
+	public static double getDashboardNumber(String key) {
+		return SmartDashboard.getNumber(key, 0);
+	}
+	public void updateSmartDashboard() {
+		SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
+		SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
+		SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
+		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
+		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
+	}
+	
 }

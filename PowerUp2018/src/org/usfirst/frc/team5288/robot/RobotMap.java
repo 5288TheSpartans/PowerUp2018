@@ -48,7 +48,7 @@ public class RobotMap {
 
 // JOYSTICK
 	// Joystick dead/safe zone
-	public static double JOYDEADZONE = 0.15;
+	public static double JOYDEADZONE = 0.06;
 	
 	// DriveStraight PID values
 	public static double P = 0;
@@ -59,6 +59,8 @@ public class RobotMap {
 // LIMIT SWITCHES (D I/O)
 	public static int LRampLimitSwitch = 4;
 	public static int RRampLimitSwitch = 5;
+	public static int UpperLiftLimit = 6;
+	public static int LowerLiftLimit = 7;
 	
 	
 	

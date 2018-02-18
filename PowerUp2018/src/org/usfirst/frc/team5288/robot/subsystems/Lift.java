@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import org.usfirst.frc.team5288.robot.RobotMap;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
@@ -19,21 +20,23 @@ import com.ctre.phoenix.*;
 public class Lift extends Subsystem {
 
     // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-	
+    // here. Call these from Commands
 	// declare talonSRX
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
 	
 	// lift states
 	public enum liftState {raising, lowering, stopped};
 	private liftState currentState;
-	
+	//
+	private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.LowerLiftLimit);
+	private DigitalInput topLimitSwitch = new DigitalInput(RobotMap.UpperLiftLimit);
+
 	// lift modes
 	public enum liftMotorMode {brake, coast};
 	private liftMotorMode currentMode;
 	// lift outputs
 	private double liftMotorRaisingOutput = 1.0;
-	private double liftMotorLoweringOutput = 0.0; // needs to be 0.0 as this will let gravity make the lift fall
+	private double liftMotorLoweringOutput = -0.2; // needs to be 0.0 as this will let gravity make the lift fall
 	private double liftMotorStoppedOutput = 0.0;
 	
 	
@@ -45,6 +48,7 @@ public class Lift extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
+    	setDefaultCommand(new ResistLiftWeight());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
@@ -61,18 +65,30 @@ public class Lift extends Subsystem {
     public void updateOutputs() {
     	if(currentState == liftState.raising) {
     		setMode(liftMotorMode.coast);
+    		if(!topLimitSwitch.get()) {
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorRaisingOutput);
+    		}
+    		else
+    		{
+    			LiftMotor.set(ControlMode.PercentOutput, 0);
+    		}
     	} 
     	else if(currentState == liftState.lowering) {
-    		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
     		setMode(liftMotorMode.coast);
+    		if(!bottomLimitSwitch.get()) {
+        		LiftMotor.set(ControlMode.PercentOutput, liftMotorRaisingOutput);
+        		}
+        		else
+        		{
+        			LiftMotor.set(ControlMode.PercentOutput, 0);
+        		}
+    		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
     	}
     	else if(currentState == liftState.stopped) {
     		setMode(liftMotorMode.brake);
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorStoppedOutput);
     	}
-    }
-    public void setState(liftState newState) {
+    }    public void setState(liftState newState) {
     	currentState = newState;
     }
     public void setMode(liftMotorMode newMode) {

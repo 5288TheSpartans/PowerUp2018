@@ -10,6 +10,7 @@ package org.usfirst.frc.team5288.robot;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
+import org.usfirst.frc.team5288.robot.commands.ResetEncoders;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
@@ -101,14 +102,16 @@ public class OI {
     {
     
     btnL4.whileHeld(new RaiseLift());
+    btnL3.whileHeld(new LowerLift());
     btnL5.whileHeld(new DriveStraight(0.2));
     btnL6.whileHeld(new RaiseLeftRampCommand());
     btnL7.whileHeld(new RaiseRightRampCommand());
     btnL8.whileHeld(new LoosenLeftRampCommand());
     btnL9.whileHeld(new LoosenRightRampCommand());
     btnL2.whenPressed(new SpotTurnDegrees(10));
-    btnL3.whileHeld(new ResistLiftWeight());
-
+    //btnL3.whileHeld(new ResistLiftWeight());
+   m - nm btnR6.whenPressed(new ResetEncoders());
+   
     // X-Box controls
     //xBoxB.whileHeld(new RaiseLift());
     
@@ -151,7 +154,8 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
 
     	
-    //-----------------------------Code for returning Joystick Axis--------------------------
+   
+   //-----------------------------Code for returning Joystick Axis--------------------------
     
     }
     public double getXLY()

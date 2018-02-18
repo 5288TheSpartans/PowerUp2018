@@ -20,7 +20,6 @@ public class DriveStraightDistance extends Command {
     private SpartanPID PID = new SpartanPID(RobotMap.P, RobotMap.I, RobotMap.D, RobotMap.FF);
     private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
-//    private SpartanPID distancePID = new SpartanPID(1/7,0.11,0.28,0);
     public DriveStraightDistance(double distance) {
     	requires(Robot.drivetrain);
     	inWantedDistance = distance;//Set the distance being searched for.
