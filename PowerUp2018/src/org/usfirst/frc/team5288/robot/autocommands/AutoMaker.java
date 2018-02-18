@@ -19,7 +19,10 @@ public class AutoMaker extends CommandGroup {
 		vers = 0; //choose version, 0 = end at pile, 1 = end a portal
 		
 		char fms[] = new char[3]; //read in fms data
-		//fms data code
+		
+		for (int o=0; 0<3; o++) {
+			fms[o] = gameData.charAt(o);
+		}
 		
 		for (int n=0; n<2; n++) {  //setting cf variables
 			
@@ -36,7 +39,7 @@ public class AutoMaker extends CommandGroup {
 			}
 		
 		}
-		/*
+		
 		//auto selection
 		if ((goal==0) & ((spawn==0) | (spawn==2))) {
 			
@@ -46,12 +49,62 @@ public class AutoMaker extends CommandGroup {
 			
 			if ((spawn==0) & (switch_cf==0) & (vers==0)) {
 				//left spawn, left switch, to pile
+				addSequential(new DriveStraightDistance(174));
+				addSequential(new SpotTurnDegrees(90));
+				addSequential(new DriveStraightDistance(48));
+				addSequential(new LiftToHeight(30));
+				addSequential(new UnloadCube());
+				//unique for vers=0
+				addSequential(new SpotTurnDegrees(180));
+				addSequential(new DriveStraightDistance(10));
+				addSequential(new SpotTurnDegrees(-90));
+				addSequential(new DriveStraightDistance(60));
+				addSequential(new SpotTurnDegrees(-90));
+				addSequential(new DriveStraightDistance(60));
+			
 			} else if ((spawn==0) & (switch_cf==0) & (vers==1)) {
 				//left spawn, left switch, to portal
+				addSequential(new DriveStraightDistance(174));
+				addSequential(new SpotTurnDegrees(90));
+				addSequential(new DriveStraightDistance(40));
+				addSequential(new LiftToHeight(30));
+				addSequential(new UnloadCube());
+				//unique for vers=1
+				addSequential(new SpotTurnDegrees(180));
+				addSequential(new DriveStraightDistance(72));
+				addSequential(new SpotTurnDegrees(90));
+				addSequential(new DriveStraightDistance(468));
+				
 			} else if ((spawn==0) & (switch_cf==1) & (vers==0)) {
 				//left spawn, right switch, to pile
+				addSequential(new SpotTurnDegrees(45));
+				addSequential(new DriveStraightDistance(216));
+				addSequential(new SpotTurnDegrees(-135));
+				addSequential(new DriveStraightDistance(40));
+				addSequential(new LiftToHeight(30));
+				addSequential(new UnloadCube());
+				//unique for vers=0
+				addSequential(new SpotTurnDegrees(180));
+				addSequential(new DriveStraightDistance(10));
+				addSequential(new SpotTurnDegrees(90));
+				addSequential(new DriveStraightDistance(60));
+				addSequential(new SpotTurnDegrees(90));
+				addSequential(new DriveStraightDistance(60));
+				
 			} else if ((spawn==0) & (switch_cf==1) & (vers==1)) {
 				//left spawn, right switch, to portal
+				addSequential(new SpotTurnDegrees(45));
+				addSequential(new DriveStraightDistance(216));
+				addSequential(new SpotTurnDegrees(-135));
+				addSequential(new DriveStraightDistance(40));
+				addSequential(new LiftToHeight(30));
+				addSequential(new UnloadCube());
+				//unique for vers=1
+				addSequential(new SpotTurnDegrees(180));
+				addSequential(new DriveStraightDistance(72));
+				addSequential(new SpotTurnDegrees(-90));
+				addSequential(new DriveStraightDistance(468));
+				
 			}
 			
 			
@@ -86,13 +139,22 @@ public class AutoMaker extends CommandGroup {
 				//right spawn, right scale, to pile
 			} else if ((spawn==2) & (scale_cf==1) & (vers==1)) {
 				//right spawn, right scale, to portal
+			} else {
+				addSequential(new DriveStraightDistance(192));
 			}
 			
 		} else {
 			//what tf you trying to accomplish??
 		}
-		*/
+		
 	}
+	
+	
+	
+	
+	
+	
+	
 	/*int goal, spawn, switch_cf, scale_cf, vers; //the 5 parameters
 
 	goal = 0; //choose spawn location, 0 = left, 1 = center, 2 = right
