@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands.lift;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.subsystems.Lift.liftState;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.command.Command;
@@ -32,7 +33,7 @@ public class LiftToHeight extends Command {
     	currentHeight = initialHeight;
     	deltaHeight = 0;
     	liftResistPID.setTarget(wantedHeight);
-    	 
+    	Robot.lift.setState(liftState.PID); 
     	System.out.println("Starting ResistLiftWeight.");
     }
 
@@ -42,13 +43,15 @@ public class LiftToHeight extends Command {
     	deltaHeight = currentHeight - initialHeight;
     	liftResistPID.update(deltaHeight);
     	Robot.lift.outputToLift(liftResistPID.getOutput());
-    	//	Robot.lift.outputToLift(0);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(currentHeight <= wantedHeight+1 || currentHeight >= wantedHeight-1)
-        return true;
+    	if(currentHeight <= wantedHeight+1 || currentHeight >= wantedHeight-1) {
+    		Robot.lift.setState(liftState.stopped);
+    		return true;
+    	}
     	else return false;
     }
 
@@ -62,5 +65,8 @@ public class LiftToHeight extends Command {
     	System.out.println("Lift weight resist interrupted.");
     	//TODO: Try too not set motors to 0 when ending a command unless necessary, adds unnecessary jitter.
     	Robot.lift.outputToLift(0);
+    }
+    public double getLiftToHeightOutput() {
+    	return liftResistPID.getOutput();
     }
 }

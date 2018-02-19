@@ -3,6 +3,8 @@ package org.usfirst.frc.team5288.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.*;
+
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.RobotMap;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 
@@ -25,7 +27,7 @@ public class Lift extends Subsystem {
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
 	
 	// lift states
-	public enum liftState {raising, lowering, stopped};
+	public enum liftState {raising, PID, lowering, stopped};
 	private liftState currentState;
 	//
 	private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.LowerLiftLimit);
@@ -38,7 +40,7 @@ public class Lift extends Subsystem {
 	private double liftMotorRaisingOutput = 1.0;
 	private double liftMotorLoweringOutput = -0.2; // needs to be 0.0 as this will let gravity make the lift fall
 	private double liftMotorStoppedOutput = 0.0;
-	
+	private double liftPower;
 	
 	
 	
@@ -59,7 +61,7 @@ public class Lift extends Subsystem {
     
   
     public void outputToLift(double pwr) {
-    	LiftMotor.set(ControlMode.PercentOutput,pwr);
+    	liftPower = pwr;
     	
     }
     public void updateOutputs() {
@@ -76,17 +78,27 @@ public class Lift extends Subsystem {
     	else if(currentState == liftState.lowering) {
     		setMode(liftMotorMode.coast);
     		if(!bottomLimitSwitch.get()) {
-        		LiftMotor.set(ControlMode.PercentOutput, liftMotorRaisingOutput);
+        		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
         		}
         		else
         		{
         			LiftMotor.set(ControlMode.PercentOutput, 0);
         		}
-    		LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
+    		// LiftMotor.set(ControlMode.PercentOutput, liftMotorLoweringOutput);
     	}
     	else if(currentState == liftState.stopped) {
     		setMode(liftMotorMode.brake);
     		LiftMotor.set(ControlMode.PercentOutput, liftMotorStoppedOutput);
+    	}
+    	else if(currentState == liftState.PID) {
+    		
+    		if(!bottomLimitSwitch.get()) {
+    			setMode(liftMotorMode.coast);
+    		LiftMotor.set(ControlMode.PercentOutput, liftPower);
+    		}
+    		else {
+    		LiftMotor.set(ControlMode.PercentOutput,0.0);
+    		}
     	}
     }    public void setState(liftState newState) {
     	currentState = newState;
@@ -101,7 +113,6 @@ public class Lift extends Subsystem {
     }
     
     public double getEncoderPosition(){
-    	
     	SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
 		SmartDashboard.putNumber("Lift encoder Position:", LiftMotor.getSelectedSensorPosition(0));
 		return LiftMotor.getSelectedSensorPosition(0);
