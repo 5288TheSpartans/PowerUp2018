@@ -32,7 +32,9 @@ public class Lift extends Subsystem {
 	//
 	private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.LowerLiftLimit);
 	private DigitalInput topLimitSwitch = new DigitalInput(RobotMap.UpperLiftLimit);
-
+	private boolean isAtTop = false;
+	private boolean isAtBottom = true;
+	private int liftHeight = 0;
 	// lift modes
 	public enum liftMotorMode {brake, coast};
 	private liftMotorMode currentMode;
@@ -41,12 +43,17 @@ public class Lift extends Subsystem {
 	private double liftMotorLoweringOutput = -0.2; // needs to be 0.0 as this will let gravity make the lift fall
 	private double liftMotorStoppedOutput = 0.0;
 	private double liftPower;
-	
-	
+	private double lastSpeed = 0;
+	private double currentSpeed= 0;
+	// Loop counting
+	long lastTime;
+	long currentTime; 
 	
 	public Lift() {
 		LiftMotor.configSelectedFeedbackSensor(com.ctre.phoenix.motorcontrol.FeedbackDevice.CTRE_MagEncoder_Absolute, 0,0);
 		LiftMotor.setSensorPhase(false);
+		lastTime = System.nanoTime();
+		currentTime = System.nanoTime();
 	}
 	
     public void initDefaultCommand() {
@@ -64,7 +71,7 @@ public class Lift extends Subsystem {
     	liftPower = pwr;
     	
     }
-    public void updateOutputs() {
+    public void updateSubsystem() {
     	if(currentState == liftState.raising) {
     		setMode(liftMotorMode.coast);
     		if(!topLimitSwitch.get()) {
@@ -110,6 +117,26 @@ public class Lift extends Subsystem {
     	else if(newMode == liftMotorMode.coast){
     		LiftMotor.setNeutralMode(NeutralMode.Coast);
     	}
+    }
+    public void updateSensors() {
+    	isAtTop = topLimitSwitch.get();
+    	isAtBottom = bottomLimitSwitch.get();
+    	if(isAtTop && isAtBottom) {
+    		//IDK
+    	}
+    	else if (isAtBottom) {
+    		liftHeight = 0;//Inches
+    	}
+    	else if(isAtTop) {
+    		liftHeight = 84;
+
+    	}
+    	lastTime = currentTime;
+    	currentTime = System.nanoTime();
+    	lastSpeed = currentSpeed;
+    	currentSpeed = LiftMotor.getSelectedSensorVelocity(0);
+    	liftHeight += (currentTime - lastTime)*((lastSpeed + currentSpeed)/2);
+    	
     }
     
     public double getEncoderPosition(){

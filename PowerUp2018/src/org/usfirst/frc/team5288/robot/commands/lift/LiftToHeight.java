@@ -66,7 +66,4 @@ public class LiftToHeight extends Command {
     	//TODO: Try too not set motors to 0 when ending a command unless necessary, adds unnecessary jitter.
     	Robot.lift.outputToLift(0);
     }
-    public double getLiftToHeightOutput() {
-    	return liftResistPID.getOutput();
-    }
 }
