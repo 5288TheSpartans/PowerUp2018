@@ -110,7 +110,7 @@ public class OI {
     btnL9.whileHeld(new LoosenRightRampCommand());
     btnL2.whenPressed(new SpotTurnDegrees(10));
     //btnL3.whileHeld(new ResistLiftWeight());
-    btnR6.whenPressed(new ResetEncoders());
+   m - nm btnR6.whenPressed(new ResetEncoders());
    
     // X-Box controls
     //xBoxB.whileHeld(new RaiseLift());
@@ -164,7 +164,7 @@ public class OI {
     }
     public double getXLX()
     {
-    	return (xbox.getRawAxis(0));
+    	return (xbox.getRawAxis(0));              
     }
     public double getXRY()
     {

@@ -2,6 +2,9 @@ package org.usfirst.frc.team5288.robot.autocommands;
 
 import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.RobotMap;
+import org.usfirst.frc.team5288.robot.commands.intake.UnloadCube;
+import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
+import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,7 +24,7 @@ public class AutoMaker extends CommandGroup {
 		char fms[] = new char[3]; //read in fms data
 		
 		for (int o=0; 0<3; o++) {
-			fms[o] = gameData.charAt(o);
+			fms[o] = Robot.gameData.charAt(o);
 		}
 		
 		for (int n=0; n<2; n++) {  //setting cf variables
@@ -125,7 +128,7 @@ public class AutoMaker extends CommandGroup {
 				addParallel(new LowerLift(30));
 				addSequential(new DriveStraight(12));
 				addSequential(new SpotTurnDegrees(90));
-				addSequential(new DraiveStraightDistance(60));
+				addSequential(new DriveStraightDistance(60));
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(60));
 			
@@ -256,7 +259,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new UnloadCube());
 				addParallel(new LowerLift(72));
 				//unique for vers=0
-				addParallel(new SpotTurn(90));
+				addParallel(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(84));
@@ -270,7 +273,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new UnloadCube());
 				addParallel(new LowerLift(72));
 				//unique to vers=1
-				addParallel(new SpotTurn(-90));
+				addParallel(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(312));
 				
 			} else if ((spawn==2) & (scale_cf==1) & (vers==0)) {
@@ -282,7 +285,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new UnloadCube());
 				addParallel(new LowerLift(72));
 				//unique for vers=0
-				addParallel(new SpotTurn(-90));
+				addParallel(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(84));
@@ -296,7 +299,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new UnloadCube());
 				addParallel(new LowerLift(72));
 				//unique for vers=1
-				addParallel(new SpotTurn(90));
+				addParallel(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(312));
 				
 			} else {
