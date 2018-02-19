@@ -18,7 +18,7 @@ public class IntakeSubsystem extends Subsystem {
 	private VictorSP rIntake = new VictorSP(RobotMap.rIntakeMotor);
 	public enum cubeState{hasCube,noCube};
 	public enum intakeState{intake,outtake,stopped};
-	private cubeState currentCubeState;
+	// private cubeState currentCubeState;
 	private intakeState currentIntakeState;
 	private boolean hasCube;
 	private boolean override;
@@ -37,9 +37,9 @@ public class IntakeSubsystem extends Subsystem {
     public void setOverride(boolean intakeOverride) {
     	override = intakeOverride;
     }
-    public void setCubeState(cubeState newState) {
-    	currentCubeState = newState;
-    }
+  //  public void setCubeState(cubeState newState) {
+  //  	currentCubeState = newState;
+  //  }
     
     public void setIntakeState(intakeState newState) {
     	currentIntakeState = newState;
@@ -48,7 +48,6 @@ public class IntakeSubsystem extends Subsystem {
     // placeholder intake sensor; sense if cube is there or not
     }
     public void updateOutputs() {
-    	updateCubeState();
     	if(!override) {
     		// if the commands are being overridden, then don't use updateSubsystems()
     		// at all, as the outputs will be manually set in override commands

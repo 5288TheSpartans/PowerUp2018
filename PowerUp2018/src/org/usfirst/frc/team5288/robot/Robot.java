@@ -72,12 +72,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		updateSubsystems();
+		updateSensors();
 	}
 
 	@Override
 	public void disabledPeriodic() {
-
+		updateSubsystems();
+		updateSensors();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 	//	Scheduler.getInstance().run();

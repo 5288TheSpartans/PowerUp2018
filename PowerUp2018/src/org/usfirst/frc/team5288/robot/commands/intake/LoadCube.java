@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5288.robot.commands.intake;
 
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem.intakeState;
 
 import edu.wpi.first.wpilibj.command.Command;
