@@ -71,7 +71,7 @@ public class Lift extends Subsystem {
     	liftPower = pwr;
     	
     }
-    public void updateSubsystem() {
+    public void updateOutputs() {
     	if(currentState == liftState.raising) {
     		setMode(liftMotorMode.coast);
     		if(!topLimitSwitch.get()) {
@@ -136,7 +136,7 @@ public class Lift extends Subsystem {
     	lastSpeed = currentSpeed;
     	currentSpeed = LiftMotor.getSelectedSensorVelocity(0);
     	liftHeight += (currentTime - lastTime)*((lastSpeed + currentSpeed)/2);
-    	
+    	System.out.println("LiftHeight recorded to be:"  + liftHeight);
     }
     
     public double getEncoderPosition(){
@@ -144,7 +144,5 @@ public class Lift extends Subsystem {
 		System.out.println("Lift encoder Position: " + LiftMotor.getSelectedSensorPosition(0));
 		return LiftMotor.getSelectedSensorPosition(0);
     }
-  //  public double getDistanceInches(){
-		// return encoder.getDistance()}
 }
 
