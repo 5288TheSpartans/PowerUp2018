@@ -113,8 +113,8 @@ public class Lift extends Subsystem {
     }
     
     public double getEncoderPosition(){
-    	SmartDashboard.putNumber("Lift encoder velocity:", LiftMotor.getSelectedSensorVelocity(0));
-		SmartDashboard.putNumber("Lift encoder Position:", LiftMotor.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Lift encoder velocity: ", LiftMotor.getSelectedSensorVelocity(0));
+		System.out.println("Lift encoder Position: " + LiftMotor.getSelectedSensorPosition(0));
 		return LiftMotor.getSelectedSensorPosition(0);
     }
   //  public double getDistanceInches(){
