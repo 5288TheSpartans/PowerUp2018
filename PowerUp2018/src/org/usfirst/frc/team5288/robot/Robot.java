@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5288.robot.commands.ManualDriveCommand;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
+import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
 // import org.usfirst.frc.team5288.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team5288.robot.subsystems.ExampleSubsystem;
@@ -37,6 +38,7 @@ public class Robot extends TimedRobot {
 	public static boolean leftLimitCondition;
 	public static boolean rightLimitCondition;
 	public static final Lift lift = new Lift();
+	public static final IntakeSubsystem intake = new IntakeSubsystem();
 	public static final DrivetrainSubsystem drivetrain = new DrivetrainSubsystem();
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
@@ -165,12 +167,14 @@ public class Robot extends TimedRobot {
 
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
-		Robot.leftRamp.updateSensors();
-		Robot.rightRamp.updateSensors();
-		//Robot.lift.updateSensors();
+		leftRamp.updateSensors();
+		rightRamp.updateSensors();
+		intake.updateSensors();
+		Robot.lift.updateSensors();
 	}
 	public void updateSubsystems() {
 		lift.updateOutputs();
+		intake.updateOutputs();
 		//drivetrain.updateOutputs();
 		rightRamp.updateOutputs();
 		leftRamp.updateOutputs();	

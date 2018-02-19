@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands.intake;
 
+import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem.intakeState;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,6 +12,7 @@ public class LoadCube extends Command {
     public LoadCube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -18,6 +21,8 @@ public class LoadCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.intake.setOverride(false);
+    	Robot.intake.setIntakeState(intakeState.intake);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -32,5 +37,6 @@ public class LoadCube extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.intake.setIntakeState(intakeState.stopped);
     }
 }
