@@ -86,7 +86,7 @@ public class OI {
  				btnR10 = new JoystickButton(joystickRight,10),
  		 		btnR11 = new JoystickButton(joystickRight,1); 
  	private JoystickButton 
- 			//xBoxB = new JoystickButton(xbox, 0),//Coloured buttons
+ 			xboxB = new JoystickButton(xbox, 0),//Coloured buttons
 			xboxA= new JoystickButton(xbox,1),//Coloured buttons
 			xboxY = new JoystickButton(xbox,2),//Coloured buttons
 			xboxX = new JoystickButton(xbox,3),//Coloured buttons
@@ -113,8 +113,8 @@ public class OI {
     btnR6.whenPressed(new ResetEncoders());
    
     // X-Box controls
-    //xBoxB.whileHeld(new RaiseLift());
-    
+    xboxB.whileHeld(new RaiseLift());
+    xboxA.whileHeld(new LowerLift());
     
     
     /*    btnL9.whenPressed(new DriveStraightTime(4000));
