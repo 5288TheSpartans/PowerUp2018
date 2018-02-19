@@ -16,11 +16,13 @@ public class LiftToHeight extends Command {
 	double initialHeight;
 	double currentHeight;
 	double deltaHeight;// current - initial
-    public LiftToHeight() {
+	double wantedHeight;
+    public LiftToHeight(double height) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	
     	liftResistPID = new SpartanPID(0.005,0,0.001,0);
+    	wantedHeight = height;
     }
 
     // Called just before this Command runs the first time
@@ -29,7 +31,7 @@ public class LiftToHeight extends Command {
     	initialHeight = Robot.lift.getEncoderPosition();
     	currentHeight = initialHeight;
     	deltaHeight = 0;
-    	liftResistPID.setTarget(0);
+    	liftResistPID.setTarget(wantedHeight);
     	 
     	System.out.println("Starting ResistLiftWeight.");
     }
@@ -45,7 +47,9 @@ public class LiftToHeight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(currentHeight <= wantedHeight+1 || currentHeight >= wantedHeight-1)
+        return true;
+    	else return false;
     }
 
     // Called once after isFinished returns true
