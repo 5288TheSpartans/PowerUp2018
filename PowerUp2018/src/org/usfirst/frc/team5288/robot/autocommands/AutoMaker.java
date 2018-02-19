@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;;
 
 public class AutoMaker extends CommandGroup {
 	public AutoMaker() {
-		int goal, spawn, switch_cf, scale_cf, vers; //the 5 parameters
+		int goal, spawn, switch_cf, scale_cf; //the 4 parameters
 
 		goal = 0; //choose spawn location, 0 = left, 1 = center, 2 = right
 		
 		spawn = 0; //choose goal, 0 = cross auto line, 1 = switch ownership, 2 = scale ownership
-		
-		vers = 0; //choose version, 0 = end at pile, 1 = end a portal
 		
 		char fms[] = new char[3]; //read in fms data
 		
@@ -50,7 +48,7 @@ public class AutoMaker extends CommandGroup {
 			
 		} else if (goal==1) {
 			
-			if ((spawn==0) & (switch_cf==0) & (vers==0)) {
+			if ((spawn==0) & (switch_cf==0)) {
 				//left spawn, left switch, to pile (0.1.0.0)
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(90));
@@ -66,7 +64,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(60));
 			
-			} else if ((spawn==0) & (switch_cf==0) & (vers==1)) {
+			} /*else if ((spawn==0) & (switch_cf==0) & (vers==1)) {
 				//left spawn, left switch, to portal (0.1.0.1)
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(90));
@@ -80,7 +78,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(468));
 				
-			} else if ((spawn==0) & (switch_cf==1) & (vers==0)) {
+			} */else if ((spawn==0) & (switch_cf==1)) {
 				//left spawn, right switch, to pile (0.1.1.0)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(216));
@@ -97,7 +95,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(60));
 				
-			} else if ((spawn==0) & (switch_cf==1) & (vers==1)) {
+			}/* else if ((spawn==0) & (switch_cf==1) & (vers==1)) {
 				//left spawn, right switch, to portal (0.1.1.1)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(216));
@@ -112,10 +110,10 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(468));
 				
-			}
+			}*/
 			
 			
-			if ((spawn==1) & (switch_cf==0) & (vers==0)) {
+			if ((spawn==1) & (switch_cf==0)) {
 				//center spawn, left switch, to pile (1.1.0.0)
 				addSequential(new SpotTurnDegrees(-45));
 				addSequential(new DriveStraightDistance(236));
@@ -132,7 +130,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(60));
 			
-			} else if ((spawn==1) & (switch_cf==0) & (vers==1)) {
+			}/* else if ((spawn==1) & (switch_cf==0) & (vers==1)) {
 				//center spawn, left switch, to portal (1.1.0.1)
 				addSequential(new SpotTurnDegrees(-45));
 				addSequential(new DriveStraightDistance(236));
@@ -147,7 +145,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(468));
 				
-			} else if ((spawn==1) & (switch_cf==1) & (vers==0)) {
+			*/ else if ((spawn==1) & (switch_cf==1)) {
 				//center spawn, right switch, to pile (1.1.1.0)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(236));
@@ -160,11 +158,11 @@ public class AutoMaker extends CommandGroup {
 				addParallel(new LowerLift(30));
 				addSequential(new DriveStraight(12));
 				addSequential(new SpotTurnDegrees(-90));
-				addSequential(new DraiveStraightDistance(60));
+				addSequential(new DriveStraightDistance(60));
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(60));
 				
-			} else if ((spawn==1) & (switch_cf==1) & (vers==1)) {
+			} /*else if ((spawn==1) & (switch_cf==1) & (vers==1)) {
 				//center spawn, right switch, to portal (1.1.1.1)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(236));
@@ -179,10 +177,10 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(468));
 				
-			}
+			}*/
 			
 			
-			if ((spawn==2) & (switch_cf==0) & (vers==0)) {
+			if ((spawn==2) & (switch_cf==0)) {
 				//right spawn, left switch, to pile (2.1.0.0)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(216));
@@ -199,7 +197,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(60));
 				
-			} else if ((spawn==1) & (switch_cf==0) & (vers==1)) {
+			} /*else if ((spawn==1) & (switch_cf==0) & (vers==1)) {
 				//right spawn, left switch, to portal (2.1.0.1)
 				addSequential(new SpotTurnDegrees(45));
 				addSequential(new DriveStraightDistance(216));
@@ -216,7 +214,7 @@ public class AutoMaker extends CommandGroup {
 				
 				
 				
-			} else if ((spawn==1) & (switch_cf==1) & (vers==0)) {
+			} */else if ((spawn==1) & (switch_cf==1) ) {
 				//right spawn, right switch, to pile (2.1.1.0)
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(-90));
@@ -232,7 +230,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(60));
 				
-			} else if ((spawn==1) & (switch_cf==1) & (vers==1)) {
+			} /*else if ((spawn==1) & (switch_cf==1) & (vers==1)) {
 				//right spawn, right switch, to portal (2.1.1.1)
 				addSequential(new DriveStraightDistance(174));
 				addSequential(new SpotTurnDegrees(-90));
@@ -246,11 +244,11 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(468));
 				
-			}
+			}*/
 			
 		} else if (goal==2) {
 			
-			if ((spawn==0) & (scale_cf==0) & (vers==0)) {
+			if ((spawn==0) & (scale_cf==0)) {
 				//left spawn, left scale, to pile (0.2.0.0)
 				addSequential(new DriveStraightDistance(324));
 				addSequential(new SpotTurnDegrees(90));
@@ -264,7 +262,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(84));
 				
-			} else if ((spawn==0) & (scale_cf==0) & (vers==1)) {
+			}/* else if ((spawn==0) & (scale_cf==0) & (vers==1)) {
 				//left spawn, left scale, to portal (0.2.0.1)
 				addSequential(new DriveStraightDistance(324));
 				addSequential(new SpotTurnDegrees(90));
@@ -276,7 +274,7 @@ public class AutoMaker extends CommandGroup {
 				addParallel(new SpotTurnDegrees(-90));
 				addSequential(new DriveStraightDistance(312));
 				
-			} else if ((spawn==2) & (scale_cf==1) & (vers==0)) {
+			}*/ else if ((spawn==2) & (scale_cf==1)) {
 				//right spawn, right scale, to pile (2.2.1.0)
 				addSequential(new DriveStraightDistance(324));
 				addSequential(new SpotTurnDegrees(-90));
@@ -290,7 +288,7 @@ public class AutoMaker extends CommandGroup {
 				addSequential(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(84));
 				
-			} else if ((spawn==2) & (scale_cf==1) & (vers==1)) {
+			} /*else if ((spawn==2) & (scale_cf==1) & (vers==1)) {
 				//right spawn, right scale, to portal (2.2.1.1)
 				addSequential(new DriveStraightDistance(324));
 				addSequential(new SpotTurnDegrees(-90));
@@ -302,7 +300,7 @@ public class AutoMaker extends CommandGroup {
 				addParallel(new SpotTurnDegrees(90));
 				addSequential(new DriveStraightDistance(312));
 				
-			} else {
+			}*/ else {
 				addSequential(new DriveStraightDistance(192));
 			}
 			

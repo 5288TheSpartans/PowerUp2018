@@ -52,8 +52,8 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		
-		// m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		m_chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 	public static String getDashboardValue(String key) {
@@ -99,12 +99,14 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		
+		  String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); 
+		  switch(autoSelected) { 
+		  case "My Auto": autonomousCommand	  = new MyAutoCommand(); 
+		  break; 
+		  case "Default Auto": default: autonomousCommand = new ExampleCommand();
+		  break; }
+		 
 
 		// schedule the autonomous command (example)
 		
