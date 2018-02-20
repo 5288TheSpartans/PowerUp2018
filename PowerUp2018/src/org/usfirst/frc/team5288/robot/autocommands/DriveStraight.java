@@ -21,13 +21,7 @@ public class DriveStraight extends Command {
 	 * Motor output Left = basePower + Gain
 	 * Motor output Right = basePower - Gain
 	 */
-	/* Suppose we have a list containing n integers.
-	 * double sum = 0;
-	 * for (int i = 0; i < n; i ++){
-	 * sum += Valuen 
-	 * }
-	 * 
-	 */
+	
 	double m_basePower =  0.2;
 	double error;
 	double gain;
@@ -39,7 +33,7 @@ public class DriveStraight extends Command {
 		double P = 0;
 		double I = 0;
 		double D = 0;
-    	straightPID = new SpartanPID(RobotMap.P, RobotMap.I, RobotMap.D, RobotMap.FF); //
+    	straightPID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF); //
     }
 
     // Called just before this Command runs the first time

@@ -19,14 +19,12 @@ public class LiftToHeight extends Command {
 	double deltaHeight;// current - initial
 	double wantedHeight;
     public LiftToHeight(double height) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+
     	requires(Robot.lift);
-    	liftResistPID = new SpartanPID(0.005,0,0.001,0);
+    	liftResistPID = new SpartanPID(0.20,0,0.001,0);
     	wantedHeight = height;
     }
 
-    // Called just before this Command runs the first time
     protected void initialize() {
     	//
     	initialHeight = Robot.lift.getEncoderPosition();
@@ -34,10 +32,9 @@ public class LiftToHeight extends Command {
     	deltaHeight = 0;
     	liftResistPID.setTarget(wantedHeight);
     	Robot.lift.setState(liftState.PID); 
-    	System.out.println("Starting ResistLiftWeight.");
+    	System.out.println("Sending");
     }
 
-    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	currentHeight = Robot.lift.getEncoderPosition();
     	deltaHeight = currentHeight - initialHeight;
@@ -46,24 +43,18 @@ public class LiftToHeight extends Command {
     	
     }
 
-    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(currentHeight <= wantedHeight+1 || currentHeight >= wantedHeight-1) {
+    	if(currentHeight <= wantedHeight+1 && currentHeight >= wantedHeight-1) {
     		Robot.lift.setState(liftState.stopped);
     		return true;
     	}
     	else return false;
     }
 
-    // Called once after isFinished returns true
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
     protected void interrupted() {
-    	System.out.println("Lift weight resist interrupted.");
-    	//TODO: Try too not set motors to 0 when ending a command unless necessary, adds unnecessary jitter.
-    	Robot.lift.outputToLift(0);
+
     }
 }

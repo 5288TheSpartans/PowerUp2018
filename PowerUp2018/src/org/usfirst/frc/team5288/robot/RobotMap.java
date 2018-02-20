@@ -49,13 +49,29 @@ public class RobotMap {
 // JOYSTICK
 	// Joystick dead/safe zone
 	public static double JOYDEADZONE = 0.06;
-	
+//PID VALUES	
 	// DriveStraight PID values
-	public static double P = 0;
-	public static double I = 0;
-	public static double D = 0;
-	public static double FF = 0;
-	
+	public static double StraightP = 0;
+	public static double StraightI = 0;
+	public static double StraightD = 0;
+	public static double StraightFF = 0;
+	// DriveDistance  PID values
+	public static double DistanceP = 0;
+	public static double DistanceI = 0;
+	public static double DistanceD = 0;
+	public static double DistanceFF = 0;
+	// SpotTurnDegrees PID values
+	public static double TurnP = 0;
+	public static double TurnI = 0;
+	public static double TurnD = 0;
+	public static double TurnFF = 0;
+
+	// LiftToHeight PID values
+	public static double LiftP = 0;
+	public static double LiftI = 0;
+	public static double LiftD = 0;
+	public static double LiftFF = 0;
+	//
 // LIMIT SWITCHES (D I/O)
 	public static int LRampLimitSwitch = 4;
 	public static int RRampLimitSwitch = 5;

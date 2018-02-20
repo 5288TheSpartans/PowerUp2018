@@ -61,19 +61,15 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double currentAccelL = 0;
 	private double jerkL = 0;
 	private double currentSpeedL = 0;
-	private double targetAccelL = 0;
-	private double targetSpeedL = 0;
 	private double encLastL = 0;
 	private double encCurrentL = 0;
 	private double encDiffL = 0;
 	// Right
 	private double lastAccelR = 0;
-	private double targetAccelR = 0;
 	private double currentAccelR = 0;
 	private double jerkR = 0;
 	private double lastSpeedR = 0;
 	private double currentSpeedR = 0;
-	private double targetSpeedR = 0;
 	private double encLastR = 0;
 	private double encCurrentR = 0;
 	private double encDiffR = 0;

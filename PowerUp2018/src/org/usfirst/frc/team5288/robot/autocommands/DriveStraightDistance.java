@@ -17,7 +17,7 @@ public class DriveStraightDistance extends Command {
     private double startingDistance = 0;
     private double inWantedDistance = 0;
 
-    private SpartanPID PID = new SpartanPID(RobotMap.P, RobotMap.I, RobotMap.D, RobotMap.FF);
+    private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
     private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {
@@ -39,14 +39,14 @@ public class DriveStraightDistance extends Command {
 
     	Robot.drivetrain.PIDInput = "" + (getCurrentDistance() - startingDistance);
     	distancePID.update(getCurrentDistance() - startingDistance);
+    	PID.update(Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches());
     	speed = distancePID.getOutput();
-    	Robot.drivetrain.PIDOutput = "DistancePID : " +  distancePID.getOutput();
     	error = PID.getOutput();
-    	if(inWantedDistance  -  getCurrentDistance()  >= 24)
+    	if(inWantedDistance  -  getCurrentDistance()  >= 36)
     	{
-    		speed = 0.6;
+    		speed = 0.7;
     	}
-    	
+    	Robot.drivetrain.PIDOutput = "DistancePID : " +  distancePID.getOutput();
     	System.out.println("PID INPUT(distance): " +  getCurrentDistance());
     	//Output using the distanceScalar*(Maxspeed + error), effectively scaling down both the speed and the error.
     	Robot.drivetrain.setLPower(-speed- error);
@@ -78,7 +78,7 @@ public class DriveStraightDistance extends Command {
     	Robot.drivetrain.setRPower(0);
     }
     private double getCurrentDistance() {
-        return (Robot.drivetrain.getLeftDistanceInches());// + Robot.drivetrain.getRightDistanceInches()) / 2;
+        return (Robot.drivetrain.getLeftDistanceInches()+ Robot.drivetrain.getRightDistanceInches()) / 2;
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
