@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot.subsystems;
 
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.RobotMap;
 //import org.usfirst.frc.team5288.robot.subsystems.Drivetrain.drivestates;
 import org.usfirst.frc.team5288.robot.commands.ManualDriveCommand;
@@ -76,6 +77,14 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double encLastR = 0;
 	private double encCurrentR = 0;
 	private double encDiffR = 0;
+	//Save max values reached.
+	private double maxJerkR = 0;
+	private double maxAccelR = 0;
+	private double maxSpeedR = 0;
+
+	private double maxJerkL = 0;
+	private double maxAccelL = 0;
+	private double maxSpeedL = 0;
 	// Time
 	private double timeLast = 0;
 	private double timeCurrent = 0;
@@ -153,9 +162,34 @@ public class DrivetrainSubsystem extends Subsystem {
 
 	public void updateOutputs() {
 		outputToMotors(lPower, rPower);
-
 	}
-
+	private void saveMaxValues() {
+		if(currentSpeedL > maxSpeedL) {
+			maxSpeedL = currentSpeedL;
+		}
+		if(currentAccelL > maxAccelL) {
+			maxAccelL = currentAccelL;
+		}
+		if(jerkL > maxJerkL) {
+			maxJerkL = jerkL;
+		}
+		if(currentSpeedR > maxSpeedR) {
+			maxSpeedR = currentSpeedR;
+		}
+		if(currentAccelR > maxAccelR) {
+			maxAccelR = currentAccelR;
+		}
+		if(jerkR > maxJerkR) {
+			maxJerkR = jerkR;
+		}
+		 Robot.putDashboardNumber("Maximum Speed Left", maxSpeedL);
+		 Robot.putDashboardNumber("Maximum Speed Right", maxSpeedR);
+		 Robot.putDashboardNumber("Maximum Accel Left",maxAccelL);
+		 Robot.putDashboardNumber("Maximum Accel Right",maxAccelR);
+		 Robot.putDashboardNumber("Maximum Jerk Left",maxJerkL);
+		 Robot.putDashboardNumber("Maximum Jerk Right",maxJerkR);
+		 
+	}
 	public void updateSensors() {
 		// Load last Values
 		lastSpeedL = currentSpeedL;
@@ -185,6 +219,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		jerkR = (currentAccelR - lastAccelR) / timeDiff;
 		// ***** ULTRASONIC VARIABLES
 		// ultraSonicDistance = getUltraSonicVoltageData()*(( 4.88/5)/0.92)*39.283;
+		//saveMaxValues();
 	}
 
 	private void updateSmartDashboard() {

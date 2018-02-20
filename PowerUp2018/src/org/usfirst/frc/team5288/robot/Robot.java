@@ -171,17 +171,22 @@ public class Robot extends TimedRobot {
 		leftRamp.updateSensors();
 		rightRamp.updateSensors();
 		intake.updateSensors();
-		Robot.lift.updateSensors();
+		lift.updateSensors();
+		drivetrain.updateSensors();
 	}
 	public void updateSubsystems() {
 		lift.updateOutputs();
 		intake.updateOutputs();
-		//drivetrain.updateOutputs();
+		drivetrain.updateOutputs();
 		rightRamp.updateOutputs();
 		leftRamp.updateOutputs();	
 	}
+	public static void putDashboardNumber(String key,double number) {
+		 SmartDashboard.putNumber(key, number);
+
+	}
 	public static double getDashboardNumber(String key) {
-		return SmartDashboard.getNumber(key, 0);
+		return SmartDashboard.getNumber(key, -10000000);
 	}
 	/*public void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
