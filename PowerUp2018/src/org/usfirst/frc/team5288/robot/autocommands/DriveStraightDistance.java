@@ -18,7 +18,8 @@ public class DriveStraightDistance extends Command {
     private double inWantedDistance = 0;
 
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
+    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceFF);
+    //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {
     	requires(Robot.drivetrain);

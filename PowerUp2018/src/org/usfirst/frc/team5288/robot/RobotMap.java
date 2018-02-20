@@ -18,44 +18,49 @@ public class RobotMap {
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
 	// public static int rightMotor = 2;
-	
-// Drivetrain
-	//Drivetrain motors (PWM)
+
+	// Drivetrain
+	// Drivetrain motors (PWM)
 	public static int LDriveMotor1 = 0;
 	public static int LDriveMotor2 = 1;
 	public static int RDriveMotor1 = 2;
 	public static int RDriveMotor2 = 3;
-	
+
 	// Drivetrain Sensors (D I/O)
 	public static int LDriveEncoder1 = 0;
 	public static int LDriveEncoder2 = 1;
 	public static int RDriveEncoder1 = 2;
-
 	public static int RDriveEncoder2 = 3;
-// INTAKE
+	// INTAKE
 	public static int lIntakeMotor = 8;
 	public static int rIntakeMotor = 9;
-// LIFT
+	// LIFT
 	// LIFT motor (CAN)
 	public static int LiftMotor = 0;
-// RAMP
-	//RAMP motors (PWM)
-	// there are two ramp motors on each side, but a *splitter* is being used to output the same power to both at the same time using ONE PWM slot.
+	// RAMP
+	// RAMP motors (PWM)
+	// there are two ramp motors on each side, but a *splitter* is being used to
+	// output the same power to both at the same time using ONE PWM slot.
 	public static int LRampMotors = 4;
 	public static int RRampMotors = 5;
 	public static int lRampServo = 6;
 	public static int rRampServo = 7;
 
-// JOYSTICK
+	// LIMIT SWITCHES (D I/O)
+	public static int LRampLimitSwitch = 4;
+	public static int RRampLimitSwitch = 5;
+	public static int TopLiftLimit = 6;
+	public static int BottomLiftLimit = 7;
+	// JOYSTICK
 	// Joystick dead/safe zone
 	public static double JOYDEADZONE = 0.06;
-//PID VALUES	
+	// PID VALUES
 	// DriveStraight PID values
 	public static double StraightP = 0;
 	public static double StraightI = 0;
 	public static double StraightD = 0;
 	public static double StraightFF = 0;
-	// DriveDistance  PID values
+	// DriveDistance PID values
 	public static double DistanceP = 0;
 	public static double DistanceI = 0;
 	public static double DistanceD = 0;
@@ -72,15 +77,7 @@ public class RobotMap {
 	public static double LiftD = 0;
 	public static double LiftFF = 0;
 	//
-// LIMIT SWITCHES (D I/O)
-	public static int LRampLimitSwitch = 4;
-	public static int RRampLimitSwitch = 5;
-	public static int UpperLiftLimit = 6;
-	public static int LowerLiftLimit = 7;
-	
-	
-	
-	
+
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

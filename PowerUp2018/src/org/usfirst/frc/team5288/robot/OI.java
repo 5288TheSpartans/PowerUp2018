@@ -84,18 +84,18 @@ public class OI {
 				btnR8 = new JoystickButton(joystickRight,8),
 				btnR9 = new JoystickButton(joystickRight,9),
  				btnR10 = new JoystickButton(joystickRight,10),
- 		 		btnR11 = new JoystickButton(joystickRight,1); 
+ 		 		btnR11 = new JoystickButton(joystickRight,11); 
  	private JoystickButton 
- 			xboxB = new JoystickButton(xbox, 0),//Coloured buttons
-			xboxA= new JoystickButton(xbox,1),//Coloured buttons
-			xboxY = new JoystickButton(xbox,2),//Coloured buttons
-			xboxX = new JoystickButton(xbox,3),//Coloured buttons
-			xboxLB = new JoystickButton(xbox,4),//Left Bumper
-			xboxRB = new JoystickButton(xbox,5),//Right Bumper
+ 			xboxB = new JoystickButton(xbox, 1),//Coloured buttons
+			xboxA= new JoystickButton(xbox,2),//Coloured buttons
+			xboxY = new JoystickButton(xbox,3),//Coloured buttons
+			xboxX = new JoystickButton(xbox,4),//Coloured buttons
+			xboxLB = new JoystickButton(xbox,5),//Left Bumper
+			xboxRB = new JoystickButton(xbox,6),//Right Bumper
 			xboxStart = new JoystickButton(xbox,7),//XboxStart buttons
-			xboxBack = new JoystickButton(xbox,6),//XboxBack buttons
-			xboxLStickButton = new JoystickButton(xbox, 8),
-			xboxRStickButton = new JoystickButton(xbox, 9);
+			xboxBack = new JoystickButton(xbox,8),//XboxBack buttons
+			xboxLStickButton = new JoystickButton(xbox, 9),
+			xboxRStickButton = new JoystickButton(xbox, 10);
 		 	
 
     public OI()

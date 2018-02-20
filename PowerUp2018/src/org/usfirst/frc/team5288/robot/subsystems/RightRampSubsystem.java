@@ -41,20 +41,20 @@ public class RightRampSubsystem extends Subsystem {
 	    	if (currentState == state.planted){
 	    		if(limitSwitchStatus){
 			    	rmotor1.set(rampMotorOutput);
-			    	rServo.set(servoPlantedAngle);
+			    	rServo.setAngle(servoPlantedAngle);
 		    		}
 		    		else {
 				    	rmotor1.set(0);
-				    	rServo.set(servoPlantedAngle);
+				    	rServo.setAngle(servoPlantedAngle);
 		    		}
 	    	}
 	    	else if(currentState == state.neutral) {
 	    		rmotor1.set(0);
-		    	rServo.set(servoNeutralAngle);
+		    	rServo.setAngle(servoNeutralAngle);
 	    	}
 	    	else if (currentState == state.initial) {
 	    		rmotor1.set(0);
-		    	rServo.set(servoInitialAngle);
+		    	rServo.setAngle(servoInitialAngle);
 	    	}
 	    }
 	    public void setState(state newState) {

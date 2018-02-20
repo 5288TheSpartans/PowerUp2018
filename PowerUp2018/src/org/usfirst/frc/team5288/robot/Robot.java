@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void updateSensors(){
-
+		
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
 		rightLimitCondition = Robot.rightRamp.isLimitChecked();
 		leftRamp.updateSensors();
@@ -171,6 +171,7 @@ public class Robot extends TimedRobot {
 		intake.updateSensors();
 		lift.updateSensors();
 		drivetrain.updateSensors();
+		
 	}
 	public void updateSubsystems() {
 		lift.updateOutputs();
@@ -178,6 +179,7 @@ public class Robot extends TimedRobot {
 		drivetrain.updateOutputs();
 		rightRamp.updateOutputs();
 		leftRamp.updateOutputs();	
+		
 	}
 	public static void putDashboardNumber(String key,double number) {
 		 SmartDashboard.putNumber(key, number);

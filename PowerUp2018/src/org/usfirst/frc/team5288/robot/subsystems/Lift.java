@@ -24,8 +24,8 @@ import com.ctre.phoenix.*;
 public class Lift extends Subsystem {
 	// Objects
 	private TalonSRX LiftMotor = new TalonSRX(RobotMap.LiftMotor);
-	private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.LowerLiftLimit);
-	private DigitalInput topLimitSwitch = new DigitalInput(RobotMap.UpperLiftLimit);
+	private DigitalInput bottomLimitSwitch = new DigitalInput(RobotMap.BottomLiftLimit);
+	private DigitalInput topLimitSwitch = new DigitalInput(RobotMap.TopLiftLimit);
 
 	// Lift states
 	public enum liftState {
@@ -138,17 +138,30 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateSensors() {
-		isAtTop = !topLimitSwitch.get();
-		isAtBottom = !bottomLimitSwitch.get();
+		isAtTop = topLimitSwitch.get();
+		isAtBottom = bottomLimitSwitch.get();
 		if (isAtTop && isAtBottom) {
 			// IDK what to say if they are both hit, we have an issue.
 		} else if (isAtBottom) {
 			liftHeight = 0;// Inches
+			sketchyHeight = 0;
+
 			LiftMotor.setSelectedSensorPosition(0, 0, 0);
+			System.out.println("Lift height reset to 0 because at bottom.");
 		} else if (isAtTop) {
+			sketchyHeight = 84;
 			liftHeight = 84;
+			LiftMotor.setSelectedSensorPosition((int) (84/heightConstant), 0, 0);
+			System.out.println("Lift height reset to  because at top.");
+
 
 		}
+		calculateLiftHeightSketchy();
+		calculateLiftHeightClean();
+		Robot.putDashboardNumber("LiftHeight = ", liftHeight);
+		Robot.putDashboardNumber("SketchyLiftHeight = ", liftHeight);
+		SmartDashboard.putBoolean("Top Limit Switch", isAtTop);
+		SmartDashboard.putBoolean("Top Limit Switch", isAtBottom);
 
 	}
 	
@@ -161,12 +174,14 @@ public class Lift extends Subsystem {
 		lastSpeed = currentSpeed;
 		currentSpeed = LiftMotor.getSelectedSensorVelocity(0);
 		sketchyHeight += (currentTime - lastTime) * ((lastSpeed + currentSpeed) / 2);
-		System.out.println("LiftHeight recorded to be:" + liftHeight);
+		System.out.println("SketchyLiftHeight recorded to be:" + sketchyHeight);
 
 	}
 
 	private void calculateLiftHeightClean() {
 		liftHeight = LiftMotor.getSelectedSensorPosition(0) * heightConstant;
+		System.out.println("LiftHeight recorded to be:" + liftHeight);
+
 	}
 
 	public double getLiftHeight() {
