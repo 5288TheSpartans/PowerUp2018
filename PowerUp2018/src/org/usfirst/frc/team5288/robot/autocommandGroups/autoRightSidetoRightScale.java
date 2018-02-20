@@ -10,22 +10,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class autoLeftSidetoLeftScale extends CommandGroup {
-    public autoLeftSidetoLeftScale() {
+public class autoRightSidetoRightScale extends CommandGroup {
+
+    public autoRightSidetoRightScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
+    	// drive to scale, dump cube in scale
     	addSequential(new DriveStraightDistance(320));
-    	addParallel(new LiftToHeight(100)); // max lift height 
-    	addSequential(new SpotTurnDegrees(90));
+    	addParallel(new LiftToHeight(100)); // max lift height
+    	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new UnloadCube());
     	addSequential(new LiftToHeight(0.0)); // min lift height
     	// now get back in position for switch cube
-    	addParallel(new SpotTurnDegrees(90));
+    	addParallel(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(88));
-    	addSequential(new SpotTurnDegrees(-90));
-    	
+    	addSequential(new SpotTurnDegrees(90));
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
