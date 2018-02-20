@@ -26,6 +26,7 @@ public class RobotMap {
 	public static int RDriveMotor1 = 2;
 	public static int RDriveMotor2 = 3;
 
+	// a is white, b is brown, x is green, (right side), red is power!! black is ground!!
 	// Drivetrain Sensors (D I/O)
 	public static int LDriveEncoder1 = 0;
 	public static int LDriveEncoder2 = 1;

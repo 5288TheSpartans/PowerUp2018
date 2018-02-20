@@ -40,12 +40,8 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double lPower = 0;// Raw Power percentage being output to the left gearbox.
 	private double rPower = 0;// Raw Power percentage being output to the right gearbox.
 	// GYRO VARIABLES
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	private final double gyroCorrectionValue = -1.9923625000000003 + 1.9959375000000001;
-	private double gyroCurrent = 0;
-	private double gyroDifference = 0;
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();;
 	private double gyroTotal = 0;
-	private double lastGyro = 0;
 	public String PIDInput = "";
 	public String PIDOutput = "";
 	// **ULTRASONIC VARIABLES*
@@ -215,7 +211,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		jerkR = (currentAccelR - lastAccelR) / timeDiff;
 		// ***** ULTRASONIC VARIABLES
 		// ultraSonicDistance = getUltraSonicVoltageData()*(( 4.88/5)/0.92)*39.283;
-		//saveMaxValues();
+		saveMaxValues();
 	}
 
 	private void updateSmartDashboard() {

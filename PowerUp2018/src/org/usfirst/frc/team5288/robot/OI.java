@@ -85,17 +85,7 @@ public class OI {
 				btnR9 = new JoystickButton(joystickRight,9),
  				btnR10 = new JoystickButton(joystickRight,10),
  		 		btnR11 = new JoystickButton(joystickRight,11); 
- 	private JoystickButton 
- 			xboxB = new JoystickButton(xbox, 1),//Coloured buttons
-			xboxA= new JoystickButton(xbox,2),//Coloured buttons
-			xboxY = new JoystickButton(xbox,3),//Coloured buttons
-			xboxX = new JoystickButton(xbox,4),//Coloured buttons
-			xboxLB = new JoystickButton(xbox,5),//Left Bumper
-			xboxRB = new JoystickButton(xbox,6),//Right Bumper
-			xboxStart = new JoystickButton(xbox,7),//XboxStart buttons
-			xboxBack = new JoystickButton(xbox,8),//XboxBack buttons
-			xboxLStickButton = new JoystickButton(xbox, 9),
-			xboxRStickButton = new JoystickButton(xbox, 10);
+ 
 		 	
 
     public OI()
@@ -111,10 +101,6 @@ public class OI {
     btnL2.whenPressed(new SpotTurnDegrees(10));
     //btnL3.whileHeld(new ResistLiftWeight());
     btnR6.whenPressed(new ResetEncoders());
-   
-    // X-Box controls
-    xboxB.whileHeld(new RaiseLift());
-    xboxA.whileHeld(new LowerLift());
     
     
     /*    btnL9.whenPressed(new DriveStraightTime(4000));

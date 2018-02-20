@@ -138,8 +138,8 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateSensors() {
-		isAtTop = topLimitSwitch.get();
-		isAtBottom = bottomLimitSwitch.get();
+		isAtTop = !topLimitSwitch.get();
+		isAtBottom = !bottomLimitSwitch.get();
 		if (isAtTop && isAtBottom) {
 			// IDK what to say if they are both hit, we have an issue.
 		} else if (isAtBottom) {
