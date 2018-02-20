@@ -21,13 +21,12 @@ public class autoLeftSidetoLeftSwitch extends CommandGroup {
     	addParallel(new LiftToHeight(30));
     	addSequential(new DriveStraightDistance(50));
     	addSequential(new UnloadCube());
-    	addSequential(new DriveStraightDistance(-10));
+    	addSequential(new DriveStraightDistance(10));
     	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(16));
+    	addSequential(new DriveStraightDistance(28));
     	addSequential(new SpotTurnDegrees(90));
-    	addParallel(new DriveStraightDistance(4));
-    	addSequential(new LoadCube());
+    	addSequential(new UnloadCube());
     	
     	
     	
