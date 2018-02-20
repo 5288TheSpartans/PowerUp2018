@@ -1,41 +1,37 @@
 package org.usfirst.frc.team5288.robot.autocommandGroups;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
+
 import org.usfirst.frc.team5288.robot.autocommands.*;
 import org.usfirst.frc.team5288.robot.commands.lift.*;
 import org.usfirst.frc.team5288.robot.commands.intake.*;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
 /**
  *
  */
-public class autoRightSidetoLeftSwitch extends CommandGroup {
+public class autoMiddletoLeftSwitch extends CommandGroup {
 
-    public autoRightSidetoLeftSwitch() {
+    public autoMiddletoLeftSwitch() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
-    	addSequential(new DriveStraightDistance(236));
-    	addSequential(new SpotTurnDegrees(-90));
+    	addSequential(new SpotTurnDegrees(-45));
     	addParallel(new LiftToHeight(25));
-    	addSequential(new DriveStraightDistance(210));
-    	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(64));
-    	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(42));
+    	addSequential(new DriveStraightDistance(215));
+    	addSequential(new SpotTurnDegrees(135));
+    	addSequential(new DriveStraightDistance(65));
     	addSequential(new UnloadCube());
     	addSequential(new DriveStraightDistance(-30));
-    	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(28));
+    	addParallel(new LiftToHeight(0));
+    	addSequential(new DriveStraightDistance(46));
     	addSequential(new SpotTurnDegrees(90));
     	addParallel(new LoadCube());
-    	addSequential(new DriveStraightDistance(34));
+    	addSequential(new DriveStraightDistance(49));
     	
-    	
-    	
+    		
+
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());
