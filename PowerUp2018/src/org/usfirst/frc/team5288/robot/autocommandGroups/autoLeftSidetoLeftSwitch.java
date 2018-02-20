@@ -16,16 +16,17 @@ public class autoLeftSidetoLeftSwitch extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential(new DriveStraightDistance(200));
+    	addSequential(new DriveStraightDistance(185));
     	addSequential(new SpotTurnDegrees(90));
-    	addParallel(new LiftToHeight(30));
+    	addParallel(new LiftToHeight(25));
     	addSequential(new DriveStraightDistance(50));
     	addSequential(new UnloadCube());
-    	addSequential(new DriveStraightDistance(10));
+    	addSequential(new DriveStraightDistance(-30));
     	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(28));
+    	addSequential(new DriveStraightDistance(24));
     	addSequential(new SpotTurnDegrees(90));
+    	addSequential(new DriveStraightDistance(38));
     	addSequential(new UnloadCube());
     	
     	
