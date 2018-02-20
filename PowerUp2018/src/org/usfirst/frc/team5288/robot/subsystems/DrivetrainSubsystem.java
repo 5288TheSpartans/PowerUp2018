@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------*/
- /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -20,41 +20,41 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * An example subsystem.  You can replace me with your own Subsystem.
+ * An example subsystem. You can replace me with your own Subsystem.
  */
 public class DrivetrainSubsystem extends Subsystem {
-	//**DRIVETRAIN CONSTANTS**
-	public final double wheelRadiusm = 0.0508; //meters
-	public final double wheelcirc = 6*Math.PI; 
-	public final double topSpeed =  3.048; // meters per second
-	//*******************MOTOR CONTROLLER OBJECTS**************
-	//These Motor controller objects will always be synced in pairs of output.
-	private VictorSP lmotor1 = new VictorSP(RobotMap.LDriveMotor1);//Left Gearbox Motor #
-	private VictorSP lmotor2 = new VictorSP(RobotMap.LDriveMotor2);//Left Gearbox Motor #
-	private VictorSP rmotor1 = new VictorSP(RobotMap.RDriveMotor1);//Right Gearbox Motor #1
-	private VictorSP rmotor2 = new VictorSP(RobotMap.RDriveMotor2);//Right Gearbox Motor #2
+	// **DRIVETRAIN CONSTANTS**
+	public final double wheelRadiusm = 0.0508; // meters
+	public final double wheelcirc = 6 * Math.PI;
+	public final double topSpeed = 3.048; // meters per second
+	// *******************MOTOR CONTROLLER OBJECTS**************
+	// These Motor controller objects will always be synced in pairs of output.
+	private VictorSP lmotor1 = new VictorSP(RobotMap.LDriveMotor1);// Left Gearbox Motor #
+	private VictorSP lmotor2 = new VictorSP(RobotMap.LDriveMotor2);// Left Gearbox Motor #
+	private VictorSP rmotor1 = new VictorSP(RobotMap.RDriveMotor1);// Right Gearbox Motor #1
+	private VictorSP rmotor2 = new VictorSP(RobotMap.RDriveMotor2);// Right Gearbox Motor #2
 	private boolean isBrakeMode = true;
-	//**Drive Variables**
+	// **Drive Variables**
 	private double throttle = 1;
-	private double lPower = 0;//Raw Power percentage being output to the left gearbox.
-	private double rPower = 0;//Raw Power percentage being output to the right gearbox.
-	//GYRO VARIABLES
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro(); 
+	private double lPower = 0;// Raw Power percentage being output to the left gearbox.
+	private double rPower = 0;// Raw Power percentage being output to the right gearbox.
+	// GYRO VARIABLES
+	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	private final double gyroCorrectionValue = -1.9923625000000003 + 1.9959375000000001;
 	private double gyroCurrent = 0;
-	private double gyroDifference= 0;
+	private double gyroDifference = 0;
 	private double gyroTotal = 0;
 	private double lastGyro = 0;
 	public String PIDInput = "";
 	public String PIDOutput = "";
-	//**ULTRASONIC VARIABLES*
-	//private AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicInput);
-	private double ultraSonicDistance = 0;
-	//**ENCODER VARIABLES*
+	// **ULTRASONIC VARIABLES*
+	// private AnalogInput ultrasonic = new AnalogInput(RobotMap.ultrasonicInput);
+	// private double ultraSonicDistance = 0;
+	// **ENCODER VARIABLES*
 	private Encoder rEncoder;
 	private Encoder lEncoder;
-	//**SPEED CALCULATION BASED VARIABLES**	//Encoder Tracking variables
-	//Left
+	// **SPEED CALCULATION BASED VARIABLES** //Encoder Tracking variables
+	// Left
 	private double lastSpeedL = 0;
 	private double lastAccelL = 0;
 	private double currentAccelL = 0;
@@ -65,7 +65,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double encLastL = 0;
 	private double encCurrentL = 0;
 	private double encDiffL = 0;
-	//Right
+	// Right
 	private double lastAccelR = 0;
 	private double targetAccelR = 0;
 	private double currentAccelR = 0;
@@ -76,96 +76,142 @@ public class DrivetrainSubsystem extends Subsystem {
 	private double encLastR = 0;
 	private double encCurrentR = 0;
 	private double encDiffR = 0;
+	// Time
+	private double timeLast = 0;
+	private double timeCurrent = 0;
+	private double timeDiff = 0;
+
 	public DrivetrainSubsystem() {
-		rEncoder = new Encoder(RobotMap.RDriveEncoder1,RobotMap.RDriveEncoder2,false,EncodingType.k4X);	
-		lEncoder = new Encoder(RobotMap.LDriveEncoder1,RobotMap.LDriveEncoder2,true,EncodingType.k4X);	
+		rEncoder = new Encoder(RobotMap.RDriveEncoder1, RobotMap.RDriveEncoder2, false, EncodingType.k4X);
+		lEncoder = new Encoder(RobotMap.LDriveEncoder1, RobotMap.LDriveEncoder2, true, EncodingType.k4X);
 		rEncoder.setMaxPeriod(5);
 		lEncoder.setMaxPeriod(5);
 		rEncoder.setMinRate(0);
 		lEncoder.setMinRate(0);
 		rEncoder.setSamplesToAverage(1);
-		lEncoder.setSamplesToAverage(1);		
-		rEncoder.setDistancePerPulse(wheelcirc/2048);
-		lEncoder.setDistancePerPulse(wheelcirc/2048);
+		lEncoder.setSamplesToAverage(1);
+		rEncoder.setDistancePerPulse(wheelcirc / 2048);
+		lEncoder.setDistancePerPulse(wheelcirc / 2048);
 		gyro.calibrate();
-		
-	// PID OBJECTS/VARIABLES
-		SpartanPID drivetrainPID = new SpartanPID(0.0,0.0,0.0,0.0);
-		
 	}
+
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new ManualDrive());
 		setDefaultCommand(new ManualDriveCommand());
 	}
-	public double getGyroAngle(){
+
+	public double getGyroAngle() {
 		return gyroTotal;
 	}
-	public void resetGyro(){
+
+	public void resetGyro() {
 		gyro.reset();
 	}
-	public void resetEncoders(){
+
+	public void resetEncoders() {
 		lEncoder.reset();
 		rEncoder.reset();
 	}
-	public void setLPower(double power){
+
+	public void setLPower(double power) {
 		lPower = power;
-		lmotor1.set(-power);
-		lmotor2.set(-power);
+		//lmotor1.set(-power);
+		//lmotor2.set(-power);
 	}
-	public void setRPower(double power){
+
+	public void setRPower(double power) {
 		rPower = power;
-		rmotor1.set(power);
-		rmotor2.set(power);	
+		//rmotor1.set(power);
+		//rmotor2.set(power);
 	}
-	private void outputToMotors(double pwrLeft, double pwrRight){
+
+	private void outputToMotors(double pwrLeft, double pwrRight) {
 		lmotor1.set(-pwrLeft);
 		lmotor2.set(-pwrLeft);
 		rmotor1.set(pwrRight);
 		rmotor2.set(pwrRight);
 	}
-	public void setThrottle(double newThrottle){
+
+	public void setThrottle(double newThrottle) {
 		throttle = newThrottle;
 	}
-	public double getThrottle(){
+
+	public double getThrottle() {
 		return throttle;
 	}
-	
-	public double getLeftDistanceInches(){
+
+	public double getLeftDistanceInches() {
 		return lEncoder.getDistance();
 	}
-	public double getRightDistanceInches(){
+
+	public double getRightDistanceInches() {
 		return rEncoder.getDistance();
 	}
-	//Gearing Procedures
-	/*public void toggleHighGear(){
-		isHighGear =  !isHighGear;
+
+
+
+	public void updateOutputs() {
+		outputToMotors(lPower, rPower);
+
 	}
-	public boolean getGearing(){
-		return isHighGear;
+
+	public void updateSensors() {
+		// Load last Values
+		lastSpeedL = currentSpeedL;
+		lastSpeedR = currentSpeedR;
+		lastAccelL = currentAccelL;
+		lastAccelR = currentAccelR;
+		encLastR = encCurrentR;
+		encLastL = encCurrentL;
+		timeLast = timeCurrent;
+
+		// Update Current Values
+		timeCurrent = System.currentTimeMillis();
+		encCurrentL = getLeftDistanceInches();
+		encCurrentR = getRightDistanceInches();
+
+		// ******Calculate New Values*******
+		timeDiff = timeCurrent - timeLast;// Calculate time difference
+		encDiffL = encCurrentL - encLastL;// Calculate encoder difference
+		encDiffR = encCurrentR - encLastR;// Calculate encoder difference
+		// Calculate The Current speed
+		currentSpeedL = encDiffL / timeDiff;
+		currentSpeedR = encDiffR / timeDiff;
+		// ******Calculate Acceleration and difference in acceleration******
+		currentAccelL = (lastSpeedL - currentSpeedL) / timeDiff;
+		currentAccelR = (lastSpeedR - currentSpeedR) / timeDiff;
+		jerkL = (currentAccelL - lastAccelL) / timeDiff;
+		jerkR = (currentAccelR - lastAccelR) / timeDiff;
+		// ***** ULTRASONIC VARIABLES
+		// ultraSonicDistance = getUltraSonicVoltageData()*(( 4.88/5)/0.92)*39.283;
 	}
-	//UltraSonic Procedures
-	private double getUltraSonicVoltageData(){
-		return ultrasonic.getAverageVoltage();
-	}
-	*/
-	public double getUltraSonicDistanceInches(){
-		return ultraSonicDistance;
-	}
-	private void updateSmartDashboard(){
-    	/*
-		SmartDashBoard.putNumber("leftTargetSpeed", targetSpeedL);
-    	SmartDashBoard.putNumber("rightTargetSpeed", targetSpeedR);
-    	Robot.table.putNumber("leftDrivePower",lPower);
-    	Robot.table.putNumber("rightDrivePower",rPower);
-    	Robot.table.putNumber("leftDriveAccel",currentAccelL);
-    	Robot.table.putNumber("rightDriveAccel",currentAccelR);
-    	Robot.table.putNumber("leftDriveSpeed",currentSpeedL);
-    	Robot.table.putNumber("rightDriveSpeed",currentSpeedL);
-    	Robot.table.putNumber("leftDriveJerk",jerkL);
-    	Robot.table.putNumber("rightDriveJerk",jerkR);
-    	Robot.table.putNumber("LeftEncoderDistance",getLeftDistanceMeters() );
-    	Robot.table.putNumber("RightEncoderDistance",getLeftDistanceMeters() );
+
+	private void updateSmartDashboard() {
+		/*
+		 * SmartDashBoard.putNumber("leftTargetSpeed", targetSpeedL);
+		 * SmartDashBoard.putNumber("rightTargetSpeed", targetSpeedR);
+		 * SmartDashBoard.putNumber("leftDrivePower",lPower);
+		 * SmartDashBoard.putNumber("rightDrivePower",rPower);
+		 * SmartDashBoard.putNumber("leftDriveAccel",currentAccelL);
+		 * SmartDashBoard.putNumber("rightDriveAccel",currentAccelR);
+		 * SmartDashBoard.putNumber("leftDriveSpeed",currentSpeedL);
+		 * SmartDashBoard.putNumber("rightDriveSpeed",currentSpeedL);
+		 * SmartDashBoard.putNumber("leftDriveJerk",jerkL);
+		 * SmartDashBoard.putNumber("rightDriveJerk",jerkR);
+		 * SmartDashBoard.putNumber("LeftEncoderDistance",getLeftDistanceInches() );
+		 * SmartDashBoard.putNumber("RightEncoderDistance",getLeftDistance() );
 		 */
 	}
 }
+/*
+// Gearing Procedures
+
+public void toggleHighGear(){ isHighGear = !isHighGear; } 
+public boolean getGearing(){ return isHighGear; } //UltraSonic Procedures private double
+getUltraSonicVoltageData(){ return ultrasonic.getAverageVoltage(); }
+public double getUltraSonicDistanceInches() {
+		return ultraSonicDistance;
+	}
+*/
+

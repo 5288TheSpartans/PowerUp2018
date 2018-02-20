@@ -13,10 +13,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class LeftRampSubsystem extends Subsystem {
-
-	private final double servoInitialAngle = 0;
 	private final double servoNeutralAngle = 0;
-	private final double servoPlantedAngle = 0;
+	private final double servoPlantedAngle = 90;
 	public enum state {initial,neutral, planted};
 	
 	private state currentState;
@@ -46,16 +44,16 @@ public class LeftRampSubsystem extends Subsystem {
 	    		}
 	    		else {
 			    	lmotor1.set(0);
-			    	lServo.set(servoPlantedAngle);
+			    	lServo.setAngle(servoPlantedAngle);
 	    		}
 	    	}
 	    	else if(currentState == state.neutral) {
 	    		lmotor1.set(0);
-		    	lServo.set(servoNeutralAngle);
+		    	lServo.setAngle(servoNeutralAngle);
 	    	}
 	    	else if (currentState == state.initial) {
 	    		lmotor1.set(0);
-		    	lServo.set(servoInitialAngle);
+		    	lServo.setAngle(servoNeutralAngle);
 	    	}
 	    }
 	    public void setState(state newState) {

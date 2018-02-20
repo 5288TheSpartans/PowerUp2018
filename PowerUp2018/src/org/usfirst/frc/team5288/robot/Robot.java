@@ -119,7 +119,6 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 	}
-
 	/**
 	 * This function is called periodically during autonomous.
 	 */
@@ -151,7 +150,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		updateSensors();
 		updateSubsystems();
-		updateSmartDashboard();
+		//updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -184,12 +183,12 @@ public class Robot extends TimedRobot {
 	public static double getDashboardNumber(String key) {
 		return SmartDashboard.getNumber(key, 0);
 	}
-	public void updateSmartDashboard() {
+	/*public void updateSmartDashboard() {
 		SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
 		SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
 		SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
-	}
+	}*/
 	
 }

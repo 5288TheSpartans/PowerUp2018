@@ -21,7 +21,7 @@ public class LiftToHeight extends Command {
     public LiftToHeight(double height) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
+    	requires(Robot.lift);
     	liftResistPID = new SpartanPID(0.005,0,0.001,0);
     	wantedHeight = height;
     }

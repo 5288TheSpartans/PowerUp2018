@@ -20,7 +20,7 @@ import com.ctre.phoenix.*;
  *
  */
 public class Lift extends Subsystem {
-
+ 
     // Put methods for controlling this subsystem
     // here. Call these from Commands
 	// declare talonSRX
@@ -106,6 +106,7 @@ public class Lift extends Subsystem {
     		else {
     		LiftMotor.set(ControlMode.PercentOutput,0.0);
     		}
+    		LiftMotor.
     	}
     }    public void setState(liftState newState) {
     	currentState = newState;
