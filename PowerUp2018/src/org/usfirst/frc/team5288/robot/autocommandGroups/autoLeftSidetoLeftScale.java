@@ -16,9 +16,11 @@ public class autoLeftSidetoLeftScale extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential(new DriveStraightDistance(320));
-    	addParallel(new LiftToHeight(100)); // max lift height 
+    	
+    	addParallel(new LiftToHeight(100)); // max lift height
+    	addSequential(new DriveStraightDistance(320)); 
     	addSequential(new SpotTurnDegrees(90));
+    	addSequential(new DriveStraightDistance(36));
     	addSequential(new UnloadCube());
     	addSequential(new LiftToHeight(0.0)); // min lift height
     	// now get back in position for switch cube

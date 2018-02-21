@@ -16,19 +16,22 @@ public class autoMiddletoLeftSwitch extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
+    	addSequential(new DriveStraightDistance(10));
     	addSequential(new SpotTurnDegrees(-45));
     	addParallel(new LiftToHeight(25));
-    	addSequential(new DriveStraightDistance(215));
-    	addSequential(new SpotTurnDegrees(135));
+    	addSequential(new DriveStraightDistance(155));
+    	addSequential(new SpotTurnDegrees(45));
     	addSequential(new DriveStraightDistance(65));
+    	addSequential(new SpotTurnDegrees(90));
+    	addSequential(new DriveStraightDistance(47));
     	addSequential(new UnloadCube());
     	addSequential(new DriveStraightDistance(-30));
     	addSequential(new SpotTurnDegrees(-90));
     	addParallel(new LiftToHeight(0));
-    	addSequential(new DriveStraightDistance(46));
+    	addSequential(new DriveStraightDistance(17));
     	addSequential(new SpotTurnDegrees(90));
     	addParallel(new LoadCube());
-    	addSequential(new DriveStraightDistance(49));
+    	addSequential(new DriveStraightDistance(33));
     	
     		
 

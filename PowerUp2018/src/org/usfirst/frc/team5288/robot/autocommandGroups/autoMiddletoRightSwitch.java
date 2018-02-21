@@ -24,21 +24,22 @@ public class autoMiddletoRightSwitch extends CommandGroup {
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
     	
+    	addSequential(new DriveStraightDistance(10));
     	addSequential(new SpotTurnDegrees(45));
     	addParallel(new LiftToHeight(25));
-    	addSequential(new DriveStraightDistance(176));
+    	addSequential(new DriveStraightDistance(182));
     	addSequential(new SpotTurnDegrees(-45));
-    	addSequential(new DriveStraightDistance(40));
+    	addSequential(new DriveStraightDistance(32));
     	addSequential(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(50));
+    	addSequential(new DriveStraightDistance(34));
     	addSequential(new UnloadCube());
-    	addSequential(new DriveStraightDistance(-40));
+    	addSequential(new DriveStraightDistance(-32));
     	addSequential(new SpotTurnDegrees(90));
     	addParallel(new LiftToHeight(0));
-    	addSequential(new DriveStraightDistance(38));
+    	addSequential(new DriveStraightDistance(28));
     	addSequential(new SpotTurnDegrees(-90));
     	addParallel(new LoadCube());
-    	addSequential(new DriveStraightDistance(41));
+    	addSequential(new DriveStraightDistance(35));
 
         // A command group will require all of the subsystems that each member
         // would require.
