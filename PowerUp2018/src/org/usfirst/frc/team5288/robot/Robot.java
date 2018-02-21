@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team5288.robot.autocommands.AutoMaker;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -43,7 +45,7 @@ public class Robot extends TimedRobot {
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+	SendableChooser<AutoMaker> autoChooser = new SendableChooser<>();
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -55,6 +57,8 @@ public class Robot extends TimedRobot {
 		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		SmartDashboard.putData("",autoChooser);
+		autoChooser.addObject("boo", new AutoMaker());
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");

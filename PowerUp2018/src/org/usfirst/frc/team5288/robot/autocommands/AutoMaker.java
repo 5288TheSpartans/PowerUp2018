@@ -24,6 +24,7 @@ public class AutoMaker extends CommandGroup {
 		for (int o=0; 0<3; o++) {
 			fms[o] = Robot.gameData.charAt(o);
 		}
+		
 		/*
 		for (int n=0; n<2; n++) {  //setting cf variables
 			

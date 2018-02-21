@@ -50,7 +50,7 @@ public class Lift extends Subsystem {
 	// lift outputs
 	private final double liftMoveMultiplier = 1;
 	private final double liftMotorRaisingOutput = 0.7;
-	private final double liftMotorLoweringOutput = -0.2; // needs to be 0.0 as this will let gravity make the lift fall
+	private final double liftMotorLoweringOutput = -0.4; // needs to be 0.0 as this will let gravity make the lift fall
 	private final double liftMotorStoppedOutput = 0.01;
 	private final double liftMotorFallingOutput = -0.01;
 	// Stuff for finding Height
