@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team5288.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.VictorSP;
 
@@ -14,10 +15,11 @@ public class IntakeSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	private DigitalInput intakeLimitSwitch = new DigitalInput(RobotMap.intakeLimitSwitch);
 	private VictorSP lIntake = new VictorSP(RobotMap.lIntakeMotor);
 	private VictorSP rIntake = new VictorSP(RobotMap.rIntakeMotor);
 	public enum cubeState{hasCube,noCube};
-	public enum intakeState{intake,outtake,stopped};
+	public enum intakeState{intake,outtakeLow,outtakeHigh,stopped};
 	// private cubeState currentCubeState;
 	private intakeState currentIntakeState;
 	private boolean hasCube;
@@ -46,6 +48,7 @@ public class IntakeSubsystem extends Subsystem {
     }
     public void updateSensors() {
     // placeholder intake sensor; sense if cube is there or not
+    hasCube = intakeLimitSwitch.get();	
     }
     public void updateOutputs() {
     	if(!override) {
@@ -54,13 +57,19 @@ public class IntakeSubsystem extends Subsystem {
     		if(currentIntakeState == intakeState.intake && hasCube ) {
     		outputToIntake(-1.0);
     		}
-    		else if(currentIntakeState == intakeState.outtake && !hasCube) {
-    		outputToIntake(1.0);
+    		else if(currentIntakeState == intakeState.outtakeLow && !hasCube) {
+    		outputToIntake(0.5);
+    		}
+    		else if(currentIntakeState == intakeState.outtakeHigh && !hasCube) {
+    			outputToIntake(1.0);
     		}
     		else if(currentIntakeState == intakeState.stopped) {
     		outputToIntake(0.0);
     		}
     	}
+    }
+    public boolean isLimitChecked() {
+    	return hasCube;
     }
     
 }

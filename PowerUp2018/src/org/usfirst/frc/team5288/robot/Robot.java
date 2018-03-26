@@ -45,7 +45,9 @@ public class Robot extends TimedRobot {
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	SendableChooser<AutoMaker> autoChooser = new SendableChooser<>();
+	SendableChooser<String> m_autoCommand = new SendableChooser<>();
+	String stringvar;
+	//SendableChooser<AutoMaker> autoChooser = new SendableChooser<>();
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -57,8 +59,9 @@ public class Robot extends TimedRobot {
 		//m_chooser.addDefault("Default Auto", new ExampleCommand());
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
-		SmartDashboard.putData("",autoChooser);
-		autoChooser.addObject("boo", new AutoMaker());
+		//SmartDashboard.putData("",autoChooser);
+		//autoChooser.addObject("boo", new AutoMaker());
+		m_autoCommand.addObject("AHHH", stringvar );
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");

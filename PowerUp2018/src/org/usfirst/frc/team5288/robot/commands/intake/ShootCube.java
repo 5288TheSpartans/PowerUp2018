@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class HoldCube extends Command {
+public class ShootCube extends Command {
 
-    public HoldCube() {
+    public ShootCube() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.intake);
@@ -22,9 +22,8 @@ public class HoldCube extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intake.setOverride(false);
-    	Robot.intake.setIntakeState(intakeState.stopped);
-    	
+    Robot.intake.setOverride(false);
+    Robot.intake.setIntakeState(intakeState.outtakeHigh);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,5 +38,6 @@ public class HoldCube extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    Robot.intake.setIntakeState(intakeState.stopped);
     }
 }

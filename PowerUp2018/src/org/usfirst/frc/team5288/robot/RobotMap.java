@@ -52,6 +52,7 @@ public class RobotMap {
 	public static int RRampLimitSwitch = 5;
 	public static int TopLiftLimit = 6;
 	public static int BottomLiftLimit = 7;
+	public static int intakeLimitSwitch = 8;
 	// JOYSTICK
 	// Joystick dead/safe zone
 	public static double JOYDEADZONE = 0.06;
