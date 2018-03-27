@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team5288.robot.autocommands.AutoMaker;
+import org.usfirst.frc.team5288.robot.autocommandGroups.*;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -43,8 +43,11 @@ public class Robot extends TimedRobot {
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
+	
+	private Integer autoSelected;
+	
 	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	SendableChooser<Integer> m_chooser = new SendableChooser<>();
 	SendableChooser<String> m_autoCommand = new SendableChooser<>();
 	String stringvar;
 	//SendableChooser<AutoMaker> autoChooser = new SendableChooser<>();
@@ -56,12 +59,16 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		
-		//m_chooser.addDefault("Default Auto", new ExampleCommand());
-		//chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
-		//SmartDashboard.putData("",autoChooser);
-		//autoChooser.addObject("boo", new AutoMaker());
+		m_chooser.addDefault("Spawn Middle to Switch", 0);
+		m_chooser.addObject("Spawn Right to Switch", 1);
+		m_chooser.addObject("Spawn Right to Scale", 2);
+		m_chooser.addObject("Spawn Left to Switch", 3);
+		m_chooser.addObject("Spawn Left to Scale", 4);
+		SmartDashboard.putData("Auto Choice", m_chooser);
+		
 		m_autoCommand.addObject("AHHH", stringvar );
+		
+		
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
@@ -106,7 +113,73 @@ public class Robot extends TimedRobot {
 	}
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
+		updateGameData();
+		autoSelected = m_chooser.getSelected();
+		switch(autoSelected) {
+		case 0:
+			if(gameData.charAt(0) == 'L') {
+				System.out.println("Auto: Middle to Left switch");
+				SmartDashboard.putString("Auto:"," Middle to Left switch");
+				m_autonomousCommand = new autoMiddletoLeftSwitch();
+			}
+			else {
+				System.out.println("Auto: Middle to Right switch");
+				SmartDashboard.putString("Auto:"," Middle to Right switch");
+				m_autonomousCommand = new autoMiddletoRightSwitch();
+			}
+			
+			break;
+		case 1:
+			if(gameData.charAt(0) == 'L') {
+				System.out.println("Auto: Right to Left switch");
+				SmartDashboard.putString("Auto:"," Right to Left switch");
+				m_autonomousCommand = new autoRightSidetoLeftSwitch();
+			}
+			else {
+				System.out.println("Auto: Right to Right switch");
+				SmartDashboard.putString("Auto:"," Right to Right switch");
+				m_autonomousCommand = new autoRightSidetoRightSwitch();
+			}
+			break;
+		case 2:
+			if(gameData.charAt(1) == 'L') {
+				System.out.println("Auto: Right to Left scale");
+				SmartDashboard.putString("Auto:"," Right to Left scale");
+				m_autonomousCommand = new autoRightSidetoLeftScale();
+			}
+			else {
+				System.out.println("Auto: Right to Right switch");
+				SmartDashboard.putString("Auto:"," Right to Right switch");
+				m_autonomousCommand = new autoRightSidetoRightSwitch();
+			}
+			break;
+		case 3:
+			if(gameData.charAt(0) == 'L') {
+				System.out.println("Auto: Left to Left switch");
+				SmartDashboard.putString("Auto:"," Left to Left switch");
+				m_autonomousCommand = new autoLeftSidetoLeftSwitch();
+			}
+			else {
+				System.out.println("Auto: Left to Right Switch");
+				SmartDashboard.putString("Auto:"," Left to Right Switch");
+				m_autonomousCommand = new autoLeftSidetoRightSwitch();
+			}
+			break;
+		case 4:
+			if(gameData.charAt(1) == 'L') {
+				System.out.println("Auto: Left to Left Scale");
+				SmartDashboard.putString("Auto:"," Left to Left Scale");
+				m_autonomousCommand = new autoLeftSidetoLeftScale();
+			}
+			else {
+				System.out.println("Auto: Left to Right Scale");
+				SmartDashboard.putString("Auto:"," Left to Right Scale");
+				m_autonomousCommand = new autoLeftSidetoRightScale();
+			}
+			break;
+		
+			
+		}
 
 		/*
 		  String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); 
@@ -119,7 +192,6 @@ public class Robot extends TimedRobot {
 
 		// schedule the autonomous command (example)
 		
-		updateGameData();
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
