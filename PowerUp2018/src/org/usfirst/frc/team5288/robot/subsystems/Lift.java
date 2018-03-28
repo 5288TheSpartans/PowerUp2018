@@ -96,30 +96,34 @@ public class Lift extends Subsystem {
 			if (!isAtTop) {
 				setLiftPower(liftMotorRaisingOutput);
 			} else {
-				setLiftPower(0);
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
 			}
 		} else if (currentState == liftState.lowering) {
 			setMode(liftMotorMode.coast);
 			if (!isAtBottom) {
 				setLiftPower(liftMotorLoweringOutput);
 			} else {
-				setLiftPower(0);
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
 			}
 		} else if (currentState == liftState.stopped) {
+			LiftMotor.set(ControlMode.PercentOutput, 0.0);
 			setMode(liftMotorMode.brake);
-			LiftMotor.set(ControlMode.PercentOutput, liftMotorStoppedOutput);
+	
 		} else if (currentState == liftState.falling) {
 			setMode(liftMotorMode.coast);
 			LiftMotor.set(ControlMode.PercentOutput, liftMotorFallingOutput);
 		} else if (currentState == liftState.PID) {
 			if (isAtBottom && liftPower < 0) {
 				setMode(liftMotorMode.brake);
-				setLiftPower(0);
+				setLiftPower(liftMotorStoppedOutput);
 			} else if(isAtTop && liftPower > 0){
 				setMode(liftMotorMode.brake);
-				setLiftPower(0);
+				setLiftPower(liftMotorStoppedOutput);
 			}
 			else {
+				setMode(liftMotorMode.coast);
 				setLiftPower(liftPower);
 			}
 		}
