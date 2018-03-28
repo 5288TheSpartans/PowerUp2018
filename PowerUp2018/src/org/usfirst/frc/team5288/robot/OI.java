@@ -86,7 +86,17 @@ public class OI {
  				btnR10 = new JoystickButton(joystickRight,10),
  		 		btnR11 = new JoystickButton(joystickRight,11); 
  
-		 	
+ 	private JoystickButton 
+ 		xboxA = new JoystickButton(xbox,1),//Coloured buttons
+ 		xBoxB = new JoystickButton(xbox,2),//Coloured buttons
+ 		xboxY = new JoystickButton(xbox,4),//Coloured buttons
+ 		xboxX = new JoystickButton(xbox,3),//Coloured buttons
+ 		xboxLB = new JoystickButton(xbox,5),//Left Bumper
+ 		xboxRB = new JoystickButton(xbox,6),//Right Bumper
+ 		xboxStart = new JoystickButton(xbox,8),//XboxStart buttons
+ 		xboxBack = new JoystickButton(xbox,7),//XboxBack buttons
+ 		xboxLStickButton = new JoystickButton(xbox, 9),
+ 		xboxRStickButton = new JoystickButton(xbox, 10);
 
     public OI()
     {
@@ -146,11 +156,11 @@ public class OI {
     }
     public double getXLY()
     {
-    	return (-xbox.getRawAxis(1));
+    	return (-xbox.getRawAxis(2));
     }
     public double getXLX()
     {
-    	return (xbox.getRawAxis(0));              
+    	return (xbox.getRawAxis(1));              
     }
     public double getXRY()
     {
