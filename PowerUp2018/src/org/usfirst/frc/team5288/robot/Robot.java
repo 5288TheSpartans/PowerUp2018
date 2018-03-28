@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 
@@ -68,7 +69,7 @@ public class Robot extends TimedRobot {
 		
 		m_autoCommand.addObject("AHHH", stringvar );
 		
-		
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
