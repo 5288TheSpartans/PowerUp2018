@@ -11,6 +11,7 @@ import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.ResetEncoders;
+import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
@@ -88,7 +89,7 @@ public class OI {
  
  	private JoystickButton 
  		xboxA = new JoystickButton(xbox,1),//Coloured buttons
- 		xBoxB = new JoystickButton(xbox,2),//Coloured buttons
+ 		xboxB = new JoystickButton(xbox,2),//Coloured buttons
  		xboxY = new JoystickButton(xbox,4),//Coloured buttons
  		xboxX = new JoystickButton(xbox,3),//Coloured buttons
  		xboxLB = new JoystickButton(xbox,5),//Left Bumper
@@ -111,8 +112,10 @@ public class OI {
     btnL2.whenPressed(new SpotTurnDegrees(10));
     //btnL3.whileHeld(new ResistLiftWeight());
     btnR6.whenPressed(new ResetEncoders());
-    
-    
+    xboxA.whenPressed(new LiftToHeight(3));
+    xboxB.whenPressed(new LiftToHeight(20));
+    xboxLB.whileHeld(new LowerLift());
+    xboxRB.whileHeld(new RaiseLift());
     /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
  * 

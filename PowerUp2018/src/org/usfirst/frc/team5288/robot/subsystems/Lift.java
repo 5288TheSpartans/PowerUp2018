@@ -146,6 +146,7 @@ public class Lift extends Subsystem {
 		isAtBottom = !bottomLimitSwitch.get();
 		if (isAtTop && isAtBottom) {
 			// IDK what to say if they are both hit, we have an issue.
+			System.out.println("ISSUE IN LIFT UPDATE SENSORS.");
 		} else if (isAtBottom) {
 			liftHeight = 0;// Inches
 			sketchyHeight = 0;
@@ -156,7 +157,7 @@ public class Lift extends Subsystem {
 			sketchyHeight = 84;
 			liftHeight = 84;
 			LiftMotor.setSelectedSensorPosition((int) (84/heightConstant), 0, 0);
-			System.out.println("Lift height reset to  because at top.");
+			System.out.println("Lift height reset because at top.");
 
 
 		}
@@ -178,13 +179,13 @@ public class Lift extends Subsystem {
 		lastSpeed = currentSpeed;
 		currentSpeed = LiftMotor.getSelectedSensorVelocity(0);
 		sketchyHeight += (currentTime - lastTime) * ((lastSpeed + currentSpeed) / 2);
-		System.out.println("SketchyLiftHeight recorded to be:" + sketchyHeight);
+	//	System.out.println("SketchyLiftHeight recorded to be:" + sketchyHeight);
 
 	}
 
 	private void calculateLiftHeightClean() {
 		liftHeight = LiftMotor.getSelectedSensorPosition(0) * heightConstant;
-		System.out.println("LiftHeight recorded to be:" + liftHeight);
+	//	System.out.println("LiftHeight recorded to be:" + liftHeight);
 
 	}
 
