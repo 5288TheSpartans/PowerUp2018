@@ -15,8 +15,8 @@ import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
-import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampCommand;
-import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampOverride;
+import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampCommand;
 
@@ -107,8 +107,8 @@ public class OI {
     btnL5.whileHeld(new DriveStraight(0.2));
     btnL6.whileHeld(new RaiseLeftRampCommand());
     btnL7.whileHeld(new RaiseRightRampCommand());
-    btnL8.whileHeld(new LoosenLeftRampCommand());
-    btnL9.whileHeld(new LoosenRightRampCommand());
+    btnL8.whileHeld(new LoosenLeftRampOverride());
+    btnL9.whileHeld(new LoosenRightRampOverride());
     btnL2.whenPressed(new SpotTurnDegrees(10));
     //btnL3.whileHeld(new ResistLiftWeight());
     btnR6.whenPressed(new ResetEncoders());

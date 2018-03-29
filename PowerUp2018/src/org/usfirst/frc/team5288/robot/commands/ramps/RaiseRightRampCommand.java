@@ -3,6 +3,7 @@ package org.usfirst.frc.team5288.robot.commands.ramps;
 
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.subsystems.RightRampSubsystem.state;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,35 +21,27 @@ public class RaiseRightRampCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("Initializing RaiseRightRampCommand.");
-    	Robot.rightRamp.outputToRightRamp(0.0);
+ 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.rightRamp.updateSensors();
-    	if(Robot.rightLimitCondition) {
-    		Robot.rightRamp.outputToRightRamp(0.65);
-   			}
+    	Robot.rightRamp.setState(state.planted);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {	
-    	Robot.rightRamp.updateSensors();
-    	if(Robot.rightLimitCondition) {
-    		return false;
-    	} else return true;
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.rightRamp.outputToRightRamp(0.0);
-    //	System.out.println("Turning off motor due to limit switch trigger.");
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    Robot.rightRamp.outputToRightRamp(0.0);
-    System.out.println("RaiseRightRampCommand interrupted.");
+    	Robot.rightRamp.setState(state.neutral);
+    	System.out.println("RaiseRightRampCommand interrupted.");
     }
 }

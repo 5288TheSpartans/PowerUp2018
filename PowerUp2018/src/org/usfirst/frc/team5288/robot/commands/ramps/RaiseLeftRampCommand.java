@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.commands.ramps;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem.state;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,31 +25,24 @@ public class RaiseLeftRampCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.leftRamp.updateSensors();
-    	if(Robot.leftLimitCondition) {	
-    	Robot.leftRamp.outputToLeftRamp(-0.65);
-    		}
-    	}
+    	Robot.leftRamp.setState(state.planted);
+    	
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	Robot.leftRamp.updateSensors();
-    	if(Robot.leftLimitCondition) {
-    		return false;
-    	} else return true;
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.leftRamp.outputToLeftRamp(0.0);
-    //	System.out.println("Turning off motor due to limit switch trigger.");
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.leftRamp.outputToLeftRamp(0.0);
+    	Robot.leftRamp.setState(state.neutral);
     	System.out.println("RaiseLeftRampCommand interrupted.");
-
-}
+    }
 }

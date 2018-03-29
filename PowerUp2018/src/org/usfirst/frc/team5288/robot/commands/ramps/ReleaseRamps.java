@@ -40,7 +40,7 @@ public class ReleaseRamps extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.leftRamp.setState(LeftRampSubsystem.state.planted);
-    	Robot.rightRamp.setState(RightRampSubsystem.state.planted);
+    	Robot.leftRamp.setState(LeftRampSubsystem.state.neutral);
+    	Robot.rightRamp.setState(RightRampSubsystem.state.neutral);
     }
 }

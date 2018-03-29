@@ -11,33 +11,39 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class RightRampSubsystem extends Subsystem {
-		private final double servoInitialAngle = 0;
-		private final double servoNeutralAngle = 0;
-		private final double servoPlantedAngle = 0;
-		public enum state {initial,neutral, planted};
-		
-		private state currentState;
-		// Define motors
-		private VictorSP rmotor1 = new VictorSP(RobotMap.RRampMotors);	//	Left ramp motors; PWM is split.
-		private Servo rServo = new Servo(RobotMap.rRampServo);
-		// Define limit switch
-		private DigitalInput rLimitSwitch = new DigitalInput(RobotMap.RRampLimitSwitch);
-		private boolean limitSwitchStatus;
-	    private double rampMotorOutput = 0;
+	
+	// Define right servo angles
+	private final double servoInitialAngle = 0;
+	private final double servoNeutralAngle = 0;
+	private final double servoPlantedAngle = 90;
+	// Define ramp & servo states
+	public enum state {initial,neutral, planted};
+	private state currentState;
+	// Define motors
+	private VictorSP rmotor1 = new VictorSP(RobotMap.RRampMotors);	//	Left ramp motors; PWM is split.
+	private Servo rServo = new Servo(RobotMap.rRampServo);
+	// Define limit switch
+	private DigitalInput rLimitSwitch = new DigitalInput(RobotMap.RRampLimitSwitch);
+	
+	private boolean limitSwitchStatus;
+	private boolean isOverride;
+    private double rampMotorOutput = 0.5;
+    private double rampLooseningOutput = -0.5;
 
-		public	RightRampSubsystem() {
-			currentState = state.initial;
-		}
-	    public void initDefaultCommand() {
-	    }
-	    
-	    public void outputToRightRamp(double power) {
-	    	rampMotorOutput = power;
-	    }
-	    public void updateSensors() {
-			limitSwitchStatus = rLimitSwitch.get();
-		}
-	    public void updateOutputs() {
+	public	RightRampSubsystem() {
+		currentState = state.initial;
+	}
+    public void initDefaultCommand() {
+    }
+    
+    public void outputToRightRamp(double power) {
+    	rampMotorOutput = power;
+    }
+    public void updateSensors() {
+		limitSwitchStatus = rLimitSwitch.get();
+	}
+    public void updateOutputs() {
+    	if(!isOverride) {
 	    	if (currentState == state.planted){
 	    		if(limitSwitchStatus){
 			    	rmotor1.set(rampMotorOutput);
@@ -56,12 +62,22 @@ public class RightRampSubsystem extends Subsystem {
 	    		rmotor1.set(0);
 		    	rServo.setAngle(servoInitialAngle);
 	    	}
-	    }
-	    public void setState(state newState) {
-	    	
-	    }
-	    public boolean isLimitChecked() {
-	    	return limitSwitchStatus;
-	    }
+    	}
+    }
+    public void setState(state newState) {
+    	currentState = newState;
+    }
+    public boolean isLimitChecked() {
+    	return limitSwitchStatus;
+    }
+    public void setOverride(boolean rightRampOverride) {
+    	isOverride = rightRampOverride;
+    }
+    public boolean getOverride() {
+    	return isOverride;
+    }
+    public void setServo(double angle) {
+    	rServo.setAngle(angle);
+    }
 }
 
