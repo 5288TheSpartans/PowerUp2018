@@ -28,7 +28,7 @@ public class LiftToHeight extends Command {
 
     protected void initialize() {
     	//
-    	initialHeight = Robot.lift.getEncoderPosition();
+    	initialHeight = Robot.lift.getLiftHeight();
     	currentHeight = initialHeight;
     	deltaHeight = 0;
     	liftResistPID.setTarget(wantedHeight);
@@ -37,7 +37,7 @@ public class LiftToHeight extends Command {
     }
 
     protected void execute() {
-    	currentHeight = Robot.lift.getEncoderPosition();
+    	currentHeight = Robot.lift.getLiftHeight();
     	deltaHeight = currentHeight - initialHeight;
     	liftResistPID.update(deltaHeight);
     	Robot.lift.outputToLift(liftResistPID.getOutput());
