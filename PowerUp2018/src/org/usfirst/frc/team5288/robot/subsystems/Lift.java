@@ -92,7 +92,48 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateOutputs() {
-		if (currentState == liftState.raising) {
+		switch(currentState) {
+		case raising:
+			setMode(liftMotorMode.coast);
+			if (!isAtTop) {
+				setLiftPower(liftMotorRaisingOutput);
+			} else {
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
+			}
+			
+		case lowering:
+			setMode(liftMotorMode.coast);
+			if (!isAtBottom) {
+				setLiftPower(liftMotorLoweringOutput);
+			} else {
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
+			}
+		
+		case stopped:
+			LiftMotor.set(ControlMode.PercentOutput, 0.0);
+			setMode(liftMotorMode.brake);
+	
+			
+		case falling:
+			setMode(liftMotorMode.coast);
+			LiftMotor.set(ControlMode.PercentOutput, liftMotorFallingOutput);
+		
+		case PID:	
+			if (isAtBottom && liftPower < 0) {
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
+			} else if(isAtTop && liftPower > 0){
+				setMode(liftMotorMode.brake);
+				setLiftPower(liftMotorStoppedOutput);
+			}
+			else {
+				setMode(liftMotorMode.coast);
+				setLiftPower(liftPower);
+			}
+		}
+		/*if (currentState == liftState.raising) {
 			setMode(liftMotorMode.coast);
 			if (!isAtTop) {
 				setLiftPower(liftMotorRaisingOutput);
@@ -127,7 +168,7 @@ public class Lift extends Subsystem {
 				setMode(liftMotorMode.coast);
 				setLiftPower(liftPower);
 			}
-		}
+		}*/
 	}
 
 	public void setState(liftState newState) {
