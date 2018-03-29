@@ -41,6 +41,7 @@ public class Lift extends Subsystem {
 	private boolean isAtBottom = true;
 	private double liftHeight = 0;
 	private double sketchyHeight = 0;
+	private double maxLiftHeight = 30; // inches
 
 	// lift modes
 	public enum liftMotorMode {
@@ -50,7 +51,7 @@ public class Lift extends Subsystem {
 	// lift outputs
 	private final double liftMoveMultiplier = 1;
 	private final double liftMotorRaisingOutput = 0.7;
-	private final double liftMotorLoweringOutput = -0.4; // needs to be 0.0 as this will let gravity make the lift fall
+	private final double liftMotorLoweringOutput = -0.4; 
 	private final double liftMotorStoppedOutput = 0.01;
 	private final double liftMotorFallingOutput = -0.01;
 	// Stuff for finding Height
@@ -142,7 +143,7 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateSensors() {
-		isAtTop = !topLimitSwitch.get();
+		isAtTop = isAtTop(); // If top limit switch is remounted, use !topLimitSwitch.get()
 		isAtBottom = !bottomLimitSwitch.get();
 		if (isAtTop && isAtBottom) {
 			// IDK what to say if they are both hit, we have an issue.
@@ -165,8 +166,8 @@ public class Lift extends Subsystem {
 		calculateLiftHeightClean();
 		Robot.putDashboardNumber("LiftHeight = ", liftHeight);
 		Robot.putDashboardNumber("SketchyLiftHeight = ", liftHeight);
-		SmartDashboard.putBoolean("Top Limit Switch", isAtTop);
-		SmartDashboard.putBoolean("Top Limit Switch", isAtBottom);
+		SmartDashboard.putBoolean("Top Limit Switch", !isAtTop);
+		SmartDashboard.putBoolean("Bottom Limit Switch", isAtBottom);
 
 	}
 	
@@ -197,5 +198,11 @@ public class Lift extends Subsystem {
 		SmartDashboard.putNumber("Lift encoder velocity: ", LiftMotor.getSelectedSensorVelocity(0));
 		System.out.println("Lift encoder Position: " + LiftMotor.getSelectedSensorPosition(0));
 		return LiftMotor.getSelectedSensorPosition(0);
+	}
+	public boolean isAtTop() {
+		if(getLiftHeight() >= maxLiftHeight) {
+			return true;
+		}
+		else return false;
 	}
 }
