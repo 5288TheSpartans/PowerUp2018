@@ -14,7 +14,7 @@ public class RightRampSubsystem extends Subsystem {
 	
 	// Define right servo angles
 	private final double servoInitialAngle = 0;
-	private final double servoNeutralAngle = 0;
+	private final double servoNeutralAngle = 90;
 	private final double servoPlantedAngle = 90;
 	// Define ramp & servo states
 	public enum state {initial,neutral, planted};
@@ -78,6 +78,9 @@ public class RightRampSubsystem extends Subsystem {
     }
     public void setServo(double angle) {
     	rServo.setAngle(angle);
+    }
+    public void outputOverride(double output) {
+    	rmotor1.set(output);
     }
 }
 

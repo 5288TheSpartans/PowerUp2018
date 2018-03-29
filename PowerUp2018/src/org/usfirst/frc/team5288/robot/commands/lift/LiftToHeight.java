@@ -39,7 +39,7 @@ public class LiftToHeight extends Command {
     protected void execute() {
     	currentHeight = Robot.lift.getLiftHeight();
     	deltaHeight = currentHeight - initialHeight;
-    	liftResistPID.update(deltaHeight);
+    	liftResistPID.update(currentHeight);
     	Robot.lift.outputToLift(liftResistPID.getOutput());
     	System.out.println(liftResistPID.getOutput());
     	currentHeightInches = Robot.lift.getLiftHeight();

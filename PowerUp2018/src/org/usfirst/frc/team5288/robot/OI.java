@@ -18,7 +18,9 @@ import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampCommand;
+import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.ReleaseRamps;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -76,6 +78,8 @@ public class OI {
  					btnL7 = new JoystickButton(joystickLeft,7),
  					btnL8 = new JoystickButton(joystickLeft,8),
  					btnL9 = new JoystickButton(joystickLeft,9),
+ 					btnL10 = new JoystickButton(joystickLeft,10),
+ 					btnL11 = new JoystickButton(joystickLeft,11),
  				btnR1 = new JoystickButton(joystickRight,1),
 				btnR2 = new JoystickButton(joystickRight,2),
 				btnR3 = new JoystickButton(joystickRight,3),
@@ -109,13 +113,14 @@ public class OI {
     btnL6.whenPressed(new ReleaseRamps());
     btnL8.whileHeld(new LoosenLeftRampOverride());
     btnL9.whileHeld(new LoosenRightRampOverride());
-    btnL2.whenPressed(new SpotTurnDegrees(10));
+ //   btnL2.whenPressed(new SpotTurnDegrees(10));
     //btnL3.whileHeld(new ResistLiftWeight());
     btnR6.whenPressed(new ResetEncoders());
     btnL2.whenPressed(new LiftToHeight(5));
     btnL7.whenPressed(new RaiseLeftRampCommand());
     btnR3.whileHeld(new RaiseRightRampCommand());
-    
+    btnL10.whileHeld(new RaiseLeftRampOverride());
+    btnL11.whileHeld(new RaiseRightRampOverride());
     
     
     xboxA.whenPressed(new LiftToHeight(3));

@@ -22,7 +22,7 @@ public class RaiseLeftRampOverride extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.leftRamp.outputToLeftRamp(0.5);
+    	Robot.leftRamp.outputOverride(0.5);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,7 @@ public class RaiseLeftRampOverride extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.leftRamp.outputToLeftRamp(0.0);
+    	Robot.leftRamp.outputOverride(0.0);
     	Robot.leftRamp.setOverride(false);
     	System.out.println("RaiseLeftRampOverride interrupted.");
     }

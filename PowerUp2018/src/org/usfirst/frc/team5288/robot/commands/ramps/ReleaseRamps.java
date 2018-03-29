@@ -34,6 +34,8 @@ public class ReleaseRamps extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.leftRamp.setState(LeftRampSubsystem.state.neutral);
+    	Robot.rightRamp.setState(RightRampSubsystem.state.neutral);
     	
     }
 
