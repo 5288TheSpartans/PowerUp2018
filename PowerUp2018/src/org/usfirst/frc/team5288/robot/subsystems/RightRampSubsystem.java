@@ -14,8 +14,8 @@ public class RightRampSubsystem extends Subsystem {
 	
 	// Define right servo angles
 	private final double servoInitialAngle = 0;
-	private final double servoNeutralAngle = 90;
-	private final double servoPlantedAngle = 90;
+	private final double servoNeutralAngle = 120;
+	private final double servoPlantedAngle = 120;
 	// Define ramp & servo states
 	public enum state {initial,neutral, planted};
 	private state currentState;
@@ -27,7 +27,7 @@ public class RightRampSubsystem extends Subsystem {
 	
 	private boolean limitSwitchStatus;
 	private boolean isOverride;
-    private double rampMotorOutput = 0.5;
+    private double rampMotorOutput = 1.0;
     private double rampLooseningOutput = -0.5;
 
 	public	RightRampSubsystem() {

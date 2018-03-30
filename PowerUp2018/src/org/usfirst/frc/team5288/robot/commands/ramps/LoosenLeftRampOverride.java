@@ -23,7 +23,7 @@ public class LoosenLeftRampOverride extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.leftRamp.setOverride(true);
-    	Robot.leftRamp.outputOverride(-0.2);
+    	Robot.leftRamp.outputOverride(0.4);
     }
 
     // Make this return true when this Command no longer needs to run execute()
