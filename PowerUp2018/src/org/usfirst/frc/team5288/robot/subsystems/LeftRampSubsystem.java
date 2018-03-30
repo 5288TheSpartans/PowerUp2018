@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class LeftRampSubsystem extends Subsystem {
 	// Define left servo angles
 	private final double servoInitialAngle = 0;
-	private final double servoNeutralAngle = -120;
-	private final double servoPlantedAngle = -120;
+	private final double servoNeutralAngle = 180;
+	private final double servoPlantedAngle = 180;
 	// Define ramp states
 	public enum state {initial,neutral, planted};
 	private state currentState;
@@ -28,7 +28,7 @@ public class LeftRampSubsystem extends Subsystem {
     boolean limitSwitchStatus;
     boolean isOverride;
     private double rampLooseningOutput = 0.5;
-    private double rampMotorOutput = -1.0;
+    private double rampMotorOutput = -0.9;
     
     
 	public LeftRampSubsystem() {

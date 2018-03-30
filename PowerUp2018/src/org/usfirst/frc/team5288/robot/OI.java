@@ -22,7 +22,9 @@ import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseLeftRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.RaiseRightRampOverride;
+import org.usfirst.frc.team5288.robot.commands.ramps.ReleaseLeftRampCommand;
 import org.usfirst.frc.team5288.robot.commands.ramps.ReleaseRamps;
+import org.usfirst.frc.team5288.robot.commands.ramps.ReleaseRightRampCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -107,22 +109,21 @@ public class OI {
 
     public OI()
     {
-    
+    btnL1.whileHeld(new LoadCube());
+    btnL2.whenPressed(new LiftToHeight(100)); // make this the scale
+    btnL3.whenPressed(new LiftToHeight(25)); // make this the switch
     btnL4.whileHeld(new RaiseLift());
-    btnL3.whileHeld(new LowerLift());
-    btnL5.whileHeld(new DriveStraight(0.2));
-    btnL6.whenPressed(new ReleaseRamps());
-    btnL8.whileHeld(new LoosenLeftRampOverride());
-    btnL9.whileHeld(new LoosenRightRampOverride());
- //   btnL2.whenPressed(new SpotTurnDegrees(10));
-    //btnL3.whileHeld(new ResistLiftWeight());
-    btnR6.whenPressed(new ResetEncoders());
-    btnL2.whenPressed(new LiftToHeight(5));
-    btnL7.whenPressed(new RaiseLeftRampCommand());
-    btnR3.whileHeld(new RaiseRightRampCommand());
-    btnL10.whileHeld(new RaiseLeftRampOverride());
-    btnL11.whileHeld(new RaiseRightRampOverride());
+    btnL5.whileHeld(new LowerLift());
+    btnL6.whileHeld(new RaiseLeftRampCommand());
+    btnL7.whileHeld(new RaiseLeftRampOverride());
+    btnL8.whenPressed(new ReleaseLeftRampCommand());
+    btnL9.whenPressed(new ReleaseRightRampCommand());
+    btnL10.whileHeld(new RaiseRightRampOverride());
+    btnL11.whileHeld(new RaiseRightRampCommand());
     
+    // Joystick RIGHT
+    btnR5.whileHeld(new UnloadCube());
+    btnR6.whileHeld(new ShootCube());
 	//xbox controls
     xboxLB.whileHeld(new LowerLift());
     xboxRB.whileHeld(new RaiseLift());

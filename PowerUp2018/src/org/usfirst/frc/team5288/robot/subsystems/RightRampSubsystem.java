@@ -27,7 +27,7 @@ public class RightRampSubsystem extends Subsystem {
 	
 	private boolean limitSwitchStatus;
 	private boolean isOverride;
-    private double rampMotorOutput = 1.0;
+    private double rampMotorOutput = 0.9;
     private double rampLooseningOutput = -0.5;
 
 	public	RightRampSubsystem() {

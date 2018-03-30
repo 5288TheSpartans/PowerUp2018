@@ -41,7 +41,7 @@ public class Lift extends Subsystem {
 	private boolean isAtBottom = true;
 	private double liftHeight = 0;
 	private double sketchyHeight = 0;
-	private double maxLiftHeight = 40000; // inches
+	private double maxLiftHeight = 70; // inches
 
 	// lift modes
 	public enum liftMotorMode {
@@ -50,8 +50,8 @@ public class Lift extends Subsystem {
 
 	// lift outputs
 	private final double liftMoveMultiplier = 1;
-	private final double liftMotorRaisingOutput = 0.7;
-	private final double liftMotorLoweringOutput = -0.4; 
+	private final double liftMotorRaisingOutput = 1.0;
+	private final double liftMotorLoweringOutput = -1.0; 
 	private final double liftMotorStoppedOutput = 0.01;
 	private final double liftMotorFallingOutput = -0.01;
 	// Stuff for finding Height

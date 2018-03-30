@@ -15,8 +15,7 @@ public class LiftToHeight extends Command {
 	
 	SpartanPID liftResistPID;
 	double initialHeight;
-	double currentHeight;
-	double deltaHeight;// current - initial
+	//double deltaHeight;// current - initial
 	double wantedHeight;
 	double currentHeightInches = 0;
     public LiftToHeight(double height) {
@@ -29,20 +28,25 @@ public class LiftToHeight extends Command {
     protected void initialize() {
     	//
     	initialHeight = Robot.lift.getLiftHeight();
-    	currentHeight = initialHeight;
-    	deltaHeight = 0;
+    	currentHeightInches = initialHeight;
+    	//deltaHeight = 0;
     	liftResistPID.setTarget(wantedHeight);
     	Robot.lift.setState(liftState.PID); 
     	System.out.println("Sending");
     }
 
     protected void execute() {
-    	currentHeight = Robot.lift.getLiftHeight();
-    	deltaHeight = currentHeight - initialHeight;
-    	liftResistPID.update(currentHeight);
-    	Robot.lift.outputToLift(liftResistPID.getOutput());
+    	currentHeightInches = Robot.lift.getLiftHeight();
+    	//deltaHeight = currentHeight - initialHeight;
+    	liftResistPID.update(currentHeightInches);
     	System.out.println(liftResistPID.getOutput());
     	currentHeightInches = Robot.lift.getLiftHeight();
+    	if(currentHeightInches > wantedHeight + 2) {
+    		Robot.lift.outputToLift(-0.4);
+    	}
+    	else {
+        	Robot.lift.outputToLift(liftResistPID.getOutput());
+    	}
     }
 
     protected boolean isFinished() {

@@ -55,13 +55,13 @@ public class IntakeSubsystem extends Subsystem {
     		// if the commands are being overridden, then don't use updateSubsystems()
     		// at all, as the outputs will be manually set in override commands
     		if(currentIntakeState == intakeState.intake && hasCube ) {
-    		outputToIntake(-1.0);
+    		outputToIntake(-0.7);
     		}
     		else if(currentIntakeState == intakeState.outtakeLow && !hasCube) {
-    		outputToIntake(0.5);
+    		outputToIntake(0.3);
     		}
     		else if(currentIntakeState == intakeState.outtakeHigh && !hasCube) {
-    			outputToIntake(1.0);
+    			outputToIntake(0.7);
     		}
     		else if(currentIntakeState == intakeState.stopped) {
     		outputToIntake(0.0);
