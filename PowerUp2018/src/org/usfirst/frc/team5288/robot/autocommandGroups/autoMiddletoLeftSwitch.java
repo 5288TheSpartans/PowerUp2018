@@ -2,6 +2,7 @@ package org.usfirst.frc.team5288.robot.autocommandGroups;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.autocommands.*;
 import org.usfirst.frc.team5288.robot.commands.lift.*;
 import org.usfirst.frc.team5288.robot.commands.intake.*;
@@ -18,7 +19,7 @@ public class autoMiddletoLeftSwitch extends CommandGroup {
         // these will run in order.
     	addSequential(new DriveStraightDistance(10));
     	addSequential(new SpotTurnDegrees(-45));
-    	addParallel(new LiftToHeight(25));
+    	addParallel(new LiftToHeight(Robot.switchHei));
     	addSequential(new DriveStraightDistance(155));
     	addSequential(new SpotTurnDegrees(45));
     	addSequential(new DriveStraightDistance(65));

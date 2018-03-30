@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5288.robot.autocommandGroups;
 
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.autocommands.*;
 import org.usfirst.frc.team5288.robot.commands.intake.UnloadCube;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
@@ -25,7 +26,7 @@ public class autoRightSidetoLeftScale extends CommandGroup {
     	
     	addSequential(new DriveStraightDistance(236));
     	addSequential(new SpotTurnDegrees(-90));
-    	addParallel(new LiftToHeight(77));
+    	addParallel(new LiftToHeight(Robot.scaleHei));
     	addSequential(new DriveStraightDistance(256));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(77));

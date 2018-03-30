@@ -1,5 +1,6 @@
 package org.usfirst.frc.team5288.robot.autocommandGroups;
 
+import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.autocommands.*;
 import org.usfirst.frc.team5288.robot.commands.lift.*;
 import org.usfirst.frc.team5288.robot.commands.intake.*;
@@ -18,11 +19,11 @@ public class autoLeftSidetoLeftSwitch extends CommandGroup {
         // these will run in order.
     	addSequential(new DriveStraightDistance(175));
     	addSequential(new SpotTurnDegrees(90));
-    	addParallel(new LiftToHeight(22));
+    	addParallel(new LiftToHeight(Robot.switchHei));
     	addSequential(new DriveStraightDistance(52));
     	addSequential(new UnloadCube());
     	addSequential(new DriveStraightDistance(-34));
-    	addParallel(new LiftToHeight(1));
+    	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(24));
     	addSequential(new SpotTurnDegrees(90));

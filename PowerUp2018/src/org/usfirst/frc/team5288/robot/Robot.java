@@ -44,6 +44,8 @@ public class Robot extends TimedRobot {
 	public static final RightRampSubsystem rightRamp = new RightRampSubsystem();
 	public static final LeftRampSubsystem leftRamp = new LeftRampSubsystem();
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
+	public static int switchHei = 40;
+	public static int scaleHei = 77;
 	
 	private Integer autoSelected;
 	
