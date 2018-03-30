@@ -2,6 +2,7 @@ package org.usfirst.frc.team5288.robot.subsystems;
 
 import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.RobotMap;
+import org.usfirst.frc.team5288.robot.commands.ramps.DoNothingLeftRampCommand;
 import org.usfirst.frc.team5288.robot.subsystems.RightRampSubsystem.state;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -14,12 +15,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class LeftRampSubsystem extends Subsystem {
 	// Define left servo angles
-	private final double servoInitialAngle = 0;
-	private final double servoNeutralAngle = 180;
-	private final double servoPlantedAngle = 180;
+	private final double servoInitialAngle = 120;
+	private final double servoPlantedAngle = 240;
 	// Define ramp states
-	public enum state {initial,neutral, planted};
-	private state currentState;
+	public enum state {initial, planted};
+	private state currentState = state.initial;
 	// Define motors
 	private VictorSP lmotor1 = new VictorSP(RobotMap.LRampMotors);	//	Left ramp motors; PWM is split.
 	private Servo lServo = new Servo(RobotMap.lRampServo);
@@ -28,13 +28,14 @@ public class LeftRampSubsystem extends Subsystem {
     boolean limitSwitchStatus;
     boolean isOverride;
     private double rampLooseningOutput = 0.5;
-    private double rampMotorOutput = -0.9;
+    private double rampMotorOutput = 0.0;
     
     
 	public LeftRampSubsystem() {
-		currentState = state.initial;
+		
 	}
 	public void initDefaultCommand() {
+		setDefaultCommand(new DoNothingLeftRampCommand());
     }
     
     public void outputToLeftRamp(double power) {
@@ -46,18 +47,13 @@ public class LeftRampSubsystem extends Subsystem {
     public void updateOutputs() {
     	if(!isOverride) {
 	    	if (currentState == state.planted){
+	    		lServo.set(servoPlantedAngle);
 	    		if(limitSwitchStatus){
 		    	lmotor1.set(rampMotorOutput);
-		    	lServo.set(servoPlantedAngle);
 	    		}
 	    		else {
 			    	lmotor1.set(0);
-			    	lServo.setAngle(servoPlantedAngle);
 	    		}
-	    	}
-	    	else if(currentState == state.neutral) {
-	    		lmotor1.set(0);
-		    	lServo.setAngle(servoNeutralAngle);
 	    	}
 	    	else if (currentState == state.initial) {
 	    		lmotor1.set(0);

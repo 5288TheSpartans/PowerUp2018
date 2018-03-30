@@ -93,8 +93,8 @@ public class OI {
 				btnR8 = new JoystickButton(joystickRight,8),
 				btnR9 = new JoystickButton(joystickRight,9),
  				btnR10 = new JoystickButton(joystickRight,10),
- 		 		btnR11 = new JoystickButton(joystickRight,11); 
- 
+ 		 		btnR11 = new JoystickButton(joystickRight,11), 
+ 				btnR12 = new JoystickButton(joystickRight,12);
  	private JoystickButton 
  		xboxA = new JoystickButton(xbox,1),//Coloured buttons
  		xboxB = new JoystickButton(xbox,2),//Coloured buttons
@@ -109,7 +109,7 @@ public class OI {
 
     public OI()
     {
-    btnL1.whileHeld(new LoadCube());
+    btnL1.toggleWhenPressed(new LoadCube());
     btnL2.whenPressed(new LiftToHeight(100)); // make this the scale
     btnL3.whenPressed(new LiftToHeight(25)); // make this the switch
     btnL4.whileHeld(new RaiseLift());
@@ -122,14 +122,20 @@ public class OI {
     btnL11.whileHeld(new RaiseRightRampCommand());
     
     // Joystick RIGHT
-    btnR5.whileHeld(new UnloadCube());
-    btnR6.whileHeld(new ShootCube());
+    btnR5.toggleWhenPressed(new UnloadCube());
+    btnR6.toggleWhenPressed(new ShootCube());
+    btnR3.toggleWhenPressed(new UnloadCubeOverride());
+    btnR1.toggleWhenPressed(new ShootCubeOverride());
+    btnR4.toggleWhenPressed(new LoadCudeOverride());
+    btnR11.whileHeld(new LoosenLeftRampOverride());
+    btnR12.whileHeld(new LoosenRightRampOverride());
+    
 	//xbox controls
     xboxLB.whileHeld(new LowerLift());
     xboxRB.whileHeld(new RaiseLift());
-    xboxA.whileHeld(new LoadCube());
-    xboxB.whileHeld(new ShootCube());
-    xboxY.whileHeld(new UnloadCube());
+    xboxA.toggleWhenPressed(new LoadCube());
+    xboxB.toggleWhenPressed(new ShootCube());
+    xboxY.toggleWhenPressed(new UnloadCube());
     xboxStart.whenPressed(new ReleaseRamps());
     /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
@@ -209,6 +215,10 @@ public class OI {
     public double getRightStickThrottle()
     {
     	return(joystickRight.getThrottle());
+    }
+    public double getLeftStickThrottle()
+    {
+    	return(joystickLeft.getThrottle());
     }
 }	
 

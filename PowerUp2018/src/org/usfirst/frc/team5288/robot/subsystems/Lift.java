@@ -39,6 +39,7 @@ public class Lift extends Subsystem {
 	// LiftPosition variables
 	private boolean isAtTop = false;
 	private boolean isAtBottom = true;
+	private boolean override = false;
 	private double liftHeight = 0;
 	private double sketchyHeight = 0;
 	private double maxLiftHeight = 70; // inches
@@ -92,81 +93,42 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateOutputs() {
-	/*	switch(currentState) {
-		case raising:
-			setMode(liftMotorMode.coast);
-			if (!isAtTop) {
-				setLiftPower(liftMotorRaisingOutput);
-			} else {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-			
-		case lowering:
-			setMode(liftMotorMode.coast);
-			if (!isAtBottom) {
-				setLiftPower(liftMotorLoweringOutput);
-			} else {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-		
-		case stopped:
-			LiftMotor.set(ControlMode.PercentOutput, 0.0);
-			setMode(liftMotorMode.brake);
-	
-			
-		case falling:
-			setMode(liftMotorMode.coast);
-			LiftMotor.set(ControlMode.PercentOutput, liftMotorFallingOutput);
-		
-		case PID:	
-			if (isAtBottom && liftPower < 0) {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			} else if(isAtTop && liftPower > 0){
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-			else {
+		if(!override) {
+			if (currentState == liftState.raising) {
 				setMode(liftMotorMode.coast);
-				setLiftPower(liftPower);
-			}
-		}*/
-		if (currentState == liftState.raising) {
-			setMode(liftMotorMode.coast);
-			if (!isAtTop) {
-				setLiftPower(liftMotorRaisingOutput);
-			} else {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-		} else if (currentState == liftState.lowering) {
-			setMode(liftMotorMode.coast);
-			if (!isAtBottom) {
-				setLiftPower(liftMotorLoweringOutput);
-			} else {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-		} else if (currentState == liftState.stopped) {
-			LiftMotor.set(ControlMode.PercentOutput, 0.0);
-			setMode(liftMotorMode.brake);
-	
-		} else if (currentState == liftState.falling) {
-			setMode(liftMotorMode.coast);
-			LiftMotor.set(ControlMode.PercentOutput, liftMotorFallingOutput);
-		} else if (currentState == liftState.PID) {
-			if (isAtBottom && liftPower < 0) {
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			} else if(isAtTop && liftPower > 0){
-				setMode(liftMotorMode.brake);
-				setLiftPower(liftMotorStoppedOutput);
-			}
-			else {
+				if (!isAtTop) {
+					setLiftPower(liftMotorRaisingOutput);
+				} else {
+					setMode(liftMotorMode.brake);
+					setLiftPower(liftMotorStoppedOutput);
+				}
+			} else if (currentState == liftState.lowering) {
 				setMode(liftMotorMode.coast);
-				setLiftPower(liftPower);
+				if (!isAtBottom) {
+					setLiftPower(liftMotorLoweringOutput);
+				} else {
+					setMode(liftMotorMode.brake);
+					setLiftPower(liftMotorStoppedOutput);
+				}
+			} else if (currentState == liftState.stopped) {
+				LiftMotor.set(ControlMode.PercentOutput, 0.0);
+				setMode(liftMotorMode.brake);
+		
+			} else if (currentState == liftState.falling) {
+				setMode(liftMotorMode.coast);
+				LiftMotor.set(ControlMode.PercentOutput, liftMotorFallingOutput);
+			} else if (currentState == liftState.PID) {
+				if (isAtBottom && liftPower < 0) {
+					setMode(liftMotorMode.brake);
+					setLiftPower(liftMotorStoppedOutput);
+				} else if(isAtTop && liftPower > 0){
+					setMode(liftMotorMode.brake);
+					setLiftPower(liftMotorStoppedOutput);
+				}
+				else {
+					setMode(liftMotorMode.coast);
+					setLiftPower(liftPower);
+				}
 			}
 		}
 	}
@@ -245,5 +207,13 @@ public class Lift extends Subsystem {
 			return false;
 		}
 		else return true;
+	}
+	public void setOverride(boolean liftOverride) {
+		override = liftOverride;
+	}
+	public void outputOverride(double power) {
+		if(override) {
+			setLiftPower(power);
+		}
 	}
 }

@@ -26,6 +26,7 @@ public class RaiseLeftRampCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.leftRamp.setState(state.planted);
+    	Robot.leftRamp.outputToLeftRamp(-1.0);
     	
     }
 
@@ -42,7 +43,7 @@ public class RaiseLeftRampCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.leftRamp.setState(state.neutral);
+    	Robot.leftRamp.outputToLeftRamp(0.0);
     	System.out.println("RaiseLeftRampCommand interrupted.");
     }
 }

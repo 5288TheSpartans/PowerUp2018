@@ -21,12 +21,14 @@ public class RaiseRightRampCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("Initializing RaiseRightRampCommand.");
+    	Robot.rightRamp.setState(state.planted);
  
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.rightRamp.setState(state.planted);
+    	Robot.rightRamp.outputToRightRamp(1.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +43,7 @@ public class RaiseRightRampCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.rightRamp.setState(state.neutral);
+    	Robot.rightRamp.outputToRightRamp(0.0);
     	System.out.println("RaiseRightRampCommand interrupted.");
     }
 }

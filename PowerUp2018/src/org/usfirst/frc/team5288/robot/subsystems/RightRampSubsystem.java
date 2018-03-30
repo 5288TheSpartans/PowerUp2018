@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.subsystems;
 
 import org.usfirst.frc.team5288.robot.RobotMap;
+import org.usfirst.frc.team5288.robot.commands.ramps.DoNothingRightRampCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
@@ -13,12 +14,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RightRampSubsystem extends Subsystem {
 	
 	// Define right servo angles
-	private final double servoInitialAngle = 0;
-	private final double servoNeutralAngle = 120;
-	private final double servoPlantedAngle = 120;
+	private final double servoInitialAngle = 90;
+	private final double servoPlantedAngle = 240;
 	// Define ramp & servo states
-	public enum state {initial,neutral, planted};
-	private state currentState;
+	public enum state {initial, planted};
+	private state currentState = state.initial;
 	// Define motors
 	private VictorSP rmotor1 = new VictorSP(RobotMap.RRampMotors);	//	Left ramp motors; PWM is split.
 	private Servo rServo = new Servo(RobotMap.rRampServo);
@@ -27,13 +27,16 @@ public class RightRampSubsystem extends Subsystem {
 	
 	private boolean limitSwitchStatus;
 	private boolean isOverride;
-    private double rampMotorOutput = 0.9;
+    private double rampMotorOutput = 0;
     private double rampLooseningOutput = -0.5;
 
+
 	public	RightRampSubsystem() {
-		currentState = state.initial;
+		
 	}
     public void initDefaultCommand() {
+    	setDefaultCommand(new DoNothingRightRampCommand());
+    	
     }
     
     public void outputToRightRamp(double power) {
@@ -45,22 +48,19 @@ public class RightRampSubsystem extends Subsystem {
     public void updateOutputs() {
     	if(!isOverride) {
 	    	if (currentState == state.planted){
+		    	rServo.setAngle(servoPlantedAngle);
+
 	    		if(limitSwitchStatus){
 			    	rmotor1.set(rampMotorOutput);
-			    	rServo.setAngle(servoPlantedAngle);
 		    		}
 		    		else {
 				    	rmotor1.set(0);
-				    	rServo.setAngle(servoPlantedAngle);
 		    		}
-	    	}
-	    	else if(currentState == state.neutral) {
-	    		rmotor1.set(0);
-		    	rServo.setAngle(servoNeutralAngle);
 	    	}
 	    	else if (currentState == state.initial) {
 	    		rmotor1.set(0);
-		    	rServo.setAngle(servoInitialAngle);
+	    		rampMotorOutput = 0;
+	    		rServo.setAngle(servoInitialAngle);
 	    	}
     	}
     }
