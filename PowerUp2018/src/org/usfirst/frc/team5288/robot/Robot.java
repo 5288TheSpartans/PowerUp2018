@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5288.robot.autocommandGroups.*;
+import org.usfirst.frc.team5288.robot.autocommands.DriveStraightTime;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -62,11 +63,12 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		m_oi = new OI();
 		
-		m_chooser.addDefault("Spawn Middle to Switch", 0);
+		m_chooser.addObject("Spawn Middle to Switch", 0);
 		m_chooser.addObject("Spawn Right to Switch", 1);
 		m_chooser.addObject("Spawn Right to Scale", 2);
 		m_chooser.addObject("Spawn Left to Switch", 3);
 		m_chooser.addObject("Spawn Left to Scale", 4);
+		m_chooser.addDefault("Drive Straight", 5);
 		SmartDashboard.putData("Auto Choice", m_chooser);
 		
 		m_autoCommand.addObject("AHHH", stringvar );
@@ -179,6 +181,11 @@ public class Robot extends TimedRobot {
 				SmartDashboard.putString("Auto:"," Left to Right Scale");
 				m_autonomousCommand = new autoLeftSidetoRightScale();
 			}
+			break;
+		case 5:
+			System.out.println("Auto: Drive Straight");
+			SmartDashboard.putString("Auto:"," Drive Straight");
+			m_autonomousCommand = new DriveStraightTime(3500);
 			break;
 		
 			

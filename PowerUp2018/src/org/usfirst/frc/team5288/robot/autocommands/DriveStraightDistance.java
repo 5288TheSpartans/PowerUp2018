@@ -16,7 +16,9 @@ public class DriveStraightDistance extends Command {
 	double speed;
     private double startingDistance = 0;
     private double inWantedDistance = 0;
-
+    private long deltaTime = 0;
+    private long startTime = 0;
+    private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
     private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceFF);
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
@@ -32,10 +34,14 @@ public class DriveStraightDistance extends Command {
     	startingDistance = getCurrentDistance();
     	PID.setTarget(0);//PID in error
     	distancePID.setTarget(inWantedDistance);
+    	startTime = System.currentTimeMillis();
+    	currentTime = startTime;
     }
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	currentTime = System.currentTimeMillis();
+    	deltaTime = currentTime - startTime;
        	distancePID.setTarget(inWantedDistance);
 
     	Robot.drivetrain.PIDInput = "" + (getCurrentDistance() - startingDistance);
@@ -64,6 +70,10 @@ public class DriveStraightDistance extends Command {
     	}
     	else{
     		rv = getCurrentDistance() - startingDistance <= inWantedDistance + .25;
+    	}
+    	if( deltaTime >= 8000) {
+    		System.out.println("The Command *DriveStraight* cancelled due to timeout.");
+    		return true;
     	}
     	if(rv)
     	{

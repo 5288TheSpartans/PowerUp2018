@@ -58,19 +58,22 @@ public class RobotMap {
 	public static double JOYDEADZONE = 0.06;
 	// PID VALUES
 	// DriveStraight PID values
-	public static double StraightP = 0;
+	//0.009, 0, 0.001, 1/720
+	public static double StraightP = 0.009;
 	public static double StraightI = 0;
-	public static double StraightD = 0;
-	public static double StraightFF = 0;
+	public static double StraightD = 0.001;
+	public static double StraightFF = 1/720;
 	// DriveDistance PID values
-	public static double DistanceP = 0;
-	public static double DistanceI = 0;
-	public static double DistanceD = 0;
+	//1/7,0.4,0.24,0
+	public static double DistanceP = 1/7;
+	public static double DistanceI = 0.4;
+	public static double DistanceD = 0.24;
 	public static double DistanceFF = 0;
 	// SpotTurnDegrees PID values
-	public static double TurnP = 0;
-	public static double TurnI = 0;
-	public static double TurnD = 0;
+	//(0.02, 0.0095, 0.09, 0)
+	public static double TurnP = 0.02;
+	public static double TurnI = 0.0095;
+	public static double TurnD = 0.09;
 	public static double TurnFF = 0;
 
 	// LiftToHeight PID values
