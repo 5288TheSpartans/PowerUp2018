@@ -18,7 +18,7 @@ public class autoRightSidetoRightScale extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	// drive to scale, dump cube in scale
-    	addParallel(new LiftToHeight(100));
+    	addParallel(new LiftToHeight(77));
     	addSequential(new DriveStraightDistance(320));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(34));

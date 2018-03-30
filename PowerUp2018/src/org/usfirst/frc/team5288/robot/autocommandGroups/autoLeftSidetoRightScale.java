@@ -18,7 +18,7 @@ public class autoLeftSidetoRightScale extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	
-    	addParallel(new LiftToHeight(100));
+    	addParallel(new LiftToHeight(77));
     	addSequential(new DriveStraightDistance(248));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(262));

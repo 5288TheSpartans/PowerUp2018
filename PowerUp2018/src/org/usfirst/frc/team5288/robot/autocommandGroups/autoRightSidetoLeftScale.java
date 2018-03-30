@@ -25,7 +25,7 @@ public class autoRightSidetoLeftScale extends CommandGroup {
     	
     	addSequential(new DriveStraightDistance(236));
     	addSequential(new SpotTurnDegrees(-90));
-    	addParallel(new LiftToHeight(100));
+    	addParallel(new LiftToHeight(77));
     	addSequential(new DriveStraightDistance(256));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(77));
