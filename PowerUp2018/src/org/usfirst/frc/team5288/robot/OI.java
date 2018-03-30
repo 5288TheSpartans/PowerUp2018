@@ -11,6 +11,7 @@ import org.usfirst.frc.team5288.robot.autocommands.DriveStraight;
 
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.ResetEncoders;
+import org.usfirst.frc.team5288.robot.commands.intake.*;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
@@ -122,11 +123,13 @@ public class OI {
     btnL10.whileHeld(new RaiseLeftRampOverride());
     btnL11.whileHeld(new RaiseRightRampOverride());
     
-    
-    xboxA.whenPressed(new LiftToHeight(3));
-    xboxB.whenPressed(new LiftToHeight(20));
+	//xbox controls
     xboxLB.whileHeld(new LowerLift());
     xboxRB.whileHeld(new RaiseLift());
+    xboxA.whileHeld(new LoadCube());
+    xboxB.whileHeld(new ShootCube());
+    xboxY.whileHeld(new UnloadCube());
+    xboxStart.whenPressed(new ReleaseRamps());
     /*    btnL9.whenPressed(new DriveStraightTime(4000));
  * 
  * 
