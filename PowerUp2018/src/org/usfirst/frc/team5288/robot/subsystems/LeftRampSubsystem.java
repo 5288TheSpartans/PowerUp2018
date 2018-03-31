@@ -80,8 +80,10 @@ public class LeftRampSubsystem extends Subsystem {
     	lServo.setAngle(angle);
     }
     public void outputOverride(double output) {
+    	if(isOverride) {
     	lmotor1.set(output);
-    }
+    	}
+    	}
     
 }
 
