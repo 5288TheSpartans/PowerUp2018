@@ -32,7 +32,7 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public void outputToIntake(double power) {
-    	lIntake.set(power);
+    	lIntake.set(-power);
     	rIntake.set(power);
     }
     
@@ -54,14 +54,14 @@ public class IntakeSubsystem extends Subsystem {
     	if(!override) {
     		// if the commands are being overridden, then don't use updateSubsystems()
     		// at all, as the outputs will be manually set in override commands
-    		if(currentIntakeState == intakeState.intake && hasCube ) {
-    		outputToIntake(-0.7);
+    		if(currentIntakeState == intakeState.intake) {
+    		outputToIntake(-1);
     		}
-    		else if(currentIntakeState == intakeState.outtakeLow && !hasCube) {
+    		else if(currentIntakeState == intakeState.outtakeLow ) {
     		outputToIntake(0.3);
     		}
-    		else if(currentIntakeState == intakeState.outtakeHigh && !hasCube) {
-    			outputToIntake(0.7);
+    		else if(currentIntakeState == intakeState.outtakeHigh) {
+    			outputToIntake(1);
     		}
     		else if(currentIntakeState == intakeState.stopped) {
     		outputToIntake(0.0);

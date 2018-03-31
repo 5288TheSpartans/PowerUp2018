@@ -131,6 +131,8 @@ public class OI {
     btnR12.whileHeld(new LoosenRightRampOverride());
     
 	//xbox controls
+    xboxLStickButton.whileHeld(new LoosenLeftRampOverride());
+    xboxRStickButton.whileHeld(new LoosenRightRampOverride());
     xboxLB.whileHeld(new LowerLift());
     xboxRB.whileHeld(new RaiseLift());
     xboxA.toggleWhenPressed(new LoadCube());

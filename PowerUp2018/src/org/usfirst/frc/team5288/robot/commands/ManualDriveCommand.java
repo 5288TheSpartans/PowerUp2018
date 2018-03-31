@@ -16,12 +16,13 @@ public class ManualDriveCommand extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drivetrain);
+    	
     	}
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("INITIALIZING MANUALDRIVECOMMAND.");
-    	Robot.drivetrain.resetEncoders();
+    
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -7,7 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 
@@ -21,6 +21,7 @@ import org.usfirst.frc.team5288.robot.autocommands.DriveStraightTime;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
+import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem.state;
 // import org.usfirst.frc.team5288.robot.commands.ExampleCommand;
 // import org.usfirst.frc.team5288.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.Lift;
@@ -73,7 +74,7 @@ public class Robot extends TimedRobot {
 		
 		m_autoCommand.addObject("AHHH", stringvar );
 		
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
@@ -119,6 +120,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		updateGameData();
+		leftRamp.setState(LeftRampSubsystem.state.initial);
+		rightRamp.setState(RightRampSubsystem.state.initial);
 		autoSelected = m_chooser.getSelected();
 		switch(autoSelected) {
 		case 0:
@@ -185,7 +188,7 @@ public class Robot extends TimedRobot {
 		case 5:
 			System.out.println("Auto: Drive Straight");
 			SmartDashboard.putString("Auto:"," Drive Straight");
-			m_autonomousCommand = new DriveStraightTime(3500);
+			m_autonomousCommand = new DriveStraightTime(2000);
 			break;
 		
 			
@@ -237,7 +240,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		updateSensors();
 		updateSubsystems();
-		//updateSmartDashboard();
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -277,12 +280,12 @@ public class Robot extends TimedRobot {
 	public static double getDashboardNumber(String key) {
 		return SmartDashboard.getNumber(key, -10000000);
 	}
-	/*public void updateSmartDashboard() {
-		SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
-		SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
-		SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
+	public void updateSmartDashboard() {
+		//SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
+		//SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
+		//SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
-	}*/
+	}
 	
 }

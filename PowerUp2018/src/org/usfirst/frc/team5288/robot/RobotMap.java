@@ -59,7 +59,7 @@ public class RobotMap {
 	// PID VALUES
 	// DriveStraight PID values
 	//0.009, 0, 0.001, 1/720
-	public static double StraightP = 0.009;
+	public static double StraightP = 0.001;
 	public static double StraightI = 0;
 	public static double StraightD = 0.001;
 	public static double StraightFF = 1/720;

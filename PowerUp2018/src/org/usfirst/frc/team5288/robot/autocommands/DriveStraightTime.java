@@ -32,8 +32,8 @@ public class DriveStraightTime extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	currentTime = System.currentTimeMillis();
-    	Robot.drivetrain.setLPower(0.5);
-    	Robot.drivetrain.setRPower(0.5);
+    	Robot.drivetrain.setLPower(-0.5);
+    	Robot.drivetrain.setRPower(-0.5);
     	
     }
 
