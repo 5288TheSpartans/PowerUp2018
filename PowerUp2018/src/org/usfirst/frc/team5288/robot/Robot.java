@@ -17,7 +17,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team5288.robot.autocommandGroups.*;
+import org.usfirst.frc.team5288.robot.autocommands.DriveStraightDistance;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightTime;
+import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -70,8 +72,9 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Spawn Left to Switch", 3);
 		m_chooser.addObject("Spawn Left to Scale", 4);
 		m_chooser.addDefault("Drive Straight", 5);
+		m_chooser.addObject("SpotTurn X degrees",5);
 		SmartDashboard.putData("Auto Choice", m_chooser);
-		
+		SmartDashboard.putNumber("Auto Tester", 0);
 		m_autoCommand.addObject("AHHH", stringvar );
 		
 		//CameraServer.getInstance().startAutomaticCapture();
@@ -188,10 +191,11 @@ public class Robot extends TimedRobot {
 		case 5:
 			System.out.println("Auto: Drive Straight");
 			SmartDashboard.putString("Auto:"," Drive Straight");
-			m_autonomousCommand = new DriveStraightTime(2000);
+			m_autonomousCommand = new  DriveStraightDistance(10);
 			break;
-		
-			
+		case 6:
+			System.out.println("Auto Tester");
+			m_autonomousCommand = new SpotTurnDegrees(SmartDashboard.getNumber("Auto tester", 0));
 		}
 
 		/*
@@ -216,6 +220,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		updateSensors();
 		updateSubsystems();
+		updateSmartDashboard();
 		Scheduler.getInstance().run();
 	}
 
@@ -223,6 +228,7 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 		updateSensors();
 		updateSubsystems();
+		
 		
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -281,9 +287,12 @@ public class Robot extends TimedRobot {
 		return SmartDashboard.getNumber(key, -10000000);
 	}
 	public void updateSmartDashboard() {
-		//SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
-		//SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
-		//SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
+		SmartDashboard.putNumber("Left distance (inches)", Robot.drivetrain.getLeftDistanceInches());
+		SmartDashboard.putNumber("Right distance (inches)", Robot.drivetrain.getRightDistanceInches());
+		SmartDashboard.putNumber("distancetravelled", Robot.lift.getEncoderPosition());
+
+		SmartDashboard.putNumber("LeftEncoderDistance",Robot.drivetrain.getLeftDistanceInches() );
+		SmartDashboard.putNumber("RightEncoderDistance",Robot.drivetrain.getRightDistanceInches() );
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
 	}

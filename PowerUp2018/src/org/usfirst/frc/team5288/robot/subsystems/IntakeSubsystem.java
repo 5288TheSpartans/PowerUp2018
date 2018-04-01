@@ -58,7 +58,7 @@ public class IntakeSubsystem extends Subsystem {
     		outputToIntake(-1);
     		}
     		else if(currentIntakeState == intakeState.outtakeLow ) {
-    		outputToIntake(0.3);
+    		outputToIntake(0.6);
     		}
     		else if(currentIntakeState == intakeState.outtakeHigh) {
     			outputToIntake(1);

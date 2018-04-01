@@ -16,11 +16,12 @@ public class DriveStraightDistance extends Command {
 	double speed;
     private double startingDistance = 0;
     private double inWantedDistance = 0;
+    private double distancetravelled = 0;
     private long deltaTime = 0;
     private long startTime = 0;
     private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceD,RobotMap.DistanceFF);
+    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceP,RobotMap.DistanceI,RobotMap.DistanceD,RobotMap.DistanceFF);
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {
@@ -33,6 +34,7 @@ public class DriveStraightDistance extends Command {
     	Robot.drivetrain.resetEncoders();
     	startingDistance = getCurrentDistance();
     	PID.setTarget(0);//PID in error
+    	System.out.println("Drive Straight Distance initialized: " + inWantedDistance);
     	distancePID.setTarget(inWantedDistance);
     	startTime = System.currentTimeMillis();
     	currentTime = startTime;
@@ -40,37 +42,43 @@ public class DriveStraightDistance extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	System.out.println("Robot has driven " + distancetravelled + "distance during command.");
     	currentTime = System.currentTimeMillis();
     	deltaTime = currentTime - startTime;
-       	distancePID.setTarget(inWantedDistance);
-
-    	Robot.drivetrain.PIDInput = "" + (getCurrentDistance() - startingDistance);
-    	distancePID.update(getCurrentDistance() - startingDistance);
+    	distancetravelled = getCurrentDistance() - startingDistance;
+    	Robot.drivetrain.PIDInput = "" + (distancetravelled);
+    	distancePID.update(distancetravelled);
     	PID.update(Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches());
-    	speed = distancePID.getOutput();
     	error = PID.getOutput();
-    	if(inWantedDistance  -  getCurrentDistance()  >= 36)
+    	if(inWantedDistance -  distancetravelled  >= 36)
     	{
-    		speed = 0.7;
+    		System.out.println("The robot is far from its destination. Overriding distancePID.");
+    		speed = 0.6;
     	}
-    	Robot.drivetrain.PIDOutput = "DistancePID : " +  distancePID.getOutput();
+    	else
+    	{
+       		speed = distancePID.getOutput();
+    	}
+    	System.out.println("Speed: " + speed + "\nError: " + error);
     	System.out.println("PID INPUT(distance): " +  getCurrentDistance());
     	//Output using the distanceScalar*(Maxspeed + error), effectively scaling down both the speed and the error.
     	Robot.drivetrain.setLPower(-speed- error);
     	Robot.drivetrain.setRPower(-speed+ error);
     }
+    	
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	boolean rv = false;
-    	
-    	if(inWantedDistance > 0)
+    	rv = distancetravelled <= inWantedDistance - 0.5 && distancetravelled >= inWantedDistance + 0.5;
+    /*	if(inWantedDistance > 0)
     	{
-    		rv = getCurrentDistance() - startingDistance >=  inWantedDistance - .25;
+    		rv = distancetravelled >=  inWantedDistance - .25;
     	}
     	else{
-    		rv = getCurrentDistance() - startingDistance <= inWantedDistance + .25;
-    	}
+    		rv = distancetravelled <= inWantedDistance + .25;
+
+    	}*/
     	if( deltaTime >= 8000) {
     		System.out.println("The Command *DriveStraight* cancelled due to timeout.");
     		return true;

@@ -103,7 +103,7 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	public double getGyroAngle() {
-		return gyroTotal;
+		return gyro.getAngle();
 	}
 
 	public void resetGyro() {
@@ -143,11 +143,11 @@ public class DrivetrainSubsystem extends Subsystem {
 	}
 
 	public double getLeftDistanceInches() {
-		return lEncoder.getDistance();
+		return rEncoder.getDistance();//Intentional because the encoders are on the wrong side and this is quicker
 	}
 
 	public double getRightDistanceInches() {
-		return rEncoder.getDistance();
+		return lEncoder.getDistance();//Intentional because the encoders are on the wrong side and this is quicker, no need to edit
 	}
 
 
@@ -192,6 +192,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		encLastL = encCurrentL;
 		timeLast = timeCurrent;
 
+		
 		// Update Current Values
 		timeCurrent = System.currentTimeMillis();
 		encCurrentL = getLeftDistanceInches();
@@ -226,8 +227,6 @@ public class DrivetrainSubsystem extends Subsystem {
 		 * SmartDashBoard.putNumber("rightDriveSpeed",currentSpeedL);
 		 * SmartDashBoard.putNumber("leftDriveJerk",jerkL);
 		 * SmartDashBoard.putNumber("rightDriveJerk",jerkR);
-		 * SmartDashBoard.putNumber("LeftEncoderDistance",getLeftDistanceInches() );
-		 * SmartDashBoard.putNumber("RightEncoderDistance",getLeftDistance() );
 		 */
 	}
 }
