@@ -5,13 +5,14 @@ import org.usfirst.frc.team5288.robot.RobotMap;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class DriveStraightDistance extends Command {
-
+	Preferences prefs;
     double error;
 	double speed;
     private double startingDistance = 0;
@@ -21,7 +22,7 @@ public class DriveStraightDistance extends Command {
     private long startTime = 0;
     private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceP,RobotMap.DistanceI,RobotMap.DistanceD,RobotMap.DistanceFF);
+    private SpartanPID distancePID = new SpartanPID(prefs.getDouble("Distance P", 0.05),prefs.getDouble("Distance I", 0),prefs.getDouble("Distance D", 0.05),prefs.getDouble("Distance FF", 0.0));
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {

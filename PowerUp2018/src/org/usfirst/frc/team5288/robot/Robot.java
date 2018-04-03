@@ -9,6 +9,7 @@ package org.usfirst.frc.team5288.robot;
 
 //import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -84,6 +85,8 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void robotPeriodic() {
+		Preferences.getInstance();
+		
 	}
 
 	/**
