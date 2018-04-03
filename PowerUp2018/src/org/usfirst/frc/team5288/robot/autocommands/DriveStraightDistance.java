@@ -7,6 +7,7 @@ import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,7 +23,7 @@ public class DriveStraightDistance extends Command {
     private long startTime = 0;
     private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(prefs.getDouble("Distance P", 0.05),prefs.getDouble("Distance I", 0),prefs.getDouble("Distance D", 0.05),prefs.getDouble("Distance FF", 0.0));
+    private SpartanPID distancePID = new SpartanPID(SmartDashboard.getNumber("Distance P",0.5),SmartDashboard.getNumber("Distance I",0.5),SmartDashboard.getNumber("Distance D",0.05),SmartDashboard.getNumber("Distance FF",0.5));
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {

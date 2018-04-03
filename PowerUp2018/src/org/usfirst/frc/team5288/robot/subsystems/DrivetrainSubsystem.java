@@ -94,6 +94,7 @@ public class DrivetrainSubsystem extends Subsystem {
 		rEncoder.setDistancePerPulse(wheelcirc / 2048);
 		lEncoder.setDistancePerPulse(wheelcirc / 2048);
 		gyro.calibrate();
+		
 	}
 
 	public void initDefaultCommand() {

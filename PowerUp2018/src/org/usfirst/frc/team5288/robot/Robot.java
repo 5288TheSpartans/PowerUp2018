@@ -21,6 +21,7 @@ import org.usfirst.frc.team5288.robot.autocommandGroups.*;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightDistance;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightTime;
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
+import org.usfirst.frc.team5288.robot.autocommands.slowDriveStraight;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -73,11 +74,13 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Spawn Left to Switch", 3);
 		m_chooser.addObject("Spawn Left to Scale", 4);
 		m_chooser.addDefault("Drive Straight", 5);
-		m_chooser.addObject("SpotTurn X degrees",5);
+		m_chooser.addObject("Auto Tester",6);
 		SmartDashboard.putData("Auto Choice", m_chooser);
 		SmartDashboard.putNumber("Auto Tester", 0);
 		m_autoCommand.addObject("AHHH", stringvar );
-		
+		SmartDashboard.putNumber("Distance P", 0);
+		SmartDashboard.putNumber("Distance I", 0);
+		SmartDashboard.putNumber("Distance D", 0);
 		//CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
@@ -198,7 +201,7 @@ public class Robot extends TimedRobot {
 			break;
 		case 6:
 			System.out.println("Auto Tester");
-			m_autonomousCommand = new SpotTurnDegrees(SmartDashboard.getNumber("Auto tester", 0));
+			m_autonomousCommand = new slowDriveStraight(5);
 		}
 
 		/*
@@ -211,7 +214,7 @@ public class Robot extends TimedRobot {
 		*/ 
 
 		// schedule the autonomous command (example)
-		
+		m_autonomousCommand = new slowDriveStraight(5);
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -298,6 +301,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightEncoderDistance",Robot.drivetrain.getRightDistanceInches() );
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
+		SmartDashboard.putNumber("Distance P", SmartDashboard.getNumber("Distance P", 0.5));
+		SmartDashboard.putNumber("Distance I", SmartDashboard.getNumber("Distance I", 0.01));
+		SmartDashboard.putNumber("Distance D", SmartDashboard.getNumber("Distance D", 0.2));
 	}
 	
 }

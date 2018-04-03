@@ -80,9 +80,8 @@ public class RightRampSubsystem extends Subsystem {
     	rServo.setAngle(angle);
     }
     public void outputOverride(double output) {
-    	if(isOverride) {
     	rmotor1.set(output);
-    	}
+    	
     	}
 }
 
