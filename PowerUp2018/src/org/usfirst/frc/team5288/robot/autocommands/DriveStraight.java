@@ -22,9 +22,9 @@ public class DriveStraight extends Command {
 	 * Motor output Right = basePower - Gain
 	 */
 	
-	double m_basePower =  0.2;
-	double error;
-	double gain;
+	double m_basePower =  0.0;
+	double error = 0;
+	double gain = 0;
 	SpartanPID straightPID;
     public DriveStraight(double basePower) {
         // Use requires() here to declare subsystem dependencies
@@ -37,7 +37,7 @@ public class DriveStraight extends Command {
     protected void initialize() {
     	straightPID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
     	straightPID.setTarget(0); 
-    	
+    	System.out.println(m_basePower);
     	Robot.drivetrain.resetEncoders();     }
 
     // Called repeatedly when this Command is scheduled to run

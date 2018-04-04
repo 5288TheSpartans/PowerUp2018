@@ -209,7 +209,7 @@ public class Robot extends TimedRobot {
 		case 5:
 			System.out.println("Auto: Drive Straight");
 			SmartDashboard.putString("Auto:"," Drive Straight");
-			m_autonomousCommand = new  DriveStraightDistance(10);
+			m_autonomousCommand = new  DriveStraightDistance(13*12);
 			break;
 		case 6:
 			System.out.println("Auto Tester");
@@ -312,8 +312,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightEncoderDistance",Robot.drivetrain.getRightDistanceInches() );
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
-		
-		updatePID();
+
 	}
 	public void updatePID() {
 		RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);

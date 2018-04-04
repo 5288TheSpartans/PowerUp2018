@@ -52,10 +52,10 @@ public class DriveStraightDistance extends Command {
     	distancePID.update(distancetravelled);
     	PID.update(Robot.drivetrain.getLeftDistanceInches() - Robot.drivetrain.getRightDistanceInches());
     	error = PID.getOutput();
-    	if(inWantedDistance -  distancetravelled  >= 36)
+    	if(inWantedDistance -  distancetravelled  >= 12*5)
     	{
     		System.out.println("The robot is far from its destination. Overriding distancePID.");
-    		speed = 0.3;
+    		speed = 0.5;
     	}
     	else
     	{
@@ -87,6 +87,7 @@ public class DriveStraightDistance extends Command {
     	}
     	if(rv)
     	{
+    		
     		System.out.println("DriveStraightDistance finished.");
         	Robot.drivetrain.PIDInput = "DriveStraightDistance finished.";
     		Robot.drivetrain.setLPower(0);

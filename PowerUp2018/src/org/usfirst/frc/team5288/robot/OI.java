@@ -67,8 +67,8 @@ public class OI {
     // number it is.
     // Joystick stick = new Joystick(port);
     // Button button = new JoystickButton(stick, buttonNumber);
-    Joystick joystickLeft = new Joystick(0);    //left joystick is in port 1
-    Joystick joystickRight = new Joystick(1);    //right joystick is in port 0
+    Joystick joystickLeft = new Joystick(0);    //left joystick is in port 0
+    Joystick joystickRight = new Joystick(1);    //right joystick is in port 1
     Joystick xbox = new Joystick(2);
     
  	private JoystickButton
@@ -122,13 +122,13 @@ public class OI {
     btnL11.whileHeld(new RaiseRightRampCommand());
     
     // Joystick RIGHT
-    btnR5.toggleWhenPressed(new UnloadCube());
-    btnR6.toggleWhenPressed(new ShootCube());
-    btnR3.toggleWhenPressed(new UnloadCubeOverride());
-    btnR1.toggleWhenPressed(new ShootCubeOverride());
-    btnR4.toggleWhenPressed(new LoadCudeOverride());
-    btnR11.whileHeld(new LoosenLeftRampOverride());
-    btnR12.whileHeld(new LoosenRightRampOverride());
+    btnR1.toggleWhenPressed(new UnloadCube());
+    btnR2.whenPressed(new SpotTurnDegrees(45));
+    btnR3.whenPressed(new SpotTurnDegrees(90));
+    btnR5.whileHeld(new LoadCudeOverride());
+    btnR6.whileHeld(new UnloadCubeOverride());
+    btnR7.whenPressed(new ResetEncoders());
+    
     
 	//xbox controls
     xboxLStickButton.whileHeld(new LoosenLeftRampOverride());
