@@ -23,7 +23,7 @@ public class DriveStraightDistance extends Command {
     private long startTime = 0;
     private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(SmartDashboard.getNumber("Distance P",0.5),SmartDashboard.getNumber("Distance I",0.5),SmartDashboard.getNumber("Distance D",0.05),SmartDashboard.getNumber("Distance FF",0.5));
+    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceP,RobotMap.DistanceI,RobotMap.DistanceD,RobotMap.DistanceFF);
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public DriveStraightDistance(double distance) {
@@ -55,7 +55,7 @@ public class DriveStraightDistance extends Command {
     	if(inWantedDistance -  distancetravelled  >= 36)
     	{
     		System.out.println("The robot is far from its destination. Overriding distancePID.");
-    		speed = 0.6;
+    		speed = 0.3;
     	}
     	else
     	{
@@ -87,8 +87,8 @@ public class DriveStraightDistance extends Command {
     	}
     	if(rv)
     	{
-
-        	Robot.drivetrain.PIDInput = "command done";
+    		System.out.println("DriveStraightDistance finished.");
+        	Robot.drivetrain.PIDInput = "DriveStraightDistance finished.";
     		Robot.drivetrain.setLPower(0);
     		Robot.drivetrain.setRPower(0);
     	}return rv;
@@ -99,7 +99,7 @@ public class DriveStraightDistance extends Command {
     	Robot.drivetrain.setRPower(0);
     }
     private double getCurrentDistance() {
-        return (Robot.drivetrain.getLeftDistanceInches()+ Robot.drivetrain.getRightDistanceInches()) / 2;
+        return ((Robot.drivetrain.getLeftDistanceInches()+ Robot.drivetrain.getRightDistanceInches()) / 2);
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run

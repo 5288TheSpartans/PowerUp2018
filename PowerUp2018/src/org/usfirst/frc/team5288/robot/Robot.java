@@ -76,11 +76,17 @@ public class Robot extends TimedRobot {
 		m_chooser.addDefault("Drive Straight", 5);
 		m_chooser.addObject("Auto Tester",6);
 		SmartDashboard.putData("Auto Choice", m_chooser);
-		SmartDashboard.putNumber("Auto Tester", 0);
-		m_autoCommand.addObject("AHHH", stringvar );
+		
+		
+		SmartDashboard.putNumber("Straight P", 0);
+		SmartDashboard.putNumber("Straight I", 0);
+		SmartDashboard.putNumber("Straight D", 0);
+		SmartDashboard.putNumber("Straight FF", 0);
+		
 		SmartDashboard.putNumber("Distance P", 0);
 		SmartDashboard.putNumber("Distance I", 0);
 		SmartDashboard.putNumber("Distance D", 0);
+		SmartDashboard.putNumber("Distance FF", 0.0);
 		//CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
@@ -214,7 +220,6 @@ public class Robot extends TimedRobot {
 		*/ 
 
 		// schedule the autonomous command (example)
-		m_autonomousCommand = new slowDriveStraight(5);
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -301,9 +306,19 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightEncoderDistance",Robot.drivetrain.getRightDistanceInches() );
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
-		SmartDashboard.putNumber("Distance P", SmartDashboard.getNumber("Distance P", 0.5));
-		SmartDashboard.putNumber("Distance I", SmartDashboard.getNumber("Distance I", 0.01));
-		SmartDashboard.putNumber("Distance D", SmartDashboard.getNumber("Distance D", 0.2));
+		
+		updatePID();
+	}
+	public void updatePID() {
+		RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);
+		RobotMap.DistanceI = SmartDashboard.getNumber("Distance I", 0.0);
+		RobotMap.DistanceD = SmartDashboard.getNumber("Distance D", 0.0);
+		RobotMap.DistanceFF = SmartDashboard.getNumber("Distance FF", 0.0);
+		
+		RobotMap.StraightP = SmartDashboard.getNumber("Straight P", 0.0);
+		RobotMap.StraightI = SmartDashboard.getNumber("Straight I", 0.0);
+		RobotMap.StraightD = SmartDashboard.getNumber("Straight D", 0.0);
+		RobotMap.StraightFF = SmartDashboard.getNumber("Straight FF", 0.0);
 	}
 	
 }

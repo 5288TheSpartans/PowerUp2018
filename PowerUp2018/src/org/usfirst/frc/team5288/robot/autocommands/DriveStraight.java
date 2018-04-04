@@ -35,7 +35,7 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	straightPID = new SpartanPID(Robot.getDashboardNumber("StraightP"), Robot.getDashboardNumber("StraightI"), Robot.getDashboardNumber("StraightD"), 0);
+    	straightPID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
     	straightPID.setTarget(0); 
     	
     	Robot.drivetrain.resetEncoders();     }

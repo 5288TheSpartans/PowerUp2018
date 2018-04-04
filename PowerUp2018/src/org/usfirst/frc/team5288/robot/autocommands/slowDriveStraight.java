@@ -23,7 +23,7 @@ public class slowDriveStraight extends Command {
     private long startTime = 0;
     private long currentTime = 0;
     private SpartanPID PID = new SpartanPID(RobotMap.StraightP, RobotMap.StraightI, RobotMap.StraightD, RobotMap.StraightFF);
-    private SpartanPID distancePID = new SpartanPID(SmartDashboard.getNumber("Distance P",0.01),SmartDashboard.getNumber("Distance I",0.01),SmartDashboard.getNumber("Distance D",0.05),SmartDashboard.getNumber("Distance FF",0.01));
+    private SpartanPID distancePID = new SpartanPID(RobotMap.DistanceP,RobotMap.DistanceI,RobotMap.DistanceD,RobotMap.DistanceFF);
     //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
     
     public slowDriveStraight(double distance) {
@@ -65,7 +65,7 @@ public class slowDriveStraight extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	boolean rv = false;
-    	rv = distancetravelled <= inWantedDistance - 0.5 && distancetravelled >= inWantedDistance + 0.5 || distancetravelled <= -inWantedDistance - 0.5 && distancetravelled >= -inWantedDistance + 0.5 ;
+    	rv = distancetravelled <= inWantedDistance - 0.5 && distancetravelled >= inWantedDistance + 0.5;
     	
     	/*	
      * if(inWantedDistance > 0)
@@ -77,13 +77,13 @@ public class slowDriveStraight extends Command {
 
     	}*/
     	if( deltaTime >= 15000) {
-    		System.out.println("The Command *DriveStraight* cancelled due to timeout.");
+    		System.out.println("SlowDriveStraight cancelled due to timeout.");
     		return true;
     	}
     	if(rv)
     	{
-
-        	Robot.drivetrain.PIDInput = "command done";
+    		System.out.println("SlowDriveStraight finished.");
+        	Robot.drivetrain.PIDInput = "SlowDriveStraight finished.";
     		Robot.drivetrain.setLPower(0);
     		Robot.drivetrain.setRPower(0);
     	}return rv;
@@ -94,7 +94,7 @@ public class slowDriveStraight extends Command {
     	Robot.drivetrain.setRPower(0);
     }
     private double getCurrentDistance() {
-        return (Robot.drivetrain.getLeftDistanceInches()+ Robot.drivetrain.getRightDistanceInches()) / 2;
+        return ((Robot.drivetrain.getLeftDistanceInches()+ Robot.drivetrain.getRightDistanceInches()) / 2);
     }
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
