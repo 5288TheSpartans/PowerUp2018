@@ -87,6 +87,12 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Distance I", 0);
 		SmartDashboard.putNumber("Distance D", 0);
 		SmartDashboard.putNumber("Distance FF", 0.0);
+		
+		SmartDashboard.putNumber("Lift P", 0);
+		SmartDashboard.putNumber("Lift I", 0);
+		SmartDashboard.putNumber("Lift D", 0);
+		SmartDashboard.putNumber("Lift FF", 0);
+		
 		//CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
@@ -319,6 +325,11 @@ public class Robot extends TimedRobot {
 		RobotMap.StraightI = SmartDashboard.getNumber("Straight I", 0.0);
 		RobotMap.StraightD = SmartDashboard.getNumber("Straight D", 0.0);
 		RobotMap.StraightFF = SmartDashboard.getNumber("Straight FF", 0.0);
+	
+		RobotMap.LiftP = SmartDashboard.getNumber("Lift P", 0);
+		RobotMap.LiftI = SmartDashboard.getNumber("Lift I", 0);
+		RobotMap.LiftD = SmartDashboard.getNumber("Lift D", 0);
+		RobotMap.LiftFF = SmartDashboard.getNumber("Lift FF", 0);
 	}
 	
 }
