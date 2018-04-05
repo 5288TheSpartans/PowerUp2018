@@ -78,20 +78,20 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto Choice", m_chooser);
 		
 		
-		SmartDashboard.putNumber("Straight P", 0);
-		SmartDashboard.putNumber("Straight I", 0);
-		SmartDashboard.putNumber("Straight D", 0);
-		SmartDashboard.putNumber("Straight FF", 0);
+		SmartDashboard.putNumber("Straight P", RobotMap.StraightP);
+		SmartDashboard.putNumber("Straight I", RobotMap.StraightI);
+		SmartDashboard.putNumber("Straight D", RobotMap.StraightD);
+		SmartDashboard.putNumber("Straight FF", RobotMap.StraightFF);
 		
-		SmartDashboard.putNumber("Distance P", 0);
-		SmartDashboard.putNumber("Distance I", 0);
-		SmartDashboard.putNumber("Distance D", 0);
-		SmartDashboard.putNumber("Distance FF", 0.0);
+		SmartDashboard.putNumber("Distance P", RobotMap.DistanceP);
+		SmartDashboard.putNumber("Distance I", RobotMap.DistanceI);
+		SmartDashboard.putNumber("Distance D", RobotMap.DistanceD);
+		SmartDashboard.putNumber("Distance FF", RobotMap.DistanceFF);
 		
-		SmartDashboard.putNumber("Lift P", 0);
-		SmartDashboard.putNumber("Lift I", 0);
-		SmartDashboard.putNumber("Lift D", 0);
-		SmartDashboard.putNumber("Lift FF", 0);
+		SmartDashboard.putNumber("Lift P", RobotMap.LiftP);
+		SmartDashboard.putNumber("Lift I", RobotMap.LiftI);
+		SmartDashboard.putNumber("Lift D", RobotMap.LiftD);
+		SmartDashboard.putNumber("Lift FF", RobotMap.LiftFF);
 		
 		//CameraServer.getInstance().startAutomaticCapture();
 	}
@@ -100,7 +100,6 @@ public class Robot extends TimedRobot {
 	}
 	
 	public void robotPeriodic() {
-		Preferences.getInstance();
 		
 	}
 
@@ -215,6 +214,7 @@ public class Robot extends TimedRobot {
 			System.out.println("Auto Tester");
 			m_autonomousCommand = new slowDriveStraight(5);
 		}
+		SmartDashboard.putData("Auto Choice", m_chooser);
 
 		/*
 		  String autoSelected = SmartDashboard.getString("Auto Selector", "Default"); 
