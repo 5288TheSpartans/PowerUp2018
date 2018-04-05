@@ -60,8 +60,8 @@ public class RobotMap {
 	// DriveStraight PID values
 	//0.009, 0, 0.001, 1/720
 	public static double StraightP = 0.05;
-	public static double StraightI = 0;
-	public static double StraightD = 0;
+	public static double StraightI = 0.009;
+	public static double StraightD = 0.00;
 	public static double StraightFF = 0.0; // 1/360
 	// DriveDistance PID values
 	//1/7,0.4,0.24,0
@@ -71,9 +71,9 @@ public class RobotMap {
 	public static double DistanceFF = 0;
 	// SpotTurnDegrees PID values
 	//(0.02, 0.0095, 0.09, 0)
-	public static double TurnP = 0.02;
-	public static double TurnI = 0.0095;
-	public static double TurnD = 0.09;
+	public static double TurnP = 0.035;
+	public static double TurnI = 0.003;
+	public static double TurnD = 0.0;
 	public static double TurnFF = 0;
 
 	// LiftToHeight PID values

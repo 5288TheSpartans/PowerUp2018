@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.autocommands;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.RobotMap;
 
 import accessories.SpartanPID;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,22 +10,22 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpotTurnDegrees extends Command {
-	public final double speed = 0.5;
-	public final double gain = 2;
+	public double speed = 0.25;
+	public final double gain = 0;
 	private double currentTurn = 0;
 	private double initialangle = 0;
 	private double targetAngle = 0;
 	private double PIDOUTPUT = 0;
-	private SpartanPID PID = new SpartanPID(0.02, 0.0095, 0.09, 0);
+	private SpartanPID PID = new SpartanPID(RobotMap.TurnP,RobotMap.TurnI , RobotMap.TurnD, RobotMap.TurnFF);
 	private double startTime = 0;
 	public SpotTurnDegrees(double turn) {
 		requires(Robot.drivetrain);
 		targetAngle = turn;
-		initialangle = Robot.drivetrain.getGyroAngle();
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.drivetrain.resetGyro();
 		startTime = System.currentTimeMillis();
 		initialangle = Robot.drivetrain.getGyroAngle();
 		PID.setTarget(targetAngle);//PID in turn
@@ -38,8 +39,9 @@ public class SpotTurnDegrees extends Command {
 		System.out.println("TURN PID INPUT : " + currentTurn);
 		System.out.println("TURN PID Target : " + targetAngle);
 		System.out.println("TURN PID OUTPUT: " + PIDOUTPUT);
+		System.out.println("SPEED: " + speed);
 		if(currentTurn > targetAngle - 1 && currentTurn < targetAngle + 1)
-		{
+		{	System.out.println("RUN.");
 			PIDOUTPUT = 0;
 		}
 		else
@@ -52,17 +54,17 @@ public class SpotTurnDegrees extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		System.out.println("Checking Turn To see if finished");
-		if(Math.abs(targetAngle)<= Math.abs(currentTurn) +1)
-		{
+		if(Math.abs(targetAngle)<= Math.abs(currentTurn) + 1)
+		{	System.out.println("SpotTurn finished. Current Turn: " + currentTurn);
 			return true;
 		}
-		if(System.currentTimeMillis()>= startTime + 2500)
+		if(System.currentTimeMillis()>= startTime + 7000)
 		{
 			System.err.println("Command did not achieve goal, ended through time.");
 			return true;
 
 		}
+		else
 		return false;
 	}
 

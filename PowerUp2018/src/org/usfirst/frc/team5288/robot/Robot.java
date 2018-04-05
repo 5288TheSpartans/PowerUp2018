@@ -312,7 +312,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("RightEncoderDistance",Robot.drivetrain.getRightDistanceInches() );
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
-
+		SmartDashboard.putNumber("Gyro angle", Robot.drivetrain.getGyroAngle());
 	}
 	public void updatePID() {
 		RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);
