@@ -83,12 +83,12 @@ public class LiftToHeight extends Command {
     		return true;
     	}
     	else return false;
-    	*/if(currentHeightInches <= wantedHeight+1 && currentHeightInches >= wantedHeight-1) {
-    		Robot.lift.setState(liftState.stopped);
+    	*/if((currentHeightInches <= wantedHeight+0.5) && (currentHeightInches >= wantedHeight- 0.5)) {
     		return true;
     	}
     	else if(deltaTime >= 4000) {
     		System.out.println("Ending LiftToHeight due to timeout.");
+    		
     		return true;
     	}
     	else return false;
