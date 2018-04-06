@@ -58,7 +58,7 @@ public class SpotTurnDegrees extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(Math.abs(targetAngle)<= Math.abs(currentTurn) + 5)
+		if(Math.abs(targetAngle)<= Math.abs(currentTurn) + 1)
 		{	System.out.println("SpotTurn finished. Current Turn: " + currentTurn);
 			return true;
 		}
