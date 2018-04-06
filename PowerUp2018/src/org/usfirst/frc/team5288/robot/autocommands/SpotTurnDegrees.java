@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class SpotTurnDegrees extends Command {
-	public double speed = 0.25;
+	public double speed = 0.125;
 	public final double gain = 0;
 	private double currentTurn = 0;
 	private double initialangle = 0;
@@ -26,9 +26,13 @@ public class SpotTurnDegrees extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		Robot.drivetrain.resetGyro();
+		Robot.drivetrain.resetEncoders();
 		startTime = System.currentTimeMillis();
 		initialangle = Robot.drivetrain.getGyroAngle();
+		PID.resetPID();
 		PID.setTarget(targetAngle);//PID in turn
+		
+		
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -54,7 +58,7 @@ public class SpotTurnDegrees extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(Math.abs(targetAngle)<= Math.abs(currentTurn) + 1)
+		if(Math.abs(targetAngle)<= Math.abs(currentTurn) + 5)
 		{	System.out.println("SpotTurn finished. Current Turn: " + currentTurn);
 			return true;
 		}

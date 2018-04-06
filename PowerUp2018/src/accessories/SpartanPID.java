@@ -43,4 +43,9 @@ public class SpartanPID {
 	public double getOutput(){
 		return output;
 	}
+	public void resetPID() {
+		kP = 0;
+		kI = 0;
+		kD = 0;
+	}
 }
