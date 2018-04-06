@@ -65,8 +65,8 @@ public class RobotMap {
 	public static double StraightFF = 0.0; // 1/360
 	// DriveDistance PID values
 	//1/7,0.4,0.24,0
-	public static double DistanceP = 0.65/36;
-	public static double DistanceI = 0;
+	public static double DistanceP = 0.005;
+	public static double DistanceI = 0.001;
 	public static double DistanceD = 0;
 	public static double DistanceFF = 0;
 	// SpotTurnDegrees PID values

@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
 		case 5:
 			System.out.println("Auto: Drive Straight");
 			SmartDashboard.putString("Auto:"," Drive Straight");
-			m_autonomousCommand = new  DriveStraightDistance(13*12);
+			m_autonomousCommand = new  DriveStraightDistance(16*12);
 			break;
 		case 6:
 			System.out.println("Auto Tester");
