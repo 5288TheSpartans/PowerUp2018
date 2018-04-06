@@ -22,15 +22,14 @@ public class autoRightSidetoRightSwitch extends CommandGroup {
     	addSequential(new SpotTurnDegrees(-90));
     	addParallel(new LiftToHeight(Robot.switchHei));
     	addSequential(new DriveStraightDistance(52));
-    	addSequential(new UnloadCube());
+    	addSequential(new UnloadCubeTime());
     	addSequential(new DriveStraightDistance(-23));
     	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(24));
     	addSequential(new SpotTurnDegrees(-90));
-    	addParallel(new LoadCube());
+    	addParallel(new LoadCubeTime());
     	addSequential(new DriveStraightDistance(40));
-    	addSequential(new LoadCube());
 
         // To run multiple commands at the same time,
         // use addParallel()

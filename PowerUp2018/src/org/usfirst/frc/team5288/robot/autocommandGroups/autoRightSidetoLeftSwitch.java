@@ -26,13 +26,13 @@ public class autoRightSidetoLeftSwitch extends CommandGroup {
     	addSequential(new DriveStraightDistance(70));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(39));
-    	addSequential(new UnloadCube());
+    	addSequential(new UnloadCubeTime());
     	addSequential(new DriveStraightDistance(-30));
     	addParallel(new LiftToHeight(0));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(21));
     	addSequential(new SpotTurnDegrees(90));
-    	addParallel(new LoadCube());
+    	addParallel(new LoadCubeTime());
     	addSequential(new DriveStraightDistance(24));
     	
     	

@@ -3,7 +3,7 @@ package org.usfirst.frc.team5288.robot.autocommandGroups;
 import org.usfirst.frc.team5288.robot.Robot;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightDistance;
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
-import org.usfirst.frc.team5288.robot.commands.intake.UnloadCube;
+import org.usfirst.frc.team5288.robot.commands.intake.*;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -23,7 +23,7 @@ public class autoRightSidetoRightScale extends CommandGroup {
     	addSequential(new DriveStraightDistance(320));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(34));
-    	addSequential(new UnloadCube());
+    	addSequential(new UnloadCubeTime());
     	addSequential(new LiftToHeight(0.0)); // min lift height
     	// now get back in position for switch cube
     	addParallel(new SpotTurnDegrees(-90));

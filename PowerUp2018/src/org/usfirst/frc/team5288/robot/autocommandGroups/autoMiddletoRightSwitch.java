@@ -33,13 +33,13 @@ public class autoMiddletoRightSwitch extends CommandGroup {
     	addSequential(new DriveStraightDistance(32));
     	addSequential(new SpotTurnDegrees(-90));
     	addSequential(new DriveStraightDistance(34));
-    	addSequential(new UnloadCube());
+    	addSequential(new UnloadCubeTime());
     	addSequential(new DriveStraightDistance(-32));
     	addSequential(new SpotTurnDegrees(90));
     	addParallel(new LiftToHeight(0));
     	addSequential(new DriveStraightDistance(28));
     	addSequential(new SpotTurnDegrees(-90));
-    	addParallel(new LoadCube());
+    	addParallel(new LoadCubeTime());
     	addSequential(new DriveStraightDistance(35));
 
         // A command group will require all of the subsystems that each member

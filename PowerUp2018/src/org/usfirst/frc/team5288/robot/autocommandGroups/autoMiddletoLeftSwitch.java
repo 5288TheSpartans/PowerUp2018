@@ -25,13 +25,13 @@ public class autoMiddletoLeftSwitch extends CommandGroup {
     	addSequential(new DriveStraightDistance(65));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(47));
-    	addSequential(new UnloadCube());
+    	addSequential(new UnloadCubeTime());
     	addSequential(new DriveStraightDistance(-30));
     	addSequential(new SpotTurnDegrees(-90));
     	addParallel(new LiftToHeight(0));
     	addSequential(new DriveStraightDistance(17));
     	addSequential(new SpotTurnDegrees(90));
-    	addParallel(new LoadCube());
+    	addParallel(new LoadCubeTime());
     	addSequential(new DriveStraightDistance(33));
     	
     		
