@@ -25,6 +25,7 @@ public class DriveStraightTime extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	System.out.println("DriveStraightTime running: " + driveTime);
     	currentTime = System.currentTimeMillis();
     	startingTime = currentTime;
     }

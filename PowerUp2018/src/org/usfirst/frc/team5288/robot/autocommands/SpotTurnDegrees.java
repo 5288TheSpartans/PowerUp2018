@@ -16,7 +16,7 @@ public class SpotTurnDegrees extends Command {
 	private double initialangle = 0;
 	private double targetAngle = 0;
 	private double PIDOUTPUT = 0;
-	private SpartanPID PID = new SpartanPID(RobotMap.TurnP,RobotMap.TurnI , RobotMap.TurnD, RobotMap.TurnFF);
+	private SpartanPID PID;
 	private double startTime = 0;
 	public SpotTurnDegrees(double turn) {
 		requires(Robot.drivetrain);
@@ -25,12 +25,17 @@ public class SpotTurnDegrees extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		PID = new SpartanPID(RobotMap.TurnP,RobotMap.TurnI , RobotMap.TurnD, RobotMap.TurnFF);
 		Robot.drivetrain.resetGyro();
 		Robot.drivetrain.resetEncoders();
 		startTime = System.currentTimeMillis();
 		initialangle = Robot.drivetrain.getGyroAngle();
 		PID.resetPID();
 		PID.setTarget(targetAngle);//PID in turn
+	/*	if(targetAngle < 0) {
+			targetAngle = 360 + targetAngle;
+			speed=speed*-1;
+		}*/
 		
 		
 	}
@@ -38,6 +43,7 @@ public class SpotTurnDegrees extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		currentTurn = Robot.drivetrain.getGyroAngle() - initialangle;
+	
 		PID.update(currentTurn);
 		
 		System.out.println("TURN PID INPUT : " + currentTurn);

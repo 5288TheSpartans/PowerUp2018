@@ -79,11 +79,13 @@ public class LiftToHeight extends Command {
     }
 
     protected boolean isFinished() {
+    	return true;
     /*	if(deltaTime >= matchedTime) {
     		return true;
     	}
     	else return false;
-    	*/if((currentHeightInches <= wantedHeight+0.5) && (currentHeightInches >= wantedHeight- 0.5)) {
+    	*/
+    	/*if((currentHeightInches <= wantedHeight+0.5) && (currentHeightInches >= wantedHeight- 0.5)) {
     		return true;
     	}
     	else if(deltaTime >= 4000) {
@@ -92,7 +94,7 @@ public class LiftToHeight extends Command {
     		return true;
     	}
     	else return false;
-    }
+    */}
 
     protected void end() {
     	Robot.lift.setState(liftState.stopped);

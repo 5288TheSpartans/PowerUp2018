@@ -75,6 +75,8 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Spawn Left to Scale", 4);
 		m_chooser.addDefault("Drive Straight", 5);
 		m_chooser.addObject("Auto Tester",6);
+		m_chooser.addObject("DriveStraightIFFSwitchL", 7);
+		m_chooser.addObject("DriveStraightIFFSwitchR", 8);
 		SmartDashboard.putData("Auto Choice", m_chooser);
 		
 		
@@ -142,6 +144,8 @@ public class Robot extends TimedRobot {
 		updateGameData();
 		leftRamp.setState(LeftRampSubsystem.state.initial);
 		rightRamp.setState(RightRampSubsystem.state.initial);
+
+		m_autonomousCommand = new DriveStraightDistance(10*12);
 		autoSelected = m_chooser.getSelected();
 		switch(autoSelected) {
 		case 0:
@@ -208,11 +212,23 @@ public class Robot extends TimedRobot {
 		case 5:
 			System.out.println("Auto: Drive Straight");
 			SmartDashboard.putString("Auto:"," Drive Straight");
-			m_autonomousCommand = new  DriveStraightDistance(16*12);
+			m_autonomousCommand = new DriveStraightDistance(10*12);
 			break;
 		case 6:
 			System.out.println("Auto Tester");
-			m_autonomousCommand = new slowDriveStraight(5);
+			System.out.println("I Love dick");
+			m_autonomousCommand = new DriveStraightDistance(10*12);
+		case 7:
+			System.out.println("Auto: DriveStraight Iff switch = L");
+			if (gameData.charAt(0) == 'L') {
+				m_autonomousCommand = new  DriveStraightTime(3500);
+			
+			}
+		case 8:
+			System.out.println("Auto: DriveStraight Iff switch = R");
+			if (gameData.charAt(0) == 'R') {
+				m_autonomousCommand = new  DriveStraightTime(3500);
+			}
 		}
 		SmartDashboard.putData("Auto Choice", m_chooser);
 
@@ -226,6 +242,7 @@ public class Robot extends TimedRobot {
 		*/ 
 
 		// schedule the autonomous command (example)
+		
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -315,7 +332,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Gyro angle", Robot.drivetrain.getGyroAngle());
 	}
 	public void updatePID() {
-		RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);
+		/*RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);
 		RobotMap.DistanceI = SmartDashboard.getNumber("Distance I", 0.0);
 		RobotMap.DistanceD = SmartDashboard.getNumber("Distance D", 0.0);
 		RobotMap.DistanceFF = SmartDashboard.getNumber("Distance FF", 0.0);
@@ -328,7 +345,7 @@ public class Robot extends TimedRobot {
 		RobotMap.LiftP = SmartDashboard.getNumber("Lift P", 0);
 		RobotMap.LiftI = SmartDashboard.getNumber("Lift I", 0);
 		RobotMap.LiftD = SmartDashboard.getNumber("Lift D", 0);
-		RobotMap.LiftFF = SmartDashboard.getNumber("Lift FF", 0);
+//		RobotMap.LiftFF = SmartDashboard.getNumber("Lift FF", 0);*/
 	}
 	
 }

@@ -13,6 +13,7 @@ import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.ResetEncoders;
 import org.usfirst.frc.team5288.robot.commands.intake.*;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
+import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeightTime;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
@@ -110,8 +111,8 @@ public class OI {
     public OI()
     {
     btnL1.toggleWhenPressed(new LoadCube());
-    btnL2.whenPressed(new LiftToHeight(70)); // make this the scale
-    btnL3.whenPressed(new LiftToHeight(22)); // make this the switch
+    btnL2.whenPressed(new LiftToHeightTime(70)); // make this the scale
+    btnL3.whenPressed(new LiftToHeightTime(22)); // make this the switch
     btnL4.whileHeld(new RaiseLift());
     btnL5.whileHeld(new LowerLift());
     btnL6.whileHeld(new RaiseLeftRampCommand());
