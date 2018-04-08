@@ -12,8 +12,8 @@ public class LiftToHeightTime extends Command {
 	private double initialTime;
 	private double currentTime;
 	private double timePassed = 0;
-	private double [] possibleHeights = {0,25,100}; // SWITCH, PORTAL, SCALE heights
-	private double [] timeToLift = {0,1000,4000}; // SWITCH,PORTAL,SCALE times
+	private double [] possibleHeights = {0,25,100}; // BOTTOM, SWITCH, SCALE heights
+	private double [] timeToLift = {0,3000,7000}; // BOTTOM, SWITCH, SCALE times
 	private double correctTimeToLift = 0;
     private int wantedHeight = 0;
 	public LiftToHeightTime(int height) {
@@ -36,14 +36,27 @@ public class LiftToHeightTime extends Command {
     protected void execute() {
     	currentTime = System.currentTimeMillis();
     	timePassed = currentTime - initialTime;
-    	Robot.lift.setState(liftState.raising);
+    	if(correctTimeToLift != 0)Robot.lift.setState(liftState.raising);
+    	else if(correctTimeToLift == 0) Robot.lift.setState(liftState.lowering);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(timePassed >= correctTimeToLift) return true;
-    	else return false;
-        
+    	if(timePassed >= correctTimeToLift && correctTimeToLift != 0) {
+    		System.out.println("LiftToHeightTime to " + wantedHeight +" has finished.");
+    		System.out.println("Ran for " + correctTimeToLift + " milliseconds.");
+    		return true;
+    	}
+    	else if(correctTimeToLift == 0 && Robot.lift.isAtBottom()) {
+    		
+    		System.out.println("Lift has reached bottom. Ending LiftToHeightTime.");
+    		return true;
+    	}
+    	if(timePassed >= 12000) {
+    		System.out.println("LiftToHeightTime has timed out. How ironic; something's wrong.");
+    		return true;
+    	}
+        return false;
     }
 
     // Called once after isFinished returns true

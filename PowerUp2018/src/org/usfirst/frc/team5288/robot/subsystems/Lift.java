@@ -196,8 +196,11 @@ public class Lift extends Subsystem {
 	//	System.out.println("Lift encoder Position: " + LiftMotor.getSelectedSensorPosition(0));
 		return LiftMotor.getSelectedSensorPosition(0);
 	}
-	public boolean isAtTop() {
+	private boolean isAtTop() {
 		return getLiftHeight() >= maxLiftHeight;
+	}
+	public boolean isAtBottom() {
+		return isAtBottom;
 	}
 	public void setOverride(boolean liftOverride) {
 		override = liftOverride;
