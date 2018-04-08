@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5288.robot.autocommandGroups;
 
 import org.usfirst.frc.team5288.robot.Robot;
+import org.usfirst.frc.team5288.robot.autocommands.DoNothingTime;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightDistance;
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.commands.intake.*;
@@ -19,18 +20,33 @@ public class autoRightSidetoRightScale extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	// drive to scale, dump cube in scale
-    	addSequential(new ReleaseIntake());
-    	addSequential(new DriveStraightDistance(300));
-    	addSequential(new SpotTurnDegrees(-90));
-    	//addSequential(new LiftToHeight(Robot.scaleHei));
     	
-    	addSequential(new UnloadCubeTime());
-
-    	//addSequential(new LiftToHeight(0.0)); // min lift height
-    	// now get back in position for switch cube
-    	addParallel(new SpotTurnDegrees(-90));
-    	addSequential(new DriveStraightDistance(88));
+    	addParallel(new ReleaseIntake());
+    	addSequential(new DriveStraightDistance(252));
+    	addSequential(new SpotTurnDegrees(-90));
+    	addSequential(new DriveStraightDistance(39));
     	addSequential(new SpotTurnDegrees(90));
+    	addSequential(new DriveStraightDistance(10));
+    	addSequential(new LiftToHeight(Robot.scaleHei));
+    	addSequential(new ShootCubeTime());
+    	addParallel(new LiftToHeight(0));
+    	addSequential(new SpotTurnDegrees(180));
+    	addParallel(new DriveStraightDistance(60));
+    	addSequential(new LoadCubeTime());
+    	addSequential(new LoadCubeTime()); //Remove if one LoadCubeTime is enough to intake cube
+    //Don't Know if this will work
+    	addSequential(new DriveStraightDistance(-60));
+    	addSequential(new SpotTurnDegrees(180));
+    	addSequential(new LiftToHeight(Robot.scaleHei));
+    	addSequential(new UnloadCubeTime());
+    	addSequential(new LiftToHeight(0));
+    	
+    	
+    	
+    	
+    	
+    	
+    	
         // To run multiple commands at the same time,
         // use addParallel()
         // e.g. addParallel(new Command1());

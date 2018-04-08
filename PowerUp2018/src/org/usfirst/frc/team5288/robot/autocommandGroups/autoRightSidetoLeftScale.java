@@ -24,20 +24,27 @@ public class autoRightSidetoLeftScale extends CommandGroup {
         //      addSequential(new Command2());
         // Command1 and Command2 will run in parallel.
     	
-    	addSequential(new DriveStraightDistance(236));
+    	addParallel(new ReleaseIntake());
+    	addSequential(new DriveStraightDistance(226));
     	addSequential(new SpotTurnDegrees(-90));
-    	//addParallel(new LiftToHeight(Robot.scaleHei));
-    	addSequential(new DriveStraightDistance(256));
+    	addSequential(new DriveStraightDistance(190));
     	addSequential(new SpotTurnDegrees(90));
-    	addSequential(new DriveStraightDistance(77));
-    	addSequential(new SpotTurnDegrees(90));
-    	addSequential(new DriveStraightDistance(30));
-    	addSequential(new UnloadCubeTime());
-    	addSequential(new LiftToHeight(0.0)); // min lift height
-    	// now get back in position for switch cube
-    	addParallel(new SpotTurnDegrees(90));
-    	addSequential(new DriveStraightDistance(88));
-    	addSequential(new SpotTurnDegrees(-90));
+    	addParallel(new LiftToHeight(Robot.scaleHei));
+    	addSequential(new DriveStraightDistance(32));
+    	addSequential(new ShootCubeTime());
+    	addParallel(new LiftToHeight(0));
+    	addSequential(new SpotTurnDegrees(180));
+    	addParallel(new DriveStraightDistance(38));
+    	addSequential(new LoadCubeTime());
+    	addSequential(new LoadCubeTime()); // ReRuns code incase we do not inake cube
+    //Do not know if this will work
+    	addSequential(new DriveStraightDistance(-36));
+    	addSequential(new SpotTurnDegrees(180));
+    	addSequential(new LiftToHeight(Robot.scaleHei));
+    	addSequential(new ShootCubeTime());
+    	addSequential(new LiftToHeight(0));
+    	
+    	
     	
     	
     	
