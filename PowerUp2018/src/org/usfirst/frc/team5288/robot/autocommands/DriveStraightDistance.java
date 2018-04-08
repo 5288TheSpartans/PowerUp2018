@@ -18,6 +18,7 @@ public class DriveStraightDistance extends Command {
     private double startingDistance = 0;
     private double inWantedDistance = 0;
     private double distancetravelled = 0;
+    private double accelConstant = 500;
     private long deltaTime = 0;
     private long startTime = 0;
     private long currentTime = 0;    //private SpartanPID distancePID = new SpartanPID(1/7,0.4,0.24,0);
@@ -62,6 +63,9 @@ public class DriveStraightDistance extends Command {
     	else if(speed < -0.5) {
     		System.out.println("The robot is zoomin. Overriding distancePID.");
     		speed = -0.5;
+    	}
+    	if(deltaTime <= accelConstant && inWantedDistance >= 15) {
+    		speed = speed*(deltaTime/accelConstant);
     	}
     	System.out.println("Speed: " + speed + "\nError: " + error);
     	System.out.println("PID INPUT(distance): " +  getCurrentDistance());

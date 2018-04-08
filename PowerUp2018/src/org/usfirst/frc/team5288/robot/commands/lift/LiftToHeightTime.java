@@ -12,8 +12,8 @@ public class LiftToHeightTime extends Command {
 	private double initialTime;
 	private double currentTime;
 	private double timePassed = 0;
-	private double [] possibleHeights = {0,25,100}; // BOTTOM, SWITCH, SCALE heights
-	private double [] timeToLift = {0,3000,7000}; // BOTTOM, SWITCH, SCALE times
+	private double [] possibleHeights = {0,Robot.switchHei,Robot.scaleHei}; // BOTTOM, SWITCH, SCALE heights
+	private double [] timeToLift = {0,1500,4000}; // BOTTOM, SWITCH, SCALE times
 	private double correctTimeToLift = 0;
     private int wantedHeight = 0;
 	public LiftToHeightTime(int height) {

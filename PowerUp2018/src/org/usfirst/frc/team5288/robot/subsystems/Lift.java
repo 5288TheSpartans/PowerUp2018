@@ -49,9 +49,9 @@ public class Lift extends Subsystem {
 	};
 
 	// lift outputs
-	private final double liftMoveMultiplier = 0.8;
+	private final double liftMoveMultiplier = 1.0;
 	private final double liftMotorRaisingOutput = 1.0;
-	private final double liftMotorLoweringOutput = -1.0; 
+	private final double liftMotorLoweringOutput = -0.6; 
 	private final double liftMotorStoppedOutput = 0.01;
 	private final double liftMotorFallingOutput = -0.01;
 	// Stuff for finding Height
@@ -124,8 +124,8 @@ public class Lift extends Subsystem {
 					setMode(liftMotorMode.brake);
 					setLiftPower(liftMotorStoppedOutput);
 				} else if(isAtTop && liftPower > 0){
-				//	setMode(liftMotorMode.brake);
 					setLiftPower(liftMotorStoppedOutput);
+					setMode(liftMotorMode.brake);
 				}
 				else {
 					setMode(liftMotorMode.coast);

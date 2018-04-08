@@ -72,7 +72,7 @@ public class RobotMap {
 	// SpotTurnDegrees PID values
 	//(0.02, 0.0095, 0.09, 0)
 	public static double TurnP = 0.035;
-	public static double TurnI = 0.012;
+	public static double TurnI = 0.017;
 	public static double TurnD = 0.0;
 	public static double TurnFF = 0;
 

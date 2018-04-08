@@ -21,7 +21,7 @@ public class LowerLiftOverride extends Command {
     }
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.outputToLift(-1.0);
+    	Robot.lift.outputToLift(0.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()
