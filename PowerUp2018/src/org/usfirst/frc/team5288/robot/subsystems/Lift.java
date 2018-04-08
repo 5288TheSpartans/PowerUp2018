@@ -41,8 +41,7 @@ public class Lift extends Subsystem {
 	private boolean isAtBottom = true;
 	private boolean override = false;
 	private double liftHeight = 0;
-	private double sketchyHeight = 0;
-	private double maxLiftHeight = 70; // inches
+	private double maxLiftHeight = 18*10; // inches
 
 	// lift modes
 	public enum liftMotorMode {
@@ -50,20 +49,20 @@ public class Lift extends Subsystem {
 	};
 
 	// lift outputs
-	private final double liftMoveMultiplier = 1;
+	private final double liftMoveMultiplier = 0.8;
 	private final double liftMotorRaisingOutput = 1.0;
 	private final double liftMotorLoweringOutput = -1.0; 
 	private final double liftMotorStoppedOutput = 0.01;
 	private final double liftMotorFallingOutput = -0.01;
 	// Stuff for finding Height
-	private double liftPower;
+	private double liftPower = 0;
 	private double lastSpeed = 0;
 	private double currentSpeed = 0;
 	private long lastTime;
 	private long currentTime;
 	private final double radius = 3 / 4; // (inches)
 	private final double ratio = 1;
-	private final double heightConstant = ratio * 4096 / (6 * radius);
+	private final double heightConstant = 0.007364;//ratio * 4096 / (6 * radius);
 	// Used to convert from units to inches where 1u = 1/4096 =
 	// avgPerimeter(in)/4096
 	// => in = 1*u*4096/(avgPerimeter)
@@ -83,6 +82,7 @@ public class Lift extends Subsystem {
 	}
 
 	public void resetEncoders() {
+		LiftMotor.setSelectedSensorPosition(0, 0, 0);
 		// encoder.reset(); does not work for TalonSRX encoders; they have their own
 		// methods
 	}
@@ -96,11 +96,13 @@ public class Lift extends Subsystem {
 		if(!override) {
 			if (currentState == liftState.raising) {
 				setMode(liftMotorMode.coast);
+				setLiftPower(liftMotorRaisingOutput);
+				
 				if (!isAtTop) {
 					setLiftPower(liftMotorRaisingOutput);
 				} else {
-					setMode(liftMotorMode.brake);
 					setLiftPower(liftMotorStoppedOutput);
+					setMode(liftMotorMode.brake);
 				}
 			} else if (currentState == liftState.lowering) {
 				setMode(liftMotorMode.coast);
@@ -122,7 +124,7 @@ public class Lift extends Subsystem {
 					setMode(liftMotorMode.brake);
 					setLiftPower(liftMotorStoppedOutput);
 				} else if(isAtTop && liftPower > 0){
-					setMode(liftMotorMode.brake);
+				//	setMode(liftMotorMode.brake);
 					setLiftPower(liftMotorStoppedOutput);
 				}
 				else {
@@ -130,6 +132,8 @@ public class Lift extends Subsystem {
 					setLiftPower(liftPower);
 				}
 			}
+		}else if(override) {
+			Robot.lift.setLiftPower(liftPower);
 		}
 	}
 
@@ -146,28 +150,26 @@ public class Lift extends Subsystem {
 	}
 
 	public void updateSensors() {
-		isAtTop = !isAtTop(); // If top limit switch is remounted, use !topLimitSwitch.get()
+		isAtTop = isAtTop(); // If top limit switch is remounted, use !topLimitSwitch.get()
 		isAtBottom = !bottomLimitSwitch.get();
 		if (isAtTop && isAtBottom) {
 			// IDK what to say if they are both hit, we have an issue.
 			System.out.println("ISSUE IN LIFT UPDATE SENSORS.");
-		} else if (isAtBottom) {
+		} 
+		if (isAtBottom) {
 			liftHeight = 0;// Inches
-			sketchyHeight = 0;
+			LiftMotor.setSelectedSensorPosition(0, 0, 0);
 
 	//		LiftMotor.setSelectedSensorPosition(0, 0, 0);
-			System.out.println("Lift height reset to 0 because at bottom.");
+	//		System.out.println("Lift height reset to 0 because at bottom.");
 		} else if (isAtTop) {
-			sketchyHeight = 84;
-			liftHeight = 84;
-			LiftMotor.setSelectedSensorPosition((int) (84/heightConstant), 0, 0);
-		//	System.out.println("Lift height reset because at top.");
+			liftHeight = maxLiftHeight;
+			System.out.println("IS AT TOP.");
 
 
 		}
-		calculateLiftHeightSketchy();
 		calculateLiftHeightClean();
-		Robot.putDashboardNumber("LiftHeight = ", liftHeight);
+		Robot.putDashboardNumber("Lift Height", liftHeight);
 		Robot.putDashboardNumber("SketchyLiftHeight = ", liftHeight);
 		SmartDashboard.putBoolean("Top Limit Switch", !isAtTop);
 		SmartDashboard.putBoolean("Bottom Limit Switch", isAtBottom);
@@ -177,15 +179,6 @@ public class Lift extends Subsystem {
 	private void setLiftPower(double output) {
 		LiftMotor.set(ControlMode.PercentOutput, liftMoveMultiplier*output);
 	}
-	private void calculateLiftHeightSketchy() {
-		lastTime = currentTime;
-		currentTime = System.nanoTime();
-		lastSpeed = currentSpeed;
-		currentSpeed = LiftMotor.getSelectedSensorVelocity(0);
-		sketchyHeight += (currentTime - lastTime) * ((lastSpeed + currentSpeed) / 2);
-	//	System.out.println("SketchyLiftHeight recorded to be:" + sketchyHeight);
-
-	}
 
 	private void calculateLiftHeightClean() {
 		liftHeight = LiftMotor.getSelectedSensorPosition(0) * heightConstant;
@@ -194,6 +187,7 @@ public class Lift extends Subsystem {
 	}
 
 	public double getLiftHeight() {
+		calculateLiftHeightClean();
 		return liftHeight;
 	}
 
@@ -203,10 +197,7 @@ public class Lift extends Subsystem {
 		return LiftMotor.getSelectedSensorPosition(0);
 	}
 	public boolean isAtTop() {
-		if(getLiftHeight() >= maxLiftHeight) {
-			return false;
-		}
-		else return true;
+		return getLiftHeight() >= maxLiftHeight;
 	}
 	public void setOverride(boolean liftOverride) {
 		override = liftOverride;

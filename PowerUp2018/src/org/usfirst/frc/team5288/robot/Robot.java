@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 //import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Preferences;
@@ -22,6 +23,7 @@ import org.usfirst.frc.team5288.robot.autocommands.DriveStraightDistance;
 import org.usfirst.frc.team5288.robot.autocommands.DriveStraightTime;
 import org.usfirst.frc.team5288.robot.autocommands.SpotTurnDegrees;
 import org.usfirst.frc.team5288.robot.autocommands.slowDriveStraight;
+import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 import org.usfirst.frc.team5288.robot.subsystems.DrivetrainSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team5288.robot.subsystems.LeftRampSubsystem;
@@ -67,7 +69,9 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		m_oi = new OI();
-		
+		gameData = "";
+		CameraServer.getInstance().startAutomaticCapture();
+
 		m_chooser.addObject("Spawn Middle to Switch", 0);
 		m_chooser.addObject("Spawn Right to Switch", 1);
 		m_chooser.addObject("Spawn Right to Scale", 2);
@@ -94,8 +98,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Lift I", RobotMap.LiftI);
 		SmartDashboard.putNumber("Lift D", RobotMap.LiftD);
 		SmartDashboard.putNumber("Lift FF", RobotMap.LiftFF);
+		SmartDashboard.putString("Game Data", gameData);
 		
-		//CameraServer.getInstance().startAutomaticCapture();
 	}
 	public static String getDashboardValue(String key) {
 		return SmartDashboard.getString(key, "null");
@@ -118,6 +122,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		gameData = "";
 		updateSubsystems();
 		updateSensors();
 		leftLimitCondition = Robot.leftRamp.isLimitChecked();
@@ -137,7 +142,9 @@ public class Robot extends TimedRobot {
 	 * to the switch structure below with additional strings & commands.
 	 */
 	public void updateGameData() {
+		while (gameData.equals("")){
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		}
 	}
 	@Override
 	public void autonomousInit() {
@@ -145,9 +152,10 @@ public class Robot extends TimedRobot {
 		leftRamp.setState(LeftRampSubsystem.state.initial);
 		rightRamp.setState(RightRampSubsystem.state.initial);
 
-		m_autonomousCommand = new DriveStraightDistance(10*12);
+		// m_autonomousCommand = new DriveStraightDistance(10*12);
 		autoSelected = m_chooser.getSelected();
-		switch(autoSelected) {
+//		m_autonomousCommand = new DriveStraightTime(3000);
+	switch(autoSelected) {
 		case 0:
 			if(gameData.charAt(0) == 'L') {
 				System.out.println("Auto: Middle to Left switch");
@@ -180,9 +188,9 @@ public class Robot extends TimedRobot {
 				m_autonomousCommand = new autoRightSidetoLeftScale();
 			}
 			else {
-				System.out.println("Auto: Right to Right switch");
-				SmartDashboard.putString("Auto:"," Right to Right switch");
-				m_autonomousCommand = new autoRightSidetoRightSwitch();
+				System.out.println("Auto: Right to Right Scale");
+//				SmartDashboard.putString("Auto:"," Right to Right Scale");
+				m_autonomousCommand = new autoRightSidetoRightScale();
 			}
 			break;
 		case 3:
@@ -216,8 +224,8 @@ public class Robot extends TimedRobot {
 			break;
 		case 6:
 			System.out.println("Auto Tester");
-			System.out.println("I Love dick");
-			m_autonomousCommand = new DriveStraightDistance(10*12);
+			System.out.println("I love testing autos!");
+			m_autonomousCommand = new LiftToHeight(80);
 		case 7:
 			System.out.println("Auto: DriveStraight Iff switch = L");
 			if (gameData.charAt(0) == 'L') {
@@ -281,6 +289,7 @@ public class Robot extends TimedRobot {
 		updateSensors();
 		updateSubsystems();
 		updateSmartDashboard();
+		//CameraServer.getInstance();
 		Scheduler.getInstance().run();
 	}
 
@@ -330,6 +339,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Right ramp limit switch", Robot.rightRamp.isLimitChecked());
 		SmartDashboard.putBoolean("Left ramp limit switch", Robot.leftRamp.isLimitChecked());
 		SmartDashboard.putNumber("Gyro angle", Robot.drivetrain.getGyroAngle());
+		SmartDashboard.putNumber("Lift encoder position", Robot.lift.getEncoderPosition());
+		SmartDashboard.putNumber("Lift Height ", Robot.lift.getLiftHeight());
+		SmartDashboard.putString("Game Data", gameData);
 	}
 	public void updatePID() {
 		/*RobotMap.DistanceP = SmartDashboard.getNumber("Distance P", 0.0);

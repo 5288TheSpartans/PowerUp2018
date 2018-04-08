@@ -15,7 +15,9 @@ import org.usfirst.frc.team5288.robot.commands.intake.*;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeight;
 import org.usfirst.frc.team5288.robot.commands.lift.LiftToHeightTime;
 import org.usfirst.frc.team5288.robot.commands.lift.LowerLift;
+import org.usfirst.frc.team5288.robot.commands.lift.LowerLiftOverride;
 import org.usfirst.frc.team5288.robot.commands.lift.RaiseLift;
+import org.usfirst.frc.team5288.robot.commands.lift.RaiseLiftOverride;
 import org.usfirst.frc.team5288.robot.commands.lift.ResistLiftWeight;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenLeftRampOverride;
 import org.usfirst.frc.team5288.robot.commands.ramps.LoosenRightRampOverride;
@@ -111,21 +113,25 @@ public class OI {
     public OI()
     {
     btnL1.toggleWhenPressed(new LoadCube());
-    btnL2.whenPressed(new LiftToHeightTime(70)); // make this the scale
-    btnL3.whenPressed(new LiftToHeightTime(22)); // make this the switch
+    btnL2.whenPressed(new LiftToHeight(60)); // make this the scale
+    btnL3.whenPressed(new LiftToHeight(0)); // make this the switch
     btnL4.whileHeld(new RaiseLift());
     btnL5.whileHeld(new LowerLift());
-    btnL6.whileHeld(new RaiseLeftRampCommand());
-    btnL7.whileHeld(new RaiseLeftRampOverride());
-    btnL8.whenPressed(new ReleaseLeftRampCommand());
-    btnL9.whenPressed(new ReleaseRightRampCommand());
-    btnL10.whileHeld(new RaiseRightRampOverride());
-    btnL11.whileHeld(new RaiseRightRampCommand());
-    
+  //  btnL6.whileHeld(new RaiseLeftRampCommand());
+  //  btnL7.whileHeld(new RaiseLeftRampOverride());
+  //  btnL8.whenPressed(new ReleaseLeftRampCommand());
+  //  btnL9.whenPressed(new ReleaseRightRampCommand());
+   // btnL10.whileHeld(new RaiseRightRampOverride());
+   // btnL11.whileHeld(new RaiseRightRampCommand());
+    btnL10.whenPressed(new LiftToHeight(0));
+    btnL11.whenPressed(new LiftToHeight(70));
     // Joystick RIGHT
     btnR1.toggleWhenPressed(new UnloadCube());
-    btnR2.whenPressed(new SpotTurnDegrees(45));
-    btnR3.whenPressed(new SpotTurnDegrees(90));
+   // btnR2.whenPressed(new SpotTurnDegrees(45));
+    //btnR3.whenPressed(new SpotTurnDegrees(90));
+    btnR2.toggleWhenPressed(new ShootCube());
+    btnR3.whileHeld(new LowerLiftOverride());
+    btnR4.whileHeld(new RaiseLiftOverride());
     btnR5.whileHeld(new LoadCudeOverride());
     btnR6.whileHeld(new UnloadCubeOverride());
     btnR7.whenPressed(new ResetEncoders());
@@ -134,8 +140,8 @@ public class OI {
 	//xbox controls
     xboxLStickButton.whileHeld(new LoosenLeftRampOverride());
     xboxRStickButton.whileHeld(new LoosenRightRampOverride());
-    xboxLB.whileHeld(new LowerLift());
-    xboxRB.whileHeld(new RaiseLift());
+   // xboxLB.whileHeld(new LowerLift());
+   // xboxRB.whileHeld(new RaiseLift());
     xboxA.toggleWhenPressed(new LoadCube());
     xboxB.toggleWhenPressed(new ShootCube());
     xboxY.toggleWhenPressed(new UnloadCube());

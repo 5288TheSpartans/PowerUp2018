@@ -26,7 +26,7 @@ public class autoRightSidetoLeftScale extends CommandGroup {
     	
     	addSequential(new DriveStraightDistance(236));
     	addSequential(new SpotTurnDegrees(-90));
-    	addParallel(new LiftToHeight(Robot.scaleHei));
+    	//addParallel(new LiftToHeight(Robot.scaleHei));
     	addSequential(new DriveStraightDistance(256));
     	addSequential(new SpotTurnDegrees(90));
     	addSequential(new DriveStraightDistance(77));

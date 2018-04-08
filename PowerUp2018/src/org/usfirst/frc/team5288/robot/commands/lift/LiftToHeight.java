@@ -38,6 +38,7 @@ public class LiftToHeight extends Command {
     }
 
     protected void initialize() {
+    	Robot.lift.setOverride(false);
 /*    	if (wantedHeight == 0){
     		matchedTime = milliSecondsPerHeight[0];
     	}
@@ -52,9 +53,12 @@ public class LiftToHeight extends Command {
     	currentTime = initialTime;
     	deltaTime = currentTime;
     */	//
+    	System.out.println("Starting LiftToHeight.");
+    	System.out.println("LiftToHeight target: " + wantedHeight);
     	initialTime = System.currentTimeMillis();
     	initialHeight = Robot.lift.getLiftHeight();
     	currentHeightInches = initialHeight;
+    	System.out.println("Current lift height: " + currentHeightInches);
     	//deltaHeight = 0;
     	liftResistPID.setTarget(wantedHeight);
     	Robot.lift.setState(liftState.PID); 
@@ -73,28 +77,29 @@ public class LiftToHeight extends Command {
     	deltaTime = currentTime - initialTime;
     	deltaHeight = currentHeightInches - initialHeight;
     	liftResistPID.update(deltaHeight);
-    	System.out.println(liftResistPID.getOutput());
+    	System.out.println("LIFT PID output: " + liftResistPID.getOutput());
     	Robot.lift.outputToLift(liftResistPID.getOutput());
     	
     }
 
     protected boolean isFinished() {
-    	return true;
-    /*	if(deltaTime >= matchedTime) {
+    	
+    	/*if(deltaTime >= matchedTime) {
     		return true;
     	}
     	else return false;
     	*/
-    	/*if((currentHeightInches <= wantedHeight+0.5) && (currentHeightInches >= wantedHeight- 0.5)) {
+    	if((currentHeightInches <= wantedHeight+2) && (currentHeightInches >= wantedHeight- 2)) {
+    		System.out.println("LiftToHeight successful. Current Height: " + currentHeightInches);
     		return true;
     	}
-    	else if(deltaTime >= 4000) {
+    	else if(deltaTime >= 5000) {
     		System.out.println("Ending LiftToHeight due to timeout.");
     		
     		return true;
     	}
     	else return false;
-    */}
+    }
 
     protected void end() {
     	Robot.lift.setState(liftState.stopped);

@@ -83,7 +83,7 @@ public class DriveStraightDistance extends Command {
     		rv = distancetravelled <= inWantedDistance + .25;
 
     	}*/
-    	if( deltaTime >= 12000) {
+    	if( deltaTime >= 5000) {
     		System.out.println("The Command *DriveStraight* cancelled due to timeout.");
     		return true;
     	}
