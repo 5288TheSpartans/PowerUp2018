@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team5288.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.CameraServer;
 //import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -54,6 +55,7 @@ public class Robot extends TimedRobot {
 	public static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	public static int switchHei = 40;
 	public static int scaleHei = 77;
+	public static NetworkTable testEntry;
 	
 	private Integer autoSelected;
 	
