@@ -112,7 +112,7 @@ public class OI {
 
     public OI()
     {
-    btnL1.toggleWhenPressed(new LoadCube());
+    btnL1.toggleWhenPressed(new UnloadCube());
 //    btnL2.whenPressed(new LiftToHeight(Robot.scaleHei)); // make this the scale
 //    btnL3.whenPressed(new LiftToHeight(Robot.switchHei)); // make this the switch
     btnL4.whileHeld(new RaiseLift());
@@ -126,7 +126,7 @@ public class OI {
     btnL10.whenPressed(new LiftToHeightTime(0));
     btnL11.whenPressed(new LiftToHeightTime(Robot.switchHei));
     // Joystick RIGHT
-    btnR1.toggleWhenPressed(new UnloadCube());
+    btnR1.toggleWhenPressed(new LoadCube());
    // btnR2.whenPressed(new SpotTurnDegrees(45));
     //btnR3.whenPressed(new SpotTurnDegrees(90));
     btnR2.toggleWhenPressed(new ShootCube());

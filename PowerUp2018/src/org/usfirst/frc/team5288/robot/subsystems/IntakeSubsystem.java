@@ -55,7 +55,7 @@ public class IntakeSubsystem extends Subsystem {
     		// if the commands are being overridden, then don't use updateSubsystems()
     		// at all, as the outputs will be manually set in override commands
     		if(currentIntakeState == intakeState.intake) {
-    		outputToIntake(-1);
+    		outputToIntake(1);
     		}
     		else if(currentIntakeState == intakeState.outtakeLow ) {
     		outputToIntake(0.6);

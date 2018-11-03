@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManualDriveCommand extends Command {
 
-	double speedMultiplier = 1.0; double leftSpeedOutput = 0; double rightSpeedOutput = 0;
+	double speedMultiplier = 0.3; double leftSpeedOutput = 0; double rightSpeedOutput = 0;
 	
     public ManualDriveCommand() {
         // Use requires() here to declare subsystem dependencies
